@@ -17,7 +17,7 @@ produces:
 paths:
   /configuration_types:
     get:
-      summary: List all configuration types. (Index)
+      summary: List Configuration Types
       description: Returns a list of configuration types in your account.
       operationId: List_configuration_types
       parameters:
@@ -204,7 +204,7 @@ paths:
           schema:
             type: object
             properties: {}
-      summary: Create a configuration type.
+      summary: Create a Configuration Type
       description: Creates a new configuration type in your account. Returns the created object if successful.
       operationId: Post_configuration_type
       parameters:
@@ -245,7 +245,7 @@ paths:
         - Configurations
   '/configuration_types/{object-id}':
     get:
-      summary: Retrieve a configuration type.
+      summary: Get a Configuration Type
       operationId: Get_configuration_type
       description: Returns the details of an existing configuration type.
       parameters: []
@@ -360,7 +360,7 @@ paths:
                       properties: {}
                       description: relationships
                 description: data
-      summary: List Flexible Asset Types (Index)
+      summary: List Flexible Asset Types
       operationId: List_flexible_asset_types
       parameters:
         - $ref: '#/parameters/page[size]'
@@ -373,7 +373,7 @@ paths:
         '200':
           description: default
           schema: {}
-      summary: Create a flexible asset type.
+      summary: Create a Flexible Asset Type
       operationId: Post_flexible_asset_type
       description: Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested relationships route to add multiple flexible asset fields to a flexible asset type in bulk.
       parameters:
@@ -564,7 +564,7 @@ paths:
                           description: flexible-asset-type
                       description: relationships
                 description: data
-      summary: List Flexible Asset Fields (Index)
+      summary: List Flexible Asset Fields
       description: Returns a list of fields for the specified flexible asset type.
       operationId: List_flexible_asset_fields
       tags:
@@ -794,7 +794,7 @@ paths:
                     type: string
                     description: last
                 description: links
-      summary: List all organizations in your account. (Index)
+      summary: List Organizations
       description: Returns a list of organizations in your account.
       operationId: List_organizations
       parameters:
@@ -949,7 +949,7 @@ paths:
                         description: short_name
                     description: attributes
                 description: data
-      summary: Create an organization.
+      summary: Create an Organization
       operationId: Post_organization
       description: Creates an organization. Returns the created object if successful.
       parameters:
@@ -1016,7 +1016,7 @@ paths:
         '200':
           description: default
           schema: {}
-      summary: Retrieve an organization. (Show)
+      summary: Get an Organization
       description: Returns the details of an existing organization.
       operationId: Get_organization
       parameters:
@@ -1174,7 +1174,7 @@ paths:
                     type: string
                     description: last
                 description: links
-      summary: List Organization Types (Index)
+      summary: List Organization Types
       description: Returns a list of organizations in your account.
       operationId: List_organization_types
       parameters:
@@ -1231,7 +1231,7 @@ paths:
                         description: updated-at
                     description: attributes
                 description: data
-      summary: Create a new Organization Type
+      summary: Create an Organization Type
       description: Creates a new organization type in your account. Returns the created object if successful.
       operationId: Post_organization_type
       parameters:
@@ -1295,7 +1295,7 @@ paths:
                         description: updated-at
                     description: attributes
                 description: data
-      summary: Retrieve an organization type.
+      summary: Get an Organization Type
       description: Returns the details of an existing organization type.
       operationId: Get_organization_type
       tags:
@@ -1330,7 +1330,7 @@ paths:
                         description: updated-at
                     description: attributes
                 description: data
-      summary: Update an organization type.
+      summary: Update an Organization Type
       description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_organization_type
       parameters:
@@ -1441,7 +1441,7 @@ paths:
                     type: string
                     description: last
                 description: links
-      summary: List all organization statuses. (Index)
+      summary: List Organization Statuses
       operationId: List_organization_status
       description: Returns a list of the organization statuses in your account.
       parameters:
@@ -1482,7 +1482,7 @@ paths:
         '200':
           description: default
           schema: {}
-      summary: Create Organization Status
+      summary: Create an Organization Status
       description: Creates a new organization status in your account. Returns the created object if successful.
       operationId: Post_organization_statuses
       parameters:
@@ -1546,7 +1546,7 @@ paths:
                         description: updated-at
                     description: attributes
                 description: data
-      summary: Retrieve an organization status. (Show)
+      summary: Get an Organization Status
       description: Returns the details of an existing organization status.
       operationId: Get_organization_status
       tags:
@@ -1556,7 +1556,7 @@ paths:
         '200':
           description: default
           schema: {}
-      summary: Update Organization Statuses
+      summary: Update an Organization Status
       description: Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_organization_statuses
       parameters:
@@ -1734,7 +1734,7 @@ paths:
                           description: flexible-asset-type
                       description: relationships
                 description: included
-      summary: Retrieve a flexible asset type. (Show)
+      summary: Get a Flexible Asset Type
       description: Returns the details of an existing flexible asset type.
       operationId: Get_flexible_asset_type
       parameters:
@@ -1753,7 +1753,7 @@ paths:
       - $ref: '#/parameters/resource_type'
       - $ref: '#/parameters/resource_id'
     post:
-      summary: Create an attachment for a specific object ID.
+      summary: Create an Attachment for a particular Resource.
       operationId: Post-attachment
       tags:
         - Attachments
@@ -1914,7 +1914,7 @@ paths:
                     file_name: test-2.png
           description: 'The request body must contain a JSON object. To create multiple attachments, provide an array of JSON objects.'
     delete:
-      summary: Delete multiple attachments. (Bulk Destroy)
+      summary: Delete multiple Attachments for a particular Resource
       operationId: Delete-attachments
       tags:
         - Attachments
@@ -2062,7 +2062,7 @@ paths:
       - $ref: '#/parameters/resource_id'
       - $ref: '#/parameters/object-id'
     patch:
-      summary: Update an attachment for a particular resource.
+      summary: Update an Attachment for a particular Resource
       operationId: Update-attachment
       tags:
         - Attachments
@@ -2127,7 +2127,7 @@ paths:
                   name: new_name.png
   /configuration_interfaces:
     post:
-      summary: Create a configuration interface
+      summary: Create a Configuration Interface
       operationId: post-configuration_interfaces
       responses:
         '200':
@@ -2136,7 +2136,7 @@ paths:
         - Configurations
       description: Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
     patch:
-      summary: Update multiple configuration interfaces
+      summary: Update multiple Configuration Interfaces
       operationId: patch-configuration_interfaces
       responses:
         '200':
@@ -2151,7 +2151,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a configuration interface
+      summary: Get a Configuration Interface
       tags:
         - Configurations
       responses:
@@ -2160,7 +2160,7 @@ paths:
       operationId: get-configuration_interfaces-id
       description: Returns the details of an existing configuration interface.
     patch:
-      summary: Update a configuration interface
+      summary: Update a Configuration Interface
       operationId: patch-configuration_interfaces-id
       responses:
         '200':
@@ -2173,7 +2173,7 @@ paths:
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /configuration_statuses:
     get:
-      summary: List all configuration statuses
+      summary: List Configuration Statuses
       tags:
         - Configurations
       responses:
@@ -2182,7 +2182,7 @@ paths:
       operationId: get-configuration_statuses
       description: Returns a list of the configuration statuses in your account.
     post:
-      summary: Create a configuration status
+      summary: Create a Configuration Status
       operationId: post-configuration_statuses
       responses:
         '200':
@@ -2194,7 +2194,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a configuration status
+      summary: Get a Configuration Status
       tags:
         - Configurations
       responses:
@@ -2203,7 +2203,7 @@ paths:
       operationId: get-configuration_statuses-id
       description: Returns the details of an existing configuration status.
     patch:
-      summary: Update a configuration status
+      summary: Update a Configuration Status
       operationId: patch-configuration_statuses-id
       responses:
         '200':
@@ -2213,7 +2213,7 @@ paths:
       description: Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
   /configurations:
     get:
-      summary: List all configurations in your account
+      summary: List Configurations
       tags:
         - Configurations
       responses:
@@ -2222,7 +2222,7 @@ paths:
       operationId: get-configurations
       description: Returns a list of configurations for all organizations or for a specified organization.
     post:
-      summary: Create a configuration
+      summary: Create a Configuration
       operationId: post-configurations
       responses:
         '200':
@@ -2231,7 +2231,7 @@ paths:
         - Configurations
       description: Creates a configuration under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configurations to an organization in bulk.
     patch:
-      summary: Update multiple configurations
+      summary: Update multiple Configurations
       operationId: patch-configurations
       responses:
         '200':
@@ -2243,7 +2243,7 @@ paths:
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
     delete:
-      summary: Delete multiple configurations (Bulk Destroy)
+      summary: Delete multiple Configurations
       operationId: delete-configurations
       responses:
         '200':
@@ -2255,7 +2255,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a configuration
+      summary: Get a Configuration
       tags:
         - Configurations
       responses:
@@ -2264,7 +2264,7 @@ paths:
       operationId: get-configurations-id
       description: Returns the details of an existing configuration.
     patch:
-      summary: Update a configuration
+      summary: Update a Configuration
       operationId: patch-configurations-id
       responses:
         '200':
@@ -2277,7 +2277,7 @@ paths:
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /contact_types:
     get:
-      summary: List all contact types
+      summary: List Contact Types
       tags:
         - Contacts
       responses:
@@ -2286,7 +2286,7 @@ paths:
       operationId: get-contact_types
       description: Returns a list of contact types in your account.
     post:
-      summary: Create a new contact type
+      summary: Create a Contact Type
       operationId: post-contact_types
       responses:
         '200':
@@ -2298,7 +2298,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a contact type
+      summary: Get a Contact Type
       tags:
         - Contacts
       responses:
@@ -2307,7 +2307,7 @@ paths:
       operationId: get-contact_types-id
       description: Returns the details of an existing contact type.
     patch:
-      summary: Update a contact type
+      summary: Update a Contact Type
       operationId: patch-contact_types-id
       responses:
         '200':
@@ -2317,7 +2317,7 @@ paths:
       description: Updates a contact type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
   /contacts:
     get:
-      summary: List all contacts in your account
+      summary: List Contacts
       tags:
         - Contacts
       responses:
@@ -2326,7 +2326,7 @@ paths:
       operationId: get-contacts
       description: Returns a list of contacts for all organizations or for a specified organization.
     post:
-      summary: Create a contact
+      summary: Create a Contact
       operationId: post-contacts
       responses:
         '200':
@@ -2335,7 +2335,7 @@ paths:
         - Contacts
       description: Creates a contact under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple contacts to an organization in bulk.
     patch:
-      summary: Update multiple contacts
+      summary: Update multiple Contacts
       operationId: patch-contacts
       responses:
         '200':
@@ -2347,7 +2347,7 @@ paths:
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
     delete:
-      summary: Delete multiple contacts
+      summary: Delete multiple Contacts
       operationId: delete-contacts
       responses:
         '200':
@@ -2359,7 +2359,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a contact
+      summary: Get a Contact
       tags:
         - Contacts
       responses:
@@ -2368,7 +2368,7 @@ paths:
       operationId: get-contacts-id
       description: Retrieve a contact for a particular organization.
     patch:
-      summary: Update a contact
+      summary: Update a Contact
       operationId: patch-contacts-id
       responses:
         '200':
@@ -2381,7 +2381,7 @@ paths:
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /countries:
     get:
-      summary: List all countries
+      summary: List all Countries
       tags:
         - Countries
       responses:
@@ -2393,7 +2393,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a country
+      summary: Get a Country
       tags:
         - Countries
       responses:
@@ -2403,7 +2403,7 @@ paths:
       description: Returns the details of one of the supported countries.
   /documents:
     patch:
-      summary: Update multiple documents.
+      summary: Update multiple Documents
       operationId: patch-documents
       responses:
         '200':
@@ -2420,7 +2420,7 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     patch:
-      summary: Update a document
+      summary: Update a Document
       operationId: patch-documents-id
       responses:
         '200':
@@ -2433,7 +2433,7 @@ paths:
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /domains:
     get:
-      summary: List all domains in your account
+      summary: List Domains
       tags:
         - Domains
       responses:
@@ -2446,7 +2446,7 @@ paths:
       - $ref: '#/parameters/parent-id'
       - $ref: '#/parameters/object-id'
     get:
-      summary: Retrieve a configuration interface
+      summary: Get a Configuration Interface
       tags:
         - Configurations
       responses:
