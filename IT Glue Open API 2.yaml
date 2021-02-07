@@ -1,0 +1,1874 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: IT Glue
+  description: IT Glue
+  contact:
+    name: Jeremy Hodge
+    url: 'http://www.ZetaOne.com'
+    email: jeremy.hodge@zetaone.com
+  termsOfService: 'https://api.itglue.com/developer'
+host: api.itglue.com
+basePath: /
+schemes:
+  - https
+consumes: []
+produces:
+  - application/json
+paths:
+  /configuration_types:
+    get:
+      summary: List all configuration types. (Index)
+      description: Returns a list of configuration types in your account.
+      operationId: List_configuration_types
+      parameters:
+        - name: 'filter[name]'
+          in: query
+          type: string
+          required: false
+          description: Filter the list by the Name field (exact match) of the configuration type.
+        - name: sort
+          in: query
+          type: string
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+          description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
+        - name: 'page[size]'
+          default: 1000
+          in: query
+          type: integer
+          required: false
+          format: int32
+        - name: 'page[number]'
+          default: 1
+          in: query
+          type: integer
+          required: false
+          format: int32
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: name
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                      description: attributes
+                description: data
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: integer
+                    format: int32
+                    description: current-page
+                  next-page:
+                    type: integer
+                    format: int32
+                    description: next-page
+                  prev-page:
+                    type: integer
+                    format: int32
+                    description: prev-page
+                  total-pages:
+                    type: integer
+                    format: int32
+                    description: total-pages
+                  total-count:
+                    type: integer
+                    format: int32
+                    description: total-count
+                  filters:
+                    type: object
+                    properties: {}
+                    description: filters
+                description: meta
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: self
+                  first:
+                    type: string
+                    description: first
+                  prev:
+                    type: string
+                    description: prev
+                  next:
+                    type: string
+                    description: next
+                  last:
+                    type: string
+                    description: last
+                description: links
+    post:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Create a configuration type.
+      description: Creates a new configuration type in your account. Returns the created object if successful.
+      operationId: Post_configuration_type
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: type
+                    x-ms-visibility: internal
+                    default: configuration-types
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                    description: attributes
+                description: data
+                required:
+                  - type
+            required:
+              - data
+  '/configuration_types/{id}':
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      configurations-count:
+                        type: integer
+                        format: int32
+                        description: configurations-count
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                    description: attributes
+                description: data
+      summary: Retrieve a configuration type. (Show)
+      description: Returns the details of an existing configuration type.
+      operationId: Get_configuration_type
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: ID of the Configuration Type to be retrieved
+          x-ms-summary: Configuration Type ID
+    patch:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Update a configuration type.
+      description: Updates a configuration type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_configuration_type
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: ''
+                    default: configuration-types
+                    x-ms-visibility: internal
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                    description: attributes
+                description: data
+                required:
+                  - type
+            required:
+              - data
+  /flexible_asset_types:
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: name
+                        description:
+                          type: string
+                          description: description
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                        icon:
+                          type: string
+                          description: icon
+                        enabled:
+                          type: boolean
+                          description: enabled
+                      description: attributes
+                    relationships:
+                      type: object
+                      properties: {}
+                      description: relationships
+                description: data
+      summary: List Flexible Asset Types (Index)
+      operationId: List_flexible_asset_types
+      parameters:
+        - name: 'page[size]'
+          in: query
+          required: false
+          type: integer
+          default: 1000
+          format: int32
+        - name: 'page[number]'
+          in: query
+          required: false
+          type: integer
+          default: 1
+          format: int32
+      description: Returns a list of flexible asset types in your account.
+    post:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Create a flexible asset type.
+      operationId: Post_flexible_asset_type
+      description: Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested relationships route to add multiple flexible asset fields to a flexible asset type in bulk.
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: ''
+                    x-ms-visibility: internal
+                    default: flexible_asset_types
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      description:
+                        type: string
+                        description: description
+                      icon:
+                        type: string
+                        description: icon
+                      show-in-menu:
+                        type: boolean
+                        description: show-in-menu
+                    description: attributes
+                  relationships:
+                    type: object
+                    properties:
+                      flexible-asset-fields:
+                        type: object
+                        properties:
+                          data:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  description: type
+                                  title: ''
+                                  x-ms-visibility: internal
+                                  default: flexible_asset_fields
+                                attributes:
+                                  type: object
+                                  properties:
+                                    order:
+                                      type: integer
+                                      format: int32
+                                      description: order
+                                    name:
+                                      type: string
+                                      description: name
+                                    kind:
+                                      type: string
+                                      description: kind
+                                    hint:
+                                      type: string
+                                      description: hint
+                                    tag-type:
+                                      type: string
+                                      description: tag-type
+                                    required:
+                                      type: boolean
+                                      description: required
+                                    show-in-list:
+                                      type: boolean
+                                      description: show-in-list
+                                    default-value:
+                                      type: string
+                                      description: default-value
+                                    use-for-title:
+                                      type: boolean
+                                      description: use-for-title
+                                  description: attributes
+                              required:
+                                - type
+                            description: data
+                        description: flexible-asset-fields
+                        required:
+                          - data
+                    description: relationships
+                    required:
+                      - flexible-asset-fields
+                description: data
+                required:
+                  - type
+                  - relationships
+            required:
+              - data
+  '/flexible_asset_types/{id}/relationships/flexible_asset_fields':
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        order:
+                          type: integer
+                          format: int32
+                          description: order
+                        name:
+                          type: string
+                          description: name
+                        kind:
+                          type: string
+                          description: kind
+                        hint:
+                          type: string
+                          description: hint
+                        decimals:
+                          type: integer
+                          format: int32
+                          description: decimals
+                        tag-type:
+                          type: string
+                          description: tag-type
+                        required:
+                          type: boolean
+                          description: required
+                        use-for-title:
+                          type: boolean
+                          description: use-for-title
+                        expiration:
+                          type: boolean
+                          description: expiration
+                        show-in-list:
+                          type: boolean
+                          description: show-in-list
+                        name-key:
+                          type: string
+                          description: name-key
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                        flexible-asset-type-id:
+                          type: integer
+                          format: int32
+                          description: flexible-asset-type-id
+                        default-value:
+                          type: string
+                          description: default-value
+                      description: attributes
+                    relationships:
+                      type: object
+                      properties:
+                        flexible-asset-type:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: id
+                                type:
+                                  type: string
+                                  description: type
+                              description: data
+                          description: flexible-asset-type
+                      description: relationships
+                description: data
+      summary: List Flexible Asset Fields (Index)
+      description: Returns a list of fields for the specified flexible asset type.
+      operationId: List_flexible_asset_fields
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+  /organizations:
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        psa-integration:
+                          type: string
+                          description: psa-integration
+                        name:
+                          type: string
+                          description: name
+                        alert:
+                          type: string
+                          description: alert
+                        description:
+                          type: string
+                          description: description
+                        organization-type-id:
+                          type: integer
+                          format: int32
+                          description: organization-type-id
+                        organization-type-name:
+                          type: string
+                          description: organization-type-name
+                        organization-status-id:
+                          type: integer
+                          format: int32
+                          description: organization-status-id
+                        organization-status-name:
+                          type: string
+                          description: organization-status-name
+                        my-glue-account-id:
+                          type: string
+                          description: my-glue-account-id
+                        primary:
+                          type: boolean
+                          description: primary
+                        quick-notes:
+                          type: string
+                          description: quick-notes
+                        short-name:
+                          type: string
+                          description: short-name
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                        my-glue-account-status:
+                          type: string
+                          description: my-glue-account-status
+                        logo:
+                          type: string
+                          description: logo
+                      description: attributes
+                    relationships:
+                      type: object
+                      properties:
+                        adapters-resources:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    description: id
+                                  type:
+                                    type: string
+                                    description: type
+                              description: data
+                          description: adapters-resources
+                      description: relationships
+                description: data
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: integer
+                    format: int32
+                    description: current-page
+                  next-page:
+                    type: integer
+                    format: int32
+                    description: next-page
+                  prev-page:
+                    type: integer
+                    format: int32
+                    description: prev-page
+                  total-pages:
+                    type: integer
+                    format: int32
+                    description: total-pages
+                  total-count:
+                    type: integer
+                    format: int32
+                    description: total-count
+                  filters:
+                    type: object
+                    properties:
+                      id:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items: {}
+                            description: permitted-values
+                        description: id
+                      name:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items: {}
+                            description: permitted-values
+                        description: name
+                      organization-type-id:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  format: int32
+                                  description: value
+                                data:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: name
+                                  description: data
+                            description: permitted-values
+                        description: organization-type-id
+                      organization-status-id:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  format: int32
+                                  description: value
+                                data:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: name
+                                  description: data
+                            description: permitted-values
+                        description: organization-status-id
+                      created-at:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items: {}
+                            description: permitted-values
+                        description: created-at
+                      updated-at:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items: {}
+                            description: permitted-values
+                        description: updated-at
+                      my-glue-account-id:
+                        type: object
+                        properties:
+                          permitted-values:
+                            type: array
+                            items: {}
+                            description: permitted-values
+                        description: my-glue-account-id
+                    description: filters
+                description: meta
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: self
+                  first:
+                    type: string
+                    description: first
+                  prev:
+                    type: string
+                    description: prev
+                  next:
+                    type: string
+                    description: next
+                  last:
+                    type: string
+                    description: last
+                description: links
+      summary: List all organizations in your account. (Index)
+      description: Returns a list of organizations in your account.
+      operationId: List_organizations
+      parameters:
+        - name: 'filter[id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[exclude][id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[name]'
+          in: query
+          required: false
+          type: string
+        - name: 'filter[exclude][name]'
+          in: query
+          required: false
+          type: string
+        - name: 'filter[organization_type_id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[exclude][organization_type_id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[organization_status_id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[exclude][organization_status_id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[created_at]'
+          in: query
+          required: false
+          type: string
+        - name: 'filter[updated_at]'
+          in: query
+          required: false
+          type: string
+        - name: 'filter[my_glue_account_id]'
+          in: query
+          required: false
+          type: integer
+        - name: 'filter[range][my_glue_account_id]'
+          in: query
+          required: false
+          type: string
+        - name: 'filter[psa_id]'
+          in: query
+          required: false
+          type: string
+        - name: 'filter[psa_integration_type]'
+          in: query
+          required: false
+          type: string
+          enum:
+            - manage
+            - autotask
+            - tigerpaw
+            - kaseya-bms
+            - pulseway-psa
+            - vorex
+        - name: 'filter[group_id]'
+          in: query
+          required: false
+          type: integer
+        - name: sort
+          in: query
+          type: string
+          required: false
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - organization_status_name
+            - organization_type_name
+            - short_name
+            - my_glue_account_id
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+            - '-organization_status_name'
+            - '-organization_type_name'
+            - '-short_name'
+            - '-my_glue_account_id'
+          description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
+        - name: 'page[size]'
+          in: query
+          required: false
+          type: integer
+        - name: 'page[number]'
+          in: query
+          required: false
+          type: integer
+        - name: include
+          in: query
+          required: false
+          type: string
+          enum:
+            - adapters_resources
+            - attachments
+    post:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int32
+                        description: id
+                      name:
+                        type: string
+                        description: name
+                      alert:
+                        type: string
+                        description: alert
+                      description:
+                        type: string
+                        description: description
+                      organization-type-id:
+                        type: integer
+                        format: int32
+                        description: organization-type-id
+                      organization-status-id:
+                        type: integer
+                        format: int32
+                        description: organization-status-id
+                      quick-notes:
+                        type: string
+                        description: quick-notes
+                      short_name:
+                        type: string
+                        description: short_name
+                    description: attributes
+                description: data
+      summary: Create an organization.
+      operationId: Post_organization
+      description: Creates an organization. Returns the created object if successful.
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: ''
+                    x-ms-visibility: internal
+                    default: organizations
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int32
+                        description: id
+                      name:
+                        type: string
+                        description: name
+                        title: ''
+                      alert:
+                        type: string
+                        description: alert
+                      description:
+                        type: string
+                        description: description
+                      organization-type-id:
+                        type: integer
+                        format: int32
+                        description: organization-type-id
+                      organization-status-id:
+                        type: integer
+                        format: int32
+                        description: organization-status-id
+                      quick-notes:
+                        type: string
+                        description: quick-notes
+                      short_name:
+                        type: string
+                        description: short_name
+                    description: attributes
+                    required:
+                      - name
+                description: data
+                required:
+                  - attributes
+                  - type
+            required:
+              - data
+  '/organizations/{id}':
+    get:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Retrieve an organization. (Show)
+      description: Returns the details of an existing organization.
+      operationId: Get_organization
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: include
+          in: query
+          required: false
+          type: string
+          description: Comma separated list of values to expand and include the related items. Values must be one of adapters_resources or attachments
+          format: string
+    patch:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Update an Organization
+      description: 'Updates the details of an existing organization. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: alert, description, quick_notes. A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don''t specify will remain unchanged.'
+      operationId: Patch_organization
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Record Type
+                    title: type
+                    x-ms-visibility: internal
+                    default: organizations
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      alert:
+                        type: string
+                        description: alert
+                      description:
+                        type: string
+                        description: description
+                      short_name:
+                        type: string
+                        description: short_name
+                      organization-type-id:
+                        type: integer
+                        format: int32
+                        description: organization-type-id
+                      organization-status-id:
+                        type: integer
+                        format: int32
+                        description: organization-status-id
+                      quick-notes:
+                        type: string
+                        description: quick-notes
+                      short-name:
+                        type: string
+                        description: short-name
+                    description: attributes
+                description: data
+                required:
+                  - type
+            required:
+              - data
+  /organization_types:
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: name
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                        synced:
+                          type: boolean
+                          description: synced
+                      description: attributes
+                description: data
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: integer
+                    format: int32
+                    description: current-page
+                  next-page:
+                    type: integer
+                    format: int32
+                    description: next-page
+                  prev-page:
+                    type: integer
+                    format: int32
+                    description: prev-page
+                  total-pages:
+                    type: integer
+                    format: int32
+                    description: total-pages
+                  total-count:
+                    type: integer
+                    format: int32
+                    description: total-count
+                  filters:
+                    type: object
+                    properties: {}
+                    description: filters
+                description: meta
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: self
+                  first:
+                    type: string
+                    description: first
+                  prev:
+                    type: string
+                    description: prev
+                  next:
+                    type: string
+                    description: next
+                  last:
+                    type: string
+                    description: last
+                description: links
+      summary: List Organization Types (Index)
+      description: Returns a list of organizations in your account.
+      operationId: List_organization_types
+      parameters:
+        - name: 'filter[name]'
+          in: query
+          required: false
+          type: string
+        - name: sort
+          in: query
+          required: false
+          type: string
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+        - name: 'page[size]'
+          in: query
+          required: false
+          type: integer
+        - name: 'page[number]'
+          in: query
+          required: false
+          type: integer
+    post:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                    description: attributes
+                description: data
+      summary: Create a new Organization Type
+      description: Creates a new organization type in your account. Returns the created object if successful.
+      operationId: Post_organization_type
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: ''
+                    x-ms-visibility: internal
+                    default: organizational-types
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                    description: attributes
+                description: data
+                required:
+                  - type
+            required:
+              - data
+  '/organization_types/{id}':
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                    description: attributes
+                description: data
+      summary: Retrieve an organization type.
+      description: Returns the details of an existing organization type.
+      operationId: Get_organization_type
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+    patch:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                    description: attributes
+                description: data
+      summary: Update an organization type.
+      description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_organization_type
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                    description: attributes
+                description: data
+  /organization_statuses:
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: name
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                        synced:
+                          type: boolean
+                          description: synced
+                      description: attributes
+                description: data
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: integer
+                    format: int32
+                    description: current-page
+                  next-page:
+                    type: integer
+                    format: int32
+                    description: next-page
+                  prev-page:
+                    type: integer
+                    format: int32
+                    description: prev-page
+                  total-pages:
+                    type: integer
+                    format: int32
+                    description: total-pages
+                  total-count:
+                    type: integer
+                    format: int32
+                    description: total-count
+                  filters:
+                    type: object
+                    properties: {}
+                    description: filters
+                description: meta
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: self
+                  first:
+                    type: string
+                    description: first
+                  prev:
+                    type: string
+                    description: prev
+                  next:
+                    type: string
+                    description: next
+                  last:
+                    type: string
+                    description: last
+                description: links
+      summary: List all organization statuses. (Index)
+      operationId: List_organization_status
+      description: Returns a list of the organization statuses in your account.
+      parameters:
+        - name: 'filter[name]'
+          in: query
+          type: string
+          required: false
+          description: Filter the list by the Name field (exact match) of the organization status.
+        - name: sort
+          in: query
+          type: string
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+          description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
+        - name: 'page[size]'
+          default: 1000
+          in: query
+          type: integer
+          required: false
+          format: int32
+        - name: 'page[number]'
+          default: 1
+          in: query
+          type: integer
+          required: false
+          format: int32
+    post:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Create Organization Status
+      description: Creates a new organization status in your account. Returns the created object if successful.
+      operationId: Post_organization_statuses
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: ''
+                    x-ms-visibility: internal
+                    default: organization-statuses
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                    description: attributes
+                description: data
+                required:
+                  - type
+            required:
+              - data
+  '/organization_statuses/{id}':
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                    description: attributes
+                description: data
+      summary: Retrieve an organization status. (Show)
+      description: Returns the details of an existing organization status.
+      operationId: Get_organization_status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+    patch:
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Update Organization Statuses
+      description: Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_organization_statuses
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: type
+                    title: ''
+                    x-ms-visibility: internal
+                    default: organization_statuses
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                    description: attributes
+                description: data
+                required:
+                  - type
+            required:
+              - data
+  '/flexible_asset_types/{id}':
+    get:
+      responses:
+        default:
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      description:
+                        type: string
+                        description: description
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                      icon:
+                        type: string
+                        description: icon
+                      show-in-menu:
+                        type: boolean
+                        description: show-in-menu
+                    description: attributes
+                  relationships:
+                    type: object
+                    properties:
+                      flexible-asset-fields:
+                        type: object
+                        properties:
+                          data:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: id
+                                type:
+                                  type: string
+                                  description: type
+                            description: data
+                        description: flexible-asset-fields
+                    description: relationships
+                description: data
+              included:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int32
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        flexible-asset-type-id:
+                          type: integer
+                          format: int32
+                          description: flexible-asset-type-id
+                        order:
+                          type: integer
+                          format: int32
+                          description: order
+                        name:
+                          type: string
+                          description: name
+                        kind:
+                          type: string
+                          description: kind
+                        hint:
+                          type: string
+                          description: hint
+                        decimals:
+                          type: integer
+                          format: int32
+                          description: decimals
+                        default-value:
+                          type: string
+                          description: default-value
+                        tag-type:
+                          type: string
+                          description: tag-type
+                        required:
+                          type: boolean
+                          description: required
+                        use-for-title:
+                          type: boolean
+                          description: use-for-title
+                        expiration:
+                          type: boolean
+                          description: expiration
+                        show-in-list:
+                          type: boolean
+                          description: show-in-list
+                        name-key:
+                          type: string
+                          description: name-key
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                      description: attributes
+                    relationships:
+                      type: object
+                      properties:
+                        flexible-asset-type:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: id
+                                type:
+                                  type: string
+                                  description: type
+                              description: data
+                          description: flexible-asset-type
+                      description: relationships
+                description: included
+      summary: Retrieve a flexible asset type. (Show)
+      description: Returns the details of an existing flexible asset type.
+      operationId: Get_flexible_asset_type
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: include
+          in: query
+          required: false
+          type: string
+          enum:
+            - flexible_asset_fields
+  '/{resource_type}/{resource_id}/relationships/attachments/':
+    parameters:
+      - type: string
+        name: resource_type
+        in: path
+        required: true
+      - type: string
+        name: resource_id
+        in: path
+        required: true
+    post:
+      summary: Create an attachment for a specific object ID.
+      operationId: Post-attachment
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Unsupported Media Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          schema:
+            type: object
+            properties: {}
+      description: |-
+        Attaches a file to the asset specified in the ID parameter. Returns the created object if successful. Can also be used to add multiple attachments to an asset in bulk.
+
+        Attachments are uploaded by including media data on the asset the attachment is associated with. Attachments can be encoded and passed in JSON format for direct upload, in which case the file has to be strict encoded. You need to convert it using something like www.freeformatter.com/base64-encoder.html. This produces a string of text that goes into the content field. Note that the name of the attachment displayed on the asset view screen will be taken from the file_name attribute.
+
+        The request body must contain a JSON object. To create multiple attachments, provide an array of JSON objects.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: object
+                required:
+                  - type
+                  - attributes
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                    description: 'Must be one of: attachments'
+                  attributes:
+                    type: object
+                    required:
+                      - attachment
+                    properties:
+                      attachment:
+                        type: object
+                        required:
+                          - content
+                          - file_name
+                        properties:
+                          content:
+                            type: string
+                            minLength: 1
+                            description: Base64 code of the uploaded file
+                          file_name:
+                            type: string
+                            minLength: 1
+            required:
+              - data
+          x-examples:
+            Single Attachment:
+              data:
+                type: attachments
+                attributes:
+                  attachment:
+                    content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
+                    file_name: test.png
+            Multiple Attachments:
+              data:
+                - type: attachments
+                  attributes:
+                    attachment:
+                      content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
+                      file_name: test.png
+                - type: attachments
+                  attributes:
+                    ...: null
+          description: ''
+    delete:
+      summary: Delete multiple attachments. (Bulk Destroy)
+      operationId: Delete-attachments
+      responses:
+        '200':
+          description: OK
+      description: Deletes one or more specified attachments. Returns the deleted attachments and a 200 status code if successful.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - type
+                  properties:
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                      required:
+                        - id
+            required:
+              - data
+          x-examples:
+            Multiple Attachment Delete:
+              data:
+                - type: attachments
+                  attributes:
+                    id: 2
+                - type: attachments
+                  attributes:
+                    id: 4
+  '/{resource_type}/{resource_id}/relationships/attachments/{id}':
+    parameters:
+      - type: string
+        name: resource_type
+        in: path
+        required: true
+      - type: string
+        name: resource_id
+        in: path
+        required: true
+      - type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: Attachments
+      operationId: patch-resource_type-resource_id-relationships-attachments-id
+      responses:
+        '200':
+          description: OK
+definitions: {}
+parameters:
+  id:
+    name: id
+    in: path
+    schema:
+      type: number
+    description: Unique Identifier of an Object in IT Glue
+  resource_id:
+    name: resource_id
+    in: path
+    schema:
+      type: number
+    description: The resource id of the parent resource.
+responses: {}
+securityDefinitions:
+  API Key:
+    type: apiKey
+    in: header
+    name: x-api-key
+security:
+  - API Key: []
+tags: []
