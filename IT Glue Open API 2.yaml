@@ -9,7 +9,6 @@ info:
     email: jeremy.hodge@zetaone.com
   termsOfService: 'https://api.itglue.com/developer'
 host: api.itglue.com
-basePath: /
 schemes:
   - https
 consumes: []
@@ -2128,7 +2127,7 @@ paths:
                   name: new_name.png
   /configuration_interfaces:
     post:
-      summary: Create a configuration interface.
+      summary: Create a configuration interface
       operationId: post-configuration_interfaces
       responses:
         '200':
@@ -2137,8 +2136,32 @@ paths:
         - Configurations
       description: Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
     patch:
-      summary: Update a configuration interface.
+      summary: Update multiple configuration interfaces
       operationId: patch-configuration_interfaces
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Configurations
+      description: |-
+        Updates a list of configuration interfaces, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
+
+        The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
+  '/configuration_interfaces/{object-id}':
+    parameters:
+      - $ref: '#/parameters/object-id'
+    get:
+      summary: Retrieve a configuration interface
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
+      operationId: get-configuration_interfaces-id
+      description: Returns the details of an existing configuration interface.
+    patch:
+      summary: Update a configuration interface
+      operationId: patch-configuration_interfaces-id
       responses:
         '200':
           description: OK
@@ -2148,222 +2171,236 @@ paths:
         Updates the details of an existing configuration interface. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
 
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
-  '/configuration_interfaces/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
-    get:
-      summary: Your GET endpoint
-      tags:
-        - Configurations
-      responses:
-        '200':
-          description: default
-      operationId: get-configuration_interfaces-id
-    patch:
-      summary: ''
-      operationId: patch-configuration_interfaces-id
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Configurations
   /configuration_statuses:
     get:
-      summary: Your GET endpoint
+      summary: List all configuration statuses
       tags:
         - Configurations
       responses:
         '200':
           description: default
       operationId: get-configuration_statuses
+      description: Returns a list of the configuration statuses in your account.
     post:
-      summary: ''
+      summary: Create a configuration status
       operationId: post-configuration_statuses
       responses:
         '200':
           description: OK
       tags:
         - Configurations
+      description: Creates a new configuration status in your account. Returns the created object if successful.
   '/configuration_statuses/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Your GET endpoint
+      summary: Retrieve a configuration status
       tags:
         - Configurations
       responses:
         '200':
           description: default
       operationId: get-configuration_statuses-id
+      description: Returns the details of an existing configuration status.
     patch:
-      summary: ''
+      summary: Update a configuration status
       operationId: patch-configuration_statuses-id
       responses:
         '200':
           description: OK
       tags:
         - Configurations
+      description: Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
   /configurations:
     get:
-      summary: Your GET endpoint
+      summary: List all configurations in your account
       tags:
         - Configurations
       responses:
         '200':
           description: default
       operationId: get-configurations
+      description: Returns a list of configurations for all organizations or for a specified organization.
     post:
-      summary: ''
+      summary: Create a configuration
       operationId: post-configurations
       responses:
         '200':
           description: OK
       tags:
         - Configurations
+      description: Creates a configuration under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configurations to an organization in bulk.
     patch:
-      summary: ''
+      summary: Update multiple configurations
       operationId: patch-configurations
       responses:
         '200':
           description: OK
       tags:
         - Configurations
+      description: |-
+        Updates a list of items, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 403 Forbidden error if any relationships are present in the request. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: archived, asset_tag, notes, purchased_at, restricted, serial_number, warranty_expires_at
+
+        The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
     delete:
-      summary: ''
+      summary: Delete multiple configurations (Bulk Destroy)
       operationId: delete-configurations
       responses:
         '200':
           description: OK
       tags:
         - Configurations
-      description: ''
+      description: Deletes one or more specified configurations. Returns the deleted configurations and a 200 status code if successful.
   '/configurations/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Your GET endpoint
+      summary: Retrieve a configuration
       tags:
         - Configurations
       responses:
         '200':
           description: default
       operationId: get-configurations-id
+      description: Returns the details of an existing configuration.
     patch:
-      summary: ''
+      summary: Update a configuration
       operationId: patch-configurations-id
       responses:
         '200':
           description: OK
       tags:
         - Configurations
+      description: |-
+        Updates the details of an existing configuration. Returns 403 Forbidden error if any relationships are present in the request. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: archived, asset_tag, notes, purchased_at, restricted, serial_number, warranty_expires_at
+
+        A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /contact_types:
     get:
-      summary: Your GET endpoint
+      summary: List all contact types
       tags:
         - Contacts
       responses:
         '200':
           description: default
       operationId: get-contact_types
+      description: Returns a list of contact types in your account.
     post:
-      summary: ''
+      summary: Create a new contact type
       operationId: post-contact_types
       responses:
         '200':
           description: OK
       tags:
         - Contacts
+      description: Creates a new contact type in your account. Returns the created object if successful.
   '/contact_types/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Your GET endpoint
+      summary: Retrieve a contact type
       tags:
         - Contacts
       responses:
         '200':
           description: default
       operationId: get-contact_types-id
+      description: Returns the details of an existing contact type.
     patch:
-      summary: ''
+      summary: Update a contact type
       operationId: patch-contact_types-id
       responses:
         '200':
           description: OK
       tags:
         - Contacts
+      description: Updates a contact type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
   /contacts:
     get:
-      summary: Your GET endpoint
+      summary: List all contacts in your account
       tags:
         - Contacts
       responses:
         '200':
           description: default
       operationId: get-contacts
+      description: Returns a list of contacts for all organizations or for a specified organization.
     post:
-      summary: ''
+      summary: Create a contact
       operationId: post-contacts
       responses:
         '200':
           description: OK
       tags:
         - Contacts
+      description: Creates a contact under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple contacts to an organization in bulk.
     patch:
-      summary: ''
+      summary: Update multiple contacts
       operationId: patch-contacts
       responses:
         '200':
           description: OK
       tags:
         - Contacts
+      description: |-
+        Updates a list of contacts, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced record.
+
+        The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
     delete:
-      summary: ''
+      summary: Delete multiple contacts
       operationId: delete-contacts
       responses:
         '200':
           description: OK
       tags:
         - Contacts
+      description: Deletes one or more specified contacts. Returns the deleted contacts and a 200 status code if successful.
   '/contacts/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Your GET endpoint
+      summary: Retrieve a contact
       tags:
         - Contacts
       responses:
         '200':
           description: default
       operationId: get-contacts-id
+      description: Retrieve a contact for a particular organization.
     patch:
-      summary: ''
+      summary: Update a contact
       operationId: patch-contacts-id
       responses:
         '200':
           description: OK
       tags:
         - Contacts
+      description: |-
+        Updates the details of an existing contact. Returns 422 Bad Request error if trying to update an externally synced record.
+
+        A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /countries:
     get:
-      summary: Your GET endpoint
+      summary: List all countries
       tags:
         - Countries
       responses:
         '200':
           description: default
       operationId: get-countries
+      description: Returns a list of supported countries.
   '/countries/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
-      summary: Your GET endpoint
+      summary: Retrieve a country
       tags:
         - Countries
       responses:
         '200':
           description: default
       operationId: get-countries-id
+      description: Returns the details of one of the supported countries.
   /documents:
     patch:
       summary: Update multiple documents.
@@ -2383,34 +2420,40 @@ paths:
     parameters:
       - $ref: '#/parameters/object-id'
     patch:
-      summary: ''
+      summary: Update a document
       operationId: patch-documents-id
       responses:
         '200':
           description: OK
       tags:
         - Documents
+      description: |-
+        Updates an existing document. Returns the updated object if successful.
+
+        A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   /domains:
     get:
-      summary: Your GET endpoint
+      summary: List all domains in your account
       tags:
         - Domains
       responses:
         '200':
           description: default
       operationId: get-domains
+      description: Returns a list of domains for all organizations or for a specified organization.
   '/configurations/{parent-id}/relationships/configuration_interfaces/{object-id}':
     parameters:
       - $ref: '#/parameters/parent-id'
       - $ref: '#/parameters/object-id'
     get:
-      summary: Your GET endpoint
+      summary: Retrieve a configuration interface
       tags:
         - Configurations
       responses:
         '200':
-          description: default
+          - description: default
       operationId: get-configurations-id-relationships-configuration_interfaces-id
+      description: Returns the details of an existing configuration interface.
 definitions: {}
 parameters:
   object-id:
