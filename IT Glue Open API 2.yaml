@@ -22,8 +22,8 @@ paths:
       operationId: List_configuration_types
       parameters:
         - $ref: '#/parameters/sort'
-        - $ref: '#/parameters/page[size]'
-        - $ref: '#/parameters/page[number]'
+        - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
       responses:
         '200':
           description: default
@@ -362,8 +362,8 @@ paths:
       summary: List Flexible Asset Types
       operationId: List_flexible_asset_types
       parameters:
-        - $ref: '#/parameters/page[size]'
-        - $ref: '#/parameters/page[number]'
+        - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
       description: Returns a list of flexible asset types in your account.
       tags:
         - Flexible Assets
@@ -886,11 +886,11 @@ paths:
             - '-short_name'
             - '-my_glue_account_id'
           description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
-        - name: 'page[size]'
+        - name: 'page-size'
           in: query
           required: false
           type: integer
-        - name: 'page[number]'
+        - name: 'page-number'
           in: query
           required: false
           type: integer
@@ -1190,11 +1190,11 @@ paths:
             - id
             - created_at
             - updated_at
-        - name: 'page[size]'
+        - name: 'page-size'
           in: query
           required: false
           type: integer
-        - name: 'page[number]'
+        - name: 'page-number'
           in: query
           required: false
           type: integer
@@ -1462,13 +1462,13 @@ paths:
             - '-created_at'
             - '-updated_at'
           description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
-        - name: 'page[size]'
+        - name: 'page-size'
           default: 1000
           in: query
           type: integer
           required: false
           format: int32
-        - name: 'page[number]'
+        - name: 'page-number'
           default: 1
           in: query
           type: integer
@@ -2450,7 +2450,7 @@ paths:
         - Configurations
       responses:
         '200':
-          - description: default
+          description: default
       operationId: get-configurations-id-relationships-configuration_interfaces-id
       description: Returns the details of an existing configuration interface.
 definitions: {}
@@ -2459,25 +2459,19 @@ parameters:
     name: object-id
     in: path
     type: integer
-    schema:
-      type: integer
     description: Unique Identifier of an Object in IT Glue
     required: true
   resource_id:
     name: resource_id
     in: path
     type: integer
-    schema:
-      type: number
     description: The resource id of the parent resource.
     required: true
   resource_type:
     name: resource_type
     in: path
-    type: integer
-    schema:
-      type: string
-    items:
+    type: string
+    enum:
       - checklists
       - checklist_templates
       - configurations
@@ -2496,32 +2490,24 @@ parameters:
     in: query
     type: string
     required: false
-    schema:
-      type: string
     description: Sort order
-  'page[number]':
+  page-number:
     name: 'page[number]'
     in: query
     type: integer
-    schema:
-      type: integer
     description: 'Return the Nth page based on page[size]'
-  'page[size]':
+  page-size:
     name: 'page[size]'
     in: query
     required: false
     type: integer
-    schema:
-      type: integer
-      default: 50
+    default: 50
     description: Number of records to return in the List
   parent-id:
     name: parent-id
     in: path
     required: true
     type: integer
-    schema:
-      type: integer
     description: Unique Identifier of an Object in IT Glue
 responses: {}
 securityDefinitions:
@@ -2533,50 +2519,41 @@ security:
   - API Key: []
 tags:
   - name: Attachments
-    description: "An attachment refers to a file upload associated with an asset.
-    
-This resource allows you to manage all attachments in your account. Note that attachments are accessed from the relevant endpoints (GET /configurations, GET /passwords, etc.) using the include=attachments parameter to return the file attachments in the relationships attributes of the requested objects. Example: /configurations/1?include=attachments
-     
-An attachment can belong to only one asset. Each asset can have relationships with one or more attachments."
+    description: |-
+      An attachment refers to a file upload associated with an asset.
+      This resource allows you to manage all attachments in your account. Note that attachments are accessed from the relevant endpoints (GET /configurations, GET /passwords, etc.) using the include=attachments parameter to return the file attachments in the relationships attributes of the requested objects. Example: /configurations/1?include=attachments
+      An attachment can belong to only one asset. Each asset can have relationships with one or more attachments.
   - name: Configurations
-    description: "A configuration refers to a device you manage for a client organization.
-    
-The Configurations resource allows you to manage information about all configurations in your account.
-    
-A configuration can belong to only one organization. Each configuration can have a primary IP address, a primary MAC address, plus one or more additional IP and MAC addresses that are maintained in a separate Configuration Interfaces resource."
+    description: |-
+      A configuration refers to a device you manage for a client organization.
+      The Configurations resource allows you to manage information about all configurations in your account.
+      A configuration can belong to only one organization. Each configuration can have a primary IP address, a primary MAC address, plus one or more additional IP and MAC addresses that are maintained in a separate Configuration Interfaces resource.
   - name: Contacts
-    description: "A contact refers to a contact in a client organization.
-    
-The Contacts resource allows you to manage information about all contacts in your account.
-
-A contact can belong to only one organization. Each contact can have one location, which is maintained as a separate Locations resource."
+    description: |-
+      A contact refers to a contact in a client organization.
+      The Contacts resource allows you to manage information about all contacts in your account.
+      A contact can belong to only one organization. Each contact can have one location, which is maintained as a separate Locations resource.
   - name: Countries
-    description: "A country refers to any distinct national entity.
-    
-The Countries resource allows you to retrieve information about the country names that IT Glue supports. Country IDs can be used to POST new locations.
-
-Supported countries may be referenced by one or more locations. Each location can have one country, but it's not required."
+    description: |-
+      A country refers to any distinct national entity.
+      The Countries resource allows you to retrieve information about the country names that IT Glue supports. Country IDs can be used to POST new locations.
+      Supported countries may be referenced by one or more locations. Each location can have one country, but it's not required.
   - name: Documents
-    description: "The Documents resource allows you to manage documents on your account."
+    description: The Documents resource allows you to manage documents on your account.
   - name: Domains
-    description: "A domain refers to a domain name, such as example.com.
-    
-The Domains resource allows you to manage information about all domains in your account.
-
-A domain can belong to only one organization."
+    description: |-
+      A domain refers to a domain name, such as example.com.
+      The Domains resource allows you to manage information about all domains in your account.
+      A domain can belong to only one organization.
   - name: Flexible Assets
-    description: "A flexible asset refers to a record that has been created using a specific flexible asset type.
-    
-This resource lets you manage all of the flexible assets in your account.
-
-Before you can have a flexible asset, a flexible asset type must exist. Flexible asset types pre-define the data structure as a table containing one or more fields with defined data types.
-
-Every flexible asset (record) has a set of traits. Each trait is a JSON key-value pair. The key part of the key-value pair is the name-key for the corresponding flexible asset field. The value part is the field data. For example, if you have a key called ip-address, then you would enter an actual IP address as its value.
-
-Note: The use-for-title property of fields in the flexible asset type is what determines the name of each associated flexible asset. If more than one field has the use-for-title property set to true, the text strings are joined into one string."
+    description: |-
+      A flexible asset refers to a record that has been created using a specific flexible asset type.
+      This resource lets you manage all of the flexible assets in your account.
+      Before you can have a flexible asset, a flexible asset type must exist. Flexible asset types pre-define the data structure as a table containing one or more fields with defined data types.
+      Every flexible asset (record) has a set of traits. Each trait is a JSON key-value pair. The key part of the key-value pair is the name-key for the corresponding flexible asset field. The value part is the field data. For example, if you have a key called ip-address, then you would enter an actual IP address as its value.
+      Note: The use-for-title property of fields in the flexible asset type is what determines the name of each associated flexible asset. If more than one field has the use-for-title property set to true, the text strings are joined into one string.
   - name: Organizations
-    description: "An organization refers to a client company.
-
-The Organizations resource is used to manage information about organizations in your account.
-
-Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account."
+    description: |-
+      An organization refers to a client company.
+      The Organizations resource is used to manage information about organizations in your account.
+      Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
