@@ -131,6 +131,8 @@ paths:
           schema:
             type: object
             properties: {}
+      tags:
+        - Configurations
     post:
       responses:
         '200':
@@ -240,12 +242,19 @@ paths:
                 type: configuration-types
                 attributes:
                   name: Power
+      tags:
+        - Configurations
   '/configuration_types/{object-id}':
     get:
+      summary: Retrieve a configuration type.
+      operationId: Get_configuration_type
+      description: Returns the details of an existing configuration type.
+      parameters: []
       responses:
-        default:
-          description: default
+        '200':
+          description: OK
           schema:
+            description: ''
             type: object
             properties:
               data:
@@ -253,73 +262,63 @@ paths:
                 properties:
                   id:
                     type: string
-                    description: id
+                    minLength: 1
                   type:
                     type: string
-                    description: type
+                    minLength: 1
                   attributes:
                     type: object
                     properties:
                       name:
                         type: string
-                        description: name
+                        minLength: 1
                       configurations-count:
-                        type: integer
-                        format: int32
-                        description: configurations-count
+                        type: number
                       created-at:
                         type: string
-                        description: created-at
+                        minLength: 1
                       updated-at:
                         type: string
-                        description: updated-at
-                    description: attributes
-                description: data
-      summary: Retrieve a configuration type. (Show)
-      description: Returns the details of an existing configuration type.
-      operationId: Get_configuration_type
-    patch:
-      responses:
-        default:
-          description: default
-          schema: {}
-      summary: Update a configuration type.
-      description: Updates a configuration type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
-      operationId: Patch_configuration_type
-      parameters:
-        - name: body
-          in: body
-          required: false
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    description: type
-                    title: ''
-                    default: configuration-types
-                    x-ms-visibility: internal
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                    description: attributes
-                description: data
+                        minLength: 1
+                    required:
+                      - name
+                      - configurations-count
+                      - created-at
+                      - updated-at
                 required:
+                  - id
                   - type
+                  - attributes
             required:
               - data
+          examples:
+            Example:
+              data:
+                id: string
+                type: string
+                attributes:
+                  name: string
+                  configurations-count: 0
+                  created-at: string
+                  updated-at: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties: {}
+      tags:
+        - Configurations
     parameters:
       - $ref: '#/parameters/object-id'
   /flexible_asset_types:
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -365,22 +364,14 @@ paths:
       summary: List Flexible Asset Types (Index)
       operationId: List_flexible_asset_types
       parameters:
-        - name: 'page[size]'
-          in: query
-          required: false
-          type: integer
-          default: 1000
-          format: int32
-        - name: 'page[number]'
-          in: query
-          required: false
-          type: integer
-          default: 1
-          format: int32
+        - $ref: '#/parameters/page[size]'
+        - $ref: '#/parameters/page[number]'
       description: Returns a list of flexible asset types in your account.
+      tags:
+        - Flexible Assets
     post:
       responses:
-        default:
+        '200':
           description: default
           schema: {}
       summary: Create a flexible asset type.
@@ -482,10 +473,12 @@ paths:
                   - relationships
             required:
               - data
+      tags:
+        - Flexible Assets
   '/flexible_asset_types/{parent-id}/relationships/flexible_asset_fields':
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -575,12 +568,14 @@ paths:
       summary: List Flexible Asset Fields (Index)
       description: Returns a list of fields for the specified flexible asset type.
       operationId: List_flexible_asset_fields
+      tags:
+        - Flexible Assets
     parameters:
       - $ref: '#/parameters/parent-id'
   /organizations:
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -908,9 +903,11 @@ paths:
           enum:
             - adapters_resources
             - attachments
+      tags:
+        - Organizations
     post:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1012,10 +1009,12 @@ paths:
                   - type
             required:
               - data
+      tags:
+        - Organizations
   '/organizations/{object-id}':
     get:
       responses:
-        default:
+        '200':
           description: default
           schema: {}
       summary: Retrieve an organization. (Show)
@@ -1028,9 +1027,11 @@ paths:
           type: string
           description: Comma separated list of values to expand and include the related items. Values must be one of adapters_resources or attachments
           format: string
+      tags:
+        - Organizations
     patch:
       responses:
-        default:
+        '200':
           description: default
           schema: {}
       summary: Update an Organization
@@ -1087,12 +1088,14 @@ paths:
                   - type
             required:
               - data
+      tags:
+        - Organizations
     parameters:
       - $ref: '#/parameters/object-id'
   /organization_types:
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1197,9 +1200,11 @@ paths:
           in: query
           required: false
           type: integer
+      tags:
+        - Organizations
     post:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1258,10 +1263,12 @@ paths:
                   - type
             required:
               - data
+      tags:
+        - Organizations
   '/organization_types/{object-id}':
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1292,9 +1299,11 @@ paths:
       summary: Retrieve an organization type.
       description: Returns the details of an existing organization type.
       operationId: Get_organization_type
+      tags:
+        - Organizations
     patch:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1346,12 +1355,14 @@ paths:
                         description: name
                     description: attributes
                 description: data
+      tags:
+        - Organizations
     parameters:
       - $ref: '#/parameters/object-id'
   /organization_statuses:
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1465,9 +1476,11 @@ paths:
           type: integer
           required: false
           format: int32
+      tags:
+        - Organizations
     post:
       responses:
-        default:
+        '200':
           description: default
           schema: {}
       summary: Create Organization Status
@@ -1501,10 +1514,12 @@ paths:
                   - type
             required:
               - data
+      tags:
+        - Organizations
   '/organization_statuses/{object-id}':
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1535,9 +1550,11 @@ paths:
       summary: Retrieve an organization status. (Show)
       description: Returns the details of an existing organization status.
       operationId: Get_organization_status
+      tags:
+        - Organizations
     patch:
       responses:
-        default:
+        '200':
           description: default
           schema: {}
       summary: Update Organization Statuses
@@ -1571,12 +1588,14 @@ paths:
                   - type
             required:
               - data
+      tags:
+        - Organizations
     parameters:
       - $ref: '#/parameters/object-id'
   '/flexible_asset_types/{object-id}':
     get:
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -1726,6 +1745,8 @@ paths:
           type: string
           enum:
             - flexible_asset_fields
+      tags:
+        - Flexible Assets
     parameters:
       - $ref: '#/parameters/object-id'
   '/{resource_type}/{resource_id}/relationships/attachments':
@@ -1735,6 +1756,8 @@ paths:
     post:
       summary: Create an attachment for a specific object ID.
       operationId: Post-attachment
+      tags:
+        - Attachments
       responses:
         '200':
           description: OK
@@ -1894,6 +1917,8 @@ paths:
     delete:
       summary: Delete multiple attachments. (Bulk Destroy)
       operationId: Delete-attachments
+      tags:
+        - Attachments
       responses:
         '200':
           description: OK
@@ -2040,6 +2065,8 @@ paths:
     patch:
       summary: Update an attachment for a particular resource.
       operationId: Update-attachment
+      tags:
+        - Attachments
       responses:
         '200':
           description: OK
@@ -2101,24 +2128,36 @@ paths:
                   name: new_name.png
   /configuration_interfaces:
     post:
-      summary: ''
+      summary: Create a configuration interface.
       operationId: post-configuration_interfaces
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
+      description: Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
     patch:
-      summary: ''
+      summary: Update a configuration interface.
       operationId: patch-configuration_interfaces
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
+      description: |-
+        Updates the details of an existing configuration interface. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
+
+        A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
   '/configuration_interfaces/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
       operationId: get-configuration_interfaces-id
     patch:
       summary: ''
@@ -2126,11 +2165,16 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
   /configuration_statuses:
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
       operationId: get-configuration_statuses
     post:
       summary: ''
@@ -2138,13 +2182,18 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
   '/configuration_statuses/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
       operationId: get-configuration_statuses-id
     patch:
       summary: ''
@@ -2152,11 +2201,16 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
   /configurations:
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
       operationId: get-configurations
     post:
       summary: ''
@@ -2164,25 +2218,35 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
     patch:
       summary: ''
       operationId: patch-configurations
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
     delete:
       summary: ''
       operationId: delete-configurations
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
+      description: ''
   '/configurations/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
       operationId: get-configurations-id
     patch:
       summary: ''
@@ -2190,11 +2254,16 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Configurations
   /contact_types:
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: default
       operationId: get-contact_types
     post:
       summary: ''
@@ -2202,13 +2271,18 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Contacts
   '/contact_types/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: default
       operationId: get-contact_types-id
     patch:
       summary: ''
@@ -2216,11 +2290,16 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Contacts
   /contacts:
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: default
       operationId: get-contacts
     post:
       summary: ''
@@ -2228,25 +2307,34 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Contacts
     patch:
       summary: ''
       operationId: patch-contacts
       responses:
         '200':
           description: OK
+      tags:
+        - Contacts
     delete:
       summary: ''
       operationId: delete-contacts
       responses:
         '200':
           description: OK
+      tags:
+        - Contacts
   '/contacts/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: default
       operationId: get-contacts-id
     patch:
       summary: ''
@@ -2254,19 +2342,27 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Contacts
   /countries:
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: default
       operationId: get-countries
   '/countries/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: default
       operationId: get-countries-id
   /documents:
     patch:
@@ -2281,6 +2377,8 @@ paths:
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
 
         Bulk updates using a nested relationships route are not supported.
+      tags:
+        - Documents
   '/documents/{object-id}':
     parameters:
       - $ref: '#/parameters/object-id'
@@ -2290,11 +2388,16 @@ paths:
       responses:
         '200':
           description: OK
+      tags:
+        - Documents
   /domains:
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Domains
+      responses:
+        '200':
+          description: default
       operationId: get-domains
   '/configurations/{parent-id}/relationships/configuration_interfaces/{object-id}':
     parameters:
@@ -2302,8 +2405,11 @@ paths:
       - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
-      tags: []
-      responses: {}
+      tags:
+        - Configurations
+      responses:
+        '200':
+          description: default
       operationId: get-configurations-id-relationships-configuration_interfaces-id
 definitions: {}
 parameters:
@@ -2382,4 +2488,13 @@ securityDefinitions:
     name: x-api-key
 security:
   - API Key: []
-tags: []
+tags:
+  - name: Attachments
+  - description: An attachment refers to a file upload associated with an asset.
+  - name: Configurations
+  - name: Contacts
+  - name: Countries
+  - name: Documents
+  - name: Domains
+  - name: Flexible Assets
+  - name: Organizations
