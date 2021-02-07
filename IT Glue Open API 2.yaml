@@ -1,3 +1,20 @@
+# OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
+# 
+# CopyLeft 2021 - ZetaOne, Inc
+# Author: Jeremy G Hodge mailto:<jeremy.hodge@zetaone.com>
+#
+# AS-IS and No Warranty, use at your own risk.
+# No support for this file is available from ZetaOne or Jeremy, for API 
+# support, contact IT Glue directly. 
+#
+# Formatted for compatibility with Microsoft's Swagger Editor for 
+#   Micrsoft Power Automate custom connector.
+#     Issues of note with compatibility:
+#       -  Microsoft's editor does not support path template parameters being
+#          defined on the global path for a set of operations. Each operation
+#          must define its path tempate parameters locally (but can be a $ref).
+#
+#
 swagger: '2.0'
 info:
   version: 1.0.0
@@ -5,8 +22,8 @@ info:
   description: IT Glue
   contact:
     name: Jeremy Hodge
-    url: 'http://www.ZetaOne.com'
-    email: jeremy.hodge@zetaone.com
+    url: 'http://www.itglue.com'
+    email: support@itglue.com
   termsOfService: 'https://api.itglue.com/developer'
 host: api.itglue.com
 schemes:
@@ -242,12 +259,13 @@ paths:
                   name: Power
       tags:
         - Configurations
-  '/configuration_types/{object-id}':
+  '/configuration_types/{object_id}':
     get:
       summary: Get a Configuration Type
       operationId: Get_configuration_type
       description: Returns the details of an existing configuration type.
-      parameters: []
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: OK
@@ -311,8 +329,7 @@ paths:
             properties: {}
       tags:
         - Configurations
-    parameters:
-      - $ref: '#/parameters/object-id'
+    parameters: []      
   /flexible_asset_types:
     get:
       responses:
@@ -569,7 +586,11 @@ paths:
       tags:
         - Flexible Assets
     parameters:
-      - $ref: '#/parameters/parent-id'
+      - in: path
+        name: parent-id
+        required: true
+        type: integer
+        description: Unique Identifier of an Object in IT Glue
   /organizations:
     get:
       responses:
@@ -886,11 +907,11 @@ paths:
             - '-short_name'
             - '-my_glue_account_id'
           description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
-        - name: 'page-size'
+        - name: page-size
           in: query
           required: false
           type: integer
-        - name: 'page-number'
+        - name: page-number
           in: query
           required: false
           type: integer
@@ -1009,7 +1030,7 @@ paths:
               - data
       tags:
         - Organizations
-  '/organizations/{object-id}':
+  '/organizations/{object_id}':
     get:
       responses:
         '200':
@@ -1019,6 +1040,7 @@ paths:
       description: Returns the details of an existing organization.
       operationId: Get_organization
       parameters:
+        - $ref: '#/parameters/object_id'
         - name: include
           in: query
           required: false
@@ -1036,6 +1058,7 @@ paths:
       description: 'Updates the details of an existing organization. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: alert, description, quick_notes. A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don''t specify will remain unchanged.'
       operationId: Patch_organization
       parameters:
+        - $ref: '#/parameters/object_id'
         - name: body
           in: body
           required: false
@@ -1088,8 +1111,7 @@ paths:
               - data
       tags:
         - Organizations
-    parameters:
-      - $ref: '#/parameters/object-id'
+    parameters: []
   /organization_types:
     get:
       responses:
@@ -1190,11 +1212,11 @@ paths:
             - id
             - created_at
             - updated_at
-        - name: 'page-size'
+        - name: page-size
           in: query
           required: false
           type: integer
-        - name: 'page-number'
+        - name: page-number
           in: query
           required: false
           type: integer
@@ -1263,8 +1285,10 @@ paths:
               - data
       tags:
         - Organizations
-  '/organization_types/{object-id}':
+  '/organization_types/{object_id}':
     get:
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: default
@@ -1299,7 +1323,7 @@ paths:
       operationId: Get_organization_type
       tags:
         - Organizations
-    patch:
+    patch:       
       responses:
         '200':
           description: default
@@ -1333,6 +1357,7 @@ paths:
       description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_organization_type
       parameters:
+        - $ref: '#/parameters/object_id'        
         - name: body
           in: body
           required: false
@@ -1355,8 +1380,7 @@ paths:
                 description: data
       tags:
         - Organizations
-    parameters:
-      - $ref: '#/parameters/object-id'
+    parameters: []
   /organization_statuses:
     get:
       responses:
@@ -1462,13 +1486,13 @@ paths:
             - '-created_at'
             - '-updated_at'
           description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
-        - name: 'page-size'
+        - name: page-size
           default: 1000
           in: query
           type: integer
           required: false
           format: int32
-        - name: 'page-number'
+        - name: page-number
           default: 1
           in: query
           type: integer
@@ -1514,8 +1538,10 @@ paths:
               - data
       tags:
         - Organizations
-  '/organization_statuses/{object-id}':
+  '/organization_statuses/{object_id}':
     get:
+      parameters:
+        - $ref: '#/parameters/object_id'        
       responses:
         '200':
           description: default
@@ -1559,6 +1585,7 @@ paths:
       description: Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_organization_statuses
       parameters:
+        - $ref: '#/parameters/object_id'
         - name: body
           in: body
           required: false
@@ -1588,9 +1615,8 @@ paths:
               - data
       tags:
         - Organizations
-    parameters:
-      - $ref: '#/parameters/object-id'
-  '/flexible_asset_types/{object-id}':
+    parameters: []
+  '/flexible_asset_types/{object_id}':
     get:
       responses:
         '200':
@@ -1737,6 +1763,7 @@ paths:
       description: Returns the details of an existing flexible asset type.
       operationId: Get_flexible_asset_type
       parameters:
+        - $ref: '#/parameters/object_id'
         - name: include
           in: query
           required: false
@@ -1745,12 +1772,31 @@ paths:
             - flexible_asset_fields
       tags:
         - Flexible Assets
-    parameters:
-      - $ref: '#/parameters/object-id'
+    parameters: []
   '/{resource_type}/{resource_id}/relationships/attachments':
     parameters:
-      - $ref: '#/parameters/resource_type'
-      - $ref: '#/parameters/resource_id'
+      - in: path
+        name: resource_type
+        type: string
+        enum:
+          - checklists
+          - checklist_templates
+          - configurations
+          - contacts
+          - documents
+          - domains
+          - locations
+          - passwords
+          - ssl_certificates
+          - flexible_assets
+          - tickets
+        required: true
+        description: The resource type of the parent resource
+      - in: path
+        name: resource_id
+        type: integer
+        description: The resource id of the parent resource.
+        required: true
     post:
       summary: Create an Attachment for a particular Resource
       operationId: Post-attachment
@@ -2055,11 +2101,31 @@ paths:
                 attributes:
                   id: 2
           description: 'Data may contain a single object to delete one attachment, or an array of objects to delete multiple attachments.'
-  '/{resource_type}/{resource_id}/relationships/attachments/{object-id}':
+  '/{resource_type}/{resource_id}/relationships/attachments/{object_id}':
     parameters:
-      - $ref: '#/parameters/resource_type'
-      - $ref: '#/parameters/resource_id'
-      - $ref: '#/parameters/object-id'
+      - in: path
+        name: resource_type
+        type: string
+        enum:
+          - checklists
+          - checklist_templates
+          - configurations
+          - contacts
+          - documents
+          - domains
+          - locations
+          - passwords
+          - ssl_certificates
+          - flexible_assets
+          - tickets
+        required: true
+        description: The resource type of the parent resource
+      - in: path
+        name: resource_id
+        type: integer
+        description: The resource id of the parent resource.
+        required: true
+      - $ref: '#/parameters/object_id'
     patch:
       summary: Update an Attachment for a particular Resource
       operationId: Update-attachment
@@ -2090,6 +2156,7 @@ paths:
             properties: {}
       description: Updates the details of an existing attachment. Only the attachment name that is displayed on the asset view screen can be changed. The original file_name can't be changed.
       parameters:
+        - $ref: '#/parameters/object_id'
         - in: body
           name: body
           schema:
@@ -2146,10 +2213,11 @@ paths:
         Updates a list of configuration interfaces, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
-  '/configuration_interfaces/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/configuration_interfaces/{object_id}':
+
     get:
+      parameters:
+        - $ref: '#/parameters/object_id'
       summary: Get a Configuration Interface
       tags:
         - Configurations
@@ -2159,6 +2227,8 @@ paths:
       operationId: get-configuration_interfaces-id
       description: Returns the details of an existing configuration interface.
     patch:
+      parameters:
+        - $ref: '#/parameters/object_id'
       summary: Update a Configuration Interface
       operationId: patch-configuration_interfaces-id
       responses:
@@ -2189,9 +2259,7 @@ paths:
       tags:
         - Configurations
       description: Creates a new configuration status in your account. Returns the created object if successful.
-  '/configuration_statuses/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/configuration_statuses/{object_id}':
     get:
       summary: Get a Configuration Status
       tags:
@@ -2201,9 +2269,13 @@ paths:
           description: default
       operationId: get-configuration_statuses-id
       description: Returns the details of an existing configuration status.
+      parameters:
+        - $ref: '#/parameters/object_id'
     patch:
       summary: Update a Configuration Status
       operationId: patch-configuration_statuses-id
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: OK
@@ -2250,11 +2322,11 @@ paths:
       tags:
         - Configurations
       description: Deletes one or more specified configurations. Returns the deleted configurations and a 200 status code if successful.
-  '/configurations/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/configurations/{object_id}':
     get:
       summary: Get a Configuration
+      parameters:
+        - $ref: '#/parameters/object_id'
       tags:
         - Configurations
       responses:
@@ -2265,6 +2337,8 @@ paths:
     patch:
       summary: Update a Configuration
       operationId: patch-configurations-id
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: OK
@@ -2293,13 +2367,13 @@ paths:
       tags:
         - Contacts
       description: Creates a new contact type in your account. Returns the created object if successful.
-  '/contact_types/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/contact_types/{object_id}':
     get:
       summary: Get a Contact Type
       tags:
         - Contacts
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: default
@@ -2308,6 +2382,8 @@ paths:
     patch:
       summary: Update a Contact Type
       operationId: patch-contact_types-id
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: OK
@@ -2354,11 +2430,11 @@ paths:
       tags:
         - Contacts
       description: Deletes one or more specified contacts. Returns the deleted contacts and a 200 status code if successful.
-  '/contacts/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/contacts/{object_id}':
     get:
       summary: Get a Contact
+      parameters:
+        - $ref: '#/parameters/object_id'
       tags:
         - Contacts
       responses:
@@ -2368,6 +2444,8 @@ paths:
       description: Retrieve a contact for a particular organization.
     patch:
       summary: Update a Contact
+      parameters:
+        - $ref: '#/parameters/object_id'
       operationId: patch-contacts-id
       responses:
         '200':
@@ -2388,11 +2466,11 @@ paths:
           description: default
       operationId: get-countries
       description: Returns a list of supported countries.
-  '/countries/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/countries/{object_id}':
     get:
       summary: Get a Country
+      parameters:
+        - $ref: '#/parameters/object_id'
       tags:
         - Countries
       responses:
@@ -2415,12 +2493,12 @@ paths:
         Bulk updates using a nested relationships route are not supported.
       tags:
         - Documents
-  '/documents/{object-id}':
-    parameters:
-      - $ref: '#/parameters/object-id'
+  '/documents/{object_id}':
     patch:
       summary: Update a Document
       operationId: patch-documents-id
+      parameters:
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: OK
@@ -2440,12 +2518,17 @@ paths:
           description: default
       operationId: get-domains
       description: Returns a list of domains for all organizations or for a specified organization.
-  '/configurations/{parent-id}/relationships/configuration_interfaces/{object-id}':
+  '/configurations/{parent-id}/relationships/configuration_interfaces/{object_id}':
     parameters:
-      - $ref: '#/parameters/parent-id'
-      - $ref: '#/parameters/object-id'
+      - in: path
+        name: parent-id
+        required: true
+        type: integer
+        description: Unique Identifier of an Object in IT Glue
     get:
       summary: Get a Configuration Interface
+      parameters:
+        - $ref: '#/parameters/object_id'
       tags:
         - Configurations
       responses:
@@ -2455,36 +2538,6 @@ paths:
       description: Returns the details of an existing configuration interface.
 definitions: {}
 parameters:
-  object-id:
-    name: object-id
-    in: path
-    type: integer
-    description: Unique Identifier of an Object in IT Glue
-    required: true
-  resource_id:
-    name: resource_id
-    in: path
-    type: integer
-    description: The resource id of the parent resource.
-    required: true
-  resource_type:
-    name: resource_type
-    in: path
-    type: string
-    enum:
-      - checklists
-      - checklist_templates
-      - configurations
-      - contacts
-      - documents
-      - domains
-      - locations
-      - passwords
-      - ssl_certificates
-      - flexible_assets
-      - tickets
-    required: true
-    description: The resource type of the parent resource
   sort:
     name: sort
     in: query
@@ -2503,12 +2556,12 @@ parameters:
     type: integer
     default: 50
     description: Number of records to return in the List
-  parent-id:
-    name: parent-id
+  object_id:
+    name: object_id
     in: path
     required: true
-    type: integer
-    description: Unique Identifier of an Object in IT Glue
+    type: number
+    description: ID of the object to be updated.
 responses: {}
 securityDefinitions:
   API Key:
