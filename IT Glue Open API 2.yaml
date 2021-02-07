@@ -287,10 +287,6 @@ paths:
       description: Updates a configuration type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_configuration_type
       parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
         - name: body
           in: body
           required: false
@@ -319,10 +315,6 @@ paths:
             required:
               - data
     parameters:
-      - type: string
-        name: object-id
-        in: path
-        required: true
       - $ref: '#/parameters/object-id'
   /flexible_asset_types:
     get:
@@ -490,7 +482,7 @@ paths:
                   - relationships
             required:
               - data
-  '/flexible_asset_types/{id}/relationships/flexible_asset_fields':
+  '/flexible_asset_types/{parent-id}/relationships/flexible_asset_fields':
     get:
       responses:
         default:
@@ -583,11 +575,8 @@ paths:
       summary: List Flexible Asset Fields (Index)
       description: Returns a list of fields for the specified flexible asset type.
       operationId: List_flexible_asset_fields
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
+    parameters:
+      - $ref: '#/parameters/parent-id'
   /organizations:
     get:
       responses:
@@ -1023,7 +1012,7 @@ paths:
                   - type
             required:
               - data
-  '/organizations/{id}':
+  '/organizations/{object-id}':
     get:
       responses:
         default:
@@ -1033,10 +1022,6 @@ paths:
       description: Returns the details of an existing organization.
       operationId: Get_organization
       parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
         - name: include
           in: query
           required: false
@@ -1052,10 +1037,6 @@ paths:
       description: 'Updates the details of an existing organization. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: alert, description, quick_notes. A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don''t specify will remain unchanged.'
       operationId: Patch_organization
       parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
         - name: body
           in: body
           required: false
@@ -1106,6 +1087,8 @@ paths:
                   - type
             required:
               - data
+    parameters:
+      - $ref: '#/parameters/object-id'
   /organization_types:
     get:
       responses:
@@ -1275,7 +1258,7 @@ paths:
                   - type
             required:
               - data
-  '/organization_types/{id}':
+  '/organization_types/{object-id}':
     get:
       responses:
         default:
@@ -1309,11 +1292,6 @@ paths:
       summary: Retrieve an organization type.
       description: Returns the details of an existing organization type.
       operationId: Get_organization_type
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
     patch:
       responses:
         default:
@@ -1348,10 +1326,6 @@ paths:
       description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_organization_type
       parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
         - name: body
           in: body
           required: false
@@ -1372,6 +1346,8 @@ paths:
                         description: name
                     description: attributes
                 description: data
+    parameters:
+      - $ref: '#/parameters/object-id'
   /organization_statuses:
     get:
       responses:
@@ -1525,7 +1501,7 @@ paths:
                   - type
             required:
               - data
-  '/organization_statuses/{id}':
+  '/organization_statuses/{object-id}':
     get:
       responses:
         default:
@@ -1559,11 +1535,6 @@ paths:
       summary: Retrieve an organization status. (Show)
       description: Returns the details of an existing organization status.
       operationId: Get_organization_status
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
     patch:
       responses:
         default:
@@ -1573,10 +1544,6 @@ paths:
       description: Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
       operationId: Patch_organization_statuses
       parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
         - name: body
           in: body
           required: false
@@ -1604,7 +1571,9 @@ paths:
                   - type
             required:
               - data
-  '/flexible_asset_types/{id}':
+    parameters:
+      - $ref: '#/parameters/object-id'
+  '/flexible_asset_types/{object-id}':
     get:
       responses:
         default:
@@ -1751,17 +1720,15 @@ paths:
       description: Returns the details of an existing flexible asset type.
       operationId: Get_flexible_asset_type
       parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
         - name: include
           in: query
           required: false
           type: string
           enum:
             - flexible_asset_fields
-  '/{resource_type}/{resource_id}/relationships/attachments/':
+    parameters:
+      - $ref: '#/parameters/object-id'
+  '/{resource_type}/{resource_id}/relationships/attachments':
     parameters:
       - $ref: '#/parameters/resource_type'
       - $ref: '#/parameters/resource_id'
@@ -2065,11 +2032,11 @@ paths:
                 attributes:
                   id: 2
           description: 'Data may contain a single object to delete one attachment, or an array of objects to delete multiple attachments.'
-  '/{resource_type}/{resource_id}/relationships/attachments/{id}':
+  '/{resource_type}/{resource_id}/relationships/attachments/{object-id}':
     parameters:
       - $ref: '#/parameters/resource_type'
       - $ref: '#/parameters/resource_id'
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     patch:
       summary: Update an attachment for a particular resource.
       operationId: Update-attachment
@@ -2145,9 +2112,9 @@ paths:
       responses:
         '200':
           description: OK
-  '/configuration_interfaces/{id}':
+  '/configuration_interfaces/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2171,9 +2138,9 @@ paths:
       responses:
         '200':
           description: OK
-  '/configuration_statuses/{id}':
+  '/configuration_statuses/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2209,9 +2176,9 @@ paths:
       responses:
         '200':
           description: OK
-  '/configurations/{id}':
+  '/configurations/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2235,9 +2202,9 @@ paths:
       responses:
         '200':
           description: OK
-  '/contact_types/{id}':
+  '/contact_types/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2273,12 +2240,9 @@ paths:
       responses:
         '200':
           description: OK
-  '/contacts/{id}':
+  '/contacts/{object-id}':
     parameters:
-      - type: string
-        name: id
-        in: path
-        required: true
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2296,9 +2260,9 @@ paths:
       tags: []
       responses: {}
       operationId: get-countries
-  '/countries/{id}':
+  '/countries/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2317,9 +2281,9 @@ paths:
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
 
         Bulk updates using a nested relationships route are not supported.
-  '/documents/{id}':
+  '/documents/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
+      - $ref: '#/parameters/object-id'
     patch:
       summary: ''
       operationId: patch-documents-id
@@ -2332,13 +2296,10 @@ paths:
       tags: []
       responses: {}
       operationId: get-domains
-  '/configurations/{id}/relationships/configuration_interfaces/{id}':
+  '/configurations/{parent-id}/relationships/configuration_interfaces/{object-id}':
     parameters:
-      - $ref: '#/parameters/id'
-      - type: string
-        name: id
-        in: path
-        required: true
+      - $ref: '#/parameters/parent-id'
+      - $ref: '#/parameters/object-id'
     get:
       summary: Your GET endpoint
       tags: []
@@ -2408,11 +2369,11 @@ parameters:
     description: Number of records to return in the List
   parent-id:
     name: parent-id
-    in: query
+    in: path
     required: true
     schema:
       type: integer
-    description: Unique Identifier of a parent Object in IT Glue
+    description: Unique Identifier of an Object in IT Glue
 responses: {}
 securityDefinitions:
   API Key:
