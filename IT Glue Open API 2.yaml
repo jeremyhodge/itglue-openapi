@@ -22,38 +22,12 @@ paths:
       description: Returns a list of configuration types in your account.
       operationId: List_configuration_types
       parameters:
-        - name: 'filter[name]'
-          in: query
-          type: string
-          required: false
-          description: Filter the list by the Name field (exact match) of the configuration type.
-        - name: sort
-          in: query
-          type: string
-          enum:
-            - name
-            - id
-            - created_at
-            - updated_at
-            - '-name'
-            - '-id'
-            - '-created_at'
-            - '-updated_at'
-          description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
-        - name: 'page[size]'
-          default: 1000
-          in: query
-          type: integer
-          required: false
-          format: int32
-        - name: 'page[number]'
-          default: 1
-          in: query
-          type: integer
-          required: false
-          format: int32
+        - $ref: '#/parameters/filter[name]'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/page[size]'
+        - $ref: '#/parameters/page[number]'
       responses:
-        default:
+        '200':
           description: default
           schema:
             type: object
@@ -130,11 +104,105 @@ paths:
                     type: string
                     description: last
                 description: links
+          examples:
+            Example:
+              data:
+                - id: string
+                  type: string
+                  attributes:
+                    name: string
+                    created-at: string
+                    updated-at: string
+              meta:
+                current-page: 0
+                next-page: 0
+                prev-page: 0
+                total-pages: 0
+                total-count: 0
+                filters: {}
+              links:
+                self: string
+                first: string
+                prev: string
+                next: string
+                last: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
     post:
       responses:
-        default:
+        '200':
           description: default
-          schema: {}
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                      configurations-count:
+                        type: number
+                      created-at:
+                        type: string
+                        minLength: 1
+                      updated-at:
+                        type: string
+                        minLength: 1
+                    required:
+                      - name
+                      - configurations-count
+                      - created-at
+                      - updated-at
+                required:
+                  - id
+                  - type
+                  - attributes
+            required:
+              - data
+          examples:
+            Example:
+              data:
+                id: string
+                type: string
+                attributes:
+                  name: string
+                  configurations-count: 0
+                  created-at: string
+                  updated-at: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Unsupported Media Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          schema:
+            type: object
+            properties: {}
       summary: Create a configuration type.
       description: Creates a new configuration type in your account. Returns the created object if successful.
       operationId: Post_configuration_type
@@ -166,6 +234,12 @@ paths:
                   - type
             required:
               - data
+          x-examples:
+            Example:
+              data:
+                type: configuration-types
+                attributes:
+                  name: Power
   '/configuration_types/{id}':
     get:
       responses:
@@ -1690,20 +1764,86 @@ paths:
             - flexible_asset_fields
   '/{resource_type}/{resource_id}/relationships/attachments/':
     parameters:
-      - type: string
-        name: resource_type
-        in: path
-        required: true
-      - type: string
-        name: resource_id
-        in: path
-        required: true
+      - $ref: '#/parameters/resource_type'
+      - $ref: '#/parameters/resource_id'
     post:
       summary: Create an attachment for a specific object ID.
       operationId: Post-attachment
       responses:
         '200':
           description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                      attachment-file-name:
+                        type: string
+                        minLength: 1
+                      attachment-content-type:
+                        type: string
+                        minLength: 1
+                      attachment-file-size:
+                        type: number
+                      ext:
+                        type: string
+                        minLength: 1
+                      viewable:
+                        type: boolean
+                      download-url:
+                        type: string
+                        minLength: 1
+                      created-at:
+                        type: string
+                        minLength: 1
+                      updated-at:
+                        type: string
+                        minLength: 1
+                    required:
+                      - name
+                      - attachment-file-name
+                      - attachment-content-type
+                      - attachment-file-size
+                      - ext
+                      - viewable
+                      - download-url
+                      - created-at
+                      - updated-at
+                required:
+                  - id
+                  - type
+                  - attributes
+            required:
+              - data
+          examples:
+            Example:
+              data:
+                id: string
+                type: string
+                attributes:
+                  name: string
+                  attachment-file-name: string
+                  attachment-content-type: string
+                  attachment-file-size: 0
+                  ext: string
+                  viewable: true
+                  download-url: string
+                  created-at: string
+                  updated-at: string
         '401':
           description: Unauthorized
           schema:
@@ -1728,8 +1868,6 @@ paths:
         Attaches a file to the asset specified in the ID parameter. Returns the created object if successful. Can also be used to add multiple attachments to an asset in bulk.
 
         Attachments are uploaded by including media data on the asset the attachment is associated with. Attachments can be encoded and passed in JSON format for direct upload, in which case the file has to be strict encoded. You need to convert it using something like www.freeformatter.com/base64-encoder.html. This produces a string of text that goes into the content field. Note that the name of the attachment displayed on the asset view screen will be taken from the file_name attribute.
-
-        The request body must contain a JSON object. To create multiple attachments, provide an array of JSON objects.
       parameters:
         - in: body
           name: body
@@ -1738,33 +1876,33 @@ paths:
             type: object
             properties:
               data:
-                type: object
-                required:
-                  - type
-                  - attributes
-                properties:
-                  type:
-                    type: string
-                    minLength: 1
-                    description: 'Must be one of: attachments'
-                  attributes:
-                    type: object
-                    required:
-                      - attachment
-                    properties:
-                      attachment:
-                        type: object
-                        required:
-                          - content
-                          - file_name
-                        properties:
-                          content:
-                            type: string
-                            minLength: 1
-                            description: Base64 code of the uploaded file
-                          file_name:
-                            type: string
-                            minLength: 1
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - type
+                  properties:
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        attachment:
+                          type: object
+                          properties:
+                            content:
+                              type: string
+                              minLength: 1
+                            file_name:
+                              type: string
+                              minLength: 1
+                          required:
+                            - content
+                            - file_name
+                      required:
+                        - attachment
             required:
               - data
           x-examples:
@@ -1781,17 +1919,110 @@ paths:
                   attributes:
                     attachment:
                       content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
-                      file_name: test.png
+                      file_name: test-1.png
                 - type: attachments
                   attributes:
-                    ...: null
-          description: ''
+                    content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
+                    file_name: test-2.png
+          description: 'The request body must contain a JSON object. To create multiple attachments, provide an array of JSON objects.'
     delete:
       summary: Delete multiple attachments. (Bulk Destroy)
       operationId: Delete-attachments
       responses:
         '200':
           description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              Data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                      attachment-file-name:
+                        type: string
+                        minLength: 1
+                      attachment-content-type:
+                        type: string
+                        minLength: 1
+                      attachment-file-size:
+                        type: number
+                      ext:
+                        type: string
+                        minLength: 1
+                      viewable:
+                        type: boolean
+                      download-url:
+                        type: string
+                        minLength: 1
+                      created-at:
+                        type: string
+                        minLength: 1
+                      updated-at:
+                        type: string
+                        minLength: 1
+                    required:
+                      - name
+                      - attachment-file-name
+                      - attachment-content-type
+                      - attachment-file-size
+                      - ext
+                      - viewable
+                      - download-url
+                      - created-at
+                      - updated-at
+                required:
+                  - id
+                  - type
+                  - attributes
+            required:
+              - Data
+          examples:
+            Example:
+              Data:
+                id: string
+                type: string
+                attributes:
+                  name: string
+                  attachment-file-name: string
+                  attachment-content-type: string
+                  attachment-file-size: 0
+                  ext: string
+                  viewable: true
+                  download-url: string
+                  created-at: string
+                  updated-at: string
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Bad Content Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Bad Request
+          schema:
+            type: object
+            properties: {}
       description: Deletes one or more specified attachments. Returns the deleted attachments and a 200 status code if successful.
       parameters:
         - in: body
@@ -1829,26 +2060,79 @@ paths:
                 - type: attachments
                   attributes:
                     id: 4
+            Single Attachment Delete:
+              data:
+                type: attachments
+                attributes:
+                  id: 2
+          description: 'Data may contain a single object to delete one attachment, or an array of objects to delete multiple attachments.'
   '/{resource_type}/{resource_id}/relationships/attachments/{id}':
     parameters:
-      - type: string
-        name: resource_type
-        in: path
-        required: true
-      - type: string
-        name: resource_id
-        in: path
-        required: true
-      - type: string
-        name: id
-        in: path
-        required: true
+      - $ref: '#/parameters/resource_type'
+      - $ref: '#/parameters/resource_id'
+      - $ref: '#/parameters/id'
     patch:
-      summary: Attachments
-      operationId: patch-resource_type-resource_id-relationships-attachments-id
+      summary: Update an attachment for a particular resource.
+      operationId: Update-attachment
       responses:
         '200':
           description: OK
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Unsupported Media Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          schema:
+            type: object
+            properties: {}
+      description: Updates the details of an existing attachment. Only the attachment name that is displayed on the asset view screen can be changed. The original file_name can't be changed.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: object
+                required:
+                  - type
+                  - attributes
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                    enum:
+                      - attachments
+                  attributes:
+                    type: object
+                    required:
+                      - name
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+            required:
+              - data
+          description: The request body must contain a JSON object.
+          x-examples:
+            Example:
+              data:
+                type: attachments
+                attributes:
+                  name: new_name.png
 definitions: {}
 parameters:
   id:
@@ -1857,12 +2141,60 @@ parameters:
     schema:
       type: number
     description: Unique Identifier of an Object in IT Glue
+    required: true
   resource_id:
     name: resource_id
     in: path
     schema:
       type: number
     description: The resource id of the parent resource.
+    required: true
+  resource_type:
+    name: resource_type
+    in: path
+    schema:
+      type: string
+    items:
+      - checklists
+      - checklist_templates
+      - configurations
+      - contacts
+      - documents
+      - domains
+      - locations
+      - passwords
+      - ssl_certificates
+      - flexible_assets
+      - tickets
+    required: true
+    description: The resource type of the parent resource
+  'filter[name]':
+    name: 'filter[name]'
+    in: query
+    schema:
+      type: string
+    description: Exact match filter on the NAME field.
+  sort:
+    name: sort
+    in: query
+    required: false
+    schema:
+      type: string
+    description: 'Sort by the selected field(s); comma separated values. To Invert order use -, eg: ''-name''. '
+  'page[number]':
+    name: 'page[number]'
+    in: query
+    schema:
+      type: integer
+    description: 'Return the Nth page based on page[size]'
+  'page[size]':
+    name: 'page[size]'
+    in: query
+    required: false
+    schema:
+      type: integer
+      default: 50
+    description: Number of records to return in the List
 responses: {}
 securityDefinitions:
   API Key:
