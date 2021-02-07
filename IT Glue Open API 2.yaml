@@ -240,7 +240,7 @@ paths:
                 type: configuration-types
                 attributes:
                   name: Power
-  '/configuration_types/{id}':
+  '/configuration_types/{object-id}':
     get:
       responses:
         default:
@@ -278,13 +278,6 @@ paths:
       summary: Retrieve a configuration type. (Show)
       description: Returns the details of an existing configuration type.
       operationId: Get_configuration_type
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
-          description: ID of the Configuration Type to be retrieved
-          x-ms-summary: Configuration Type ID
     patch:
       responses:
         default:
@@ -325,6 +318,12 @@ paths:
                   - type
             required:
               - data
+    parameters:
+      - type: string
+        name: object-id
+        in: path
+        required: true
+      - $ref: '#/parameters/object-id'
   /flexible_asset_types:
     get:
       responses:
@@ -2088,12 +2087,12 @@ paths:
             type: object
             properties: {}
         '415':
-          description: Unsupported Media Type
+          description: Bad Content Type
           schema:
             type: object
             properties: {}
         '422':
-          description: Unprocessable Entity (WebDAV)
+          description: Bad Request
           schema:
             type: object
             properties: {}
@@ -2133,13 +2132,225 @@ paths:
                 type: attachments
                 attributes:
                   name: new_name.png
+  /configuration_interfaces:
+    post:
+      summary: ''
+      operationId: post-configuration_interfaces
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: ''
+      operationId: patch-configuration_interfaces
+      responses:
+        '200':
+          description: OK
+  '/configuration_interfaces/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-configuration_interfaces-id
+    patch:
+      summary: ''
+      operationId: patch-configuration_interfaces-id
+      responses:
+        '200':
+          description: OK
+  /configuration_statuses:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-configuration_statuses
+    post:
+      summary: ''
+      operationId: post-configuration_statuses
+      responses:
+        '200':
+          description: OK
+  '/configuration_statuses/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-configuration_statuses-id
+    patch:
+      summary: ''
+      operationId: patch-configuration_statuses-id
+      responses:
+        '200':
+          description: OK
+  /configurations:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-configurations
+    post:
+      summary: ''
+      operationId: post-configurations
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: ''
+      operationId: patch-configurations
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: ''
+      operationId: delete-configurations
+      responses:
+        '200':
+          description: OK
+  '/configurations/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-configurations-id
+    patch:
+      summary: ''
+      operationId: patch-configurations-id
+      responses:
+        '200':
+          description: OK
+  /contact_types:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-contact_types
+    post:
+      summary: ''
+      operationId: post-contact_types
+      responses:
+        '200':
+          description: OK
+  '/contact_types/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-contact_types-id
+    patch:
+      summary: ''
+      operationId: patch-contact_types-id
+      responses:
+        '200':
+          description: OK
+  /contacts:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-contacts
+    post:
+      summary: ''
+      operationId: post-contacts
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: ''
+      operationId: patch-contacts
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: ''
+      operationId: delete-contacts
+      responses:
+        '200':
+          description: OK
+  '/contacts/{id}':
+    parameters:
+      - type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-contacts-id
+    patch:
+      summary: ''
+      operationId: patch-contacts-id
+      responses:
+        '200':
+          description: OK
+  /countries:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-countries
+  '/countries/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-countries-id
+  /documents:
+    patch:
+      summary: Update multiple documents.
+      operationId: patch-documents
+      responses:
+        '200':
+          description: OK
+      description: |-
+        Updates a list of items, also known as bulk updating.
+
+        The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
+
+        Bulk updates using a nested relationships route are not supported.
+  '/documents/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+    patch:
+      summary: ''
+      operationId: patch-documents-id
+      responses:
+        '200':
+          description: OK
+  /domains:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-domains
+  '/configurations/{id}/relationships/configuration_interfaces/{id}':
+    parameters:
+      - $ref: '#/parameters/id'
+      - type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-configurations-id-relationships-configuration_interfaces-id
 definitions: {}
 parameters:
-  id:
-    name: id
+  object-id:
+    name: object-id
     in: path
     schema:
-      type: number
+      type: integer
     description: Unique Identifier of an Object in IT Glue
     required: true
   resource_id:
@@ -2195,6 +2406,13 @@ parameters:
       type: integer
       default: 50
     description: Number of records to return in the List
+  parent-id:
+    name: parent-id
+    in: query
+    required: true
+    schema:
+      type: integer
+    description: Unique Identifier of a parent Object in IT Glue
 responses: {}
 securityDefinitions:
   API Key:
