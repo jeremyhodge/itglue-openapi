@@ -21,7 +21,6 @@ paths:
       description: Returns a list of configuration types in your account.
       operationId: List_configuration_types
       parameters:
-        - $ref: '#/parameters/filter[name]'
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page[size]'
         - $ref: '#/parameters/page[number]'
@@ -2456,23 +2455,26 @@ paths:
       description: Returns the details of an existing configuration interface.
 definitions: {}
 parameters:
-  object-id:
+  'object-id':
     name: object-id
     in: path
+    type: integer
     schema:
       type: integer
     description: Unique Identifier of an Object in IT Glue
     required: true
-  resource_id:
+  'resource_id':
     name: resource_id
     in: path
+    type: integer
     schema:
       type: number
     description: The resource id of the parent resource.
     required: true
-  resource_type:
+  'resource_type':
     name: resource_type
     in: path
+    type: integer
     schema:
       type: string
     items:
@@ -2489,22 +2491,18 @@ parameters:
       - tickets
     required: true
     description: The resource type of the parent resource
-  'filter[name]':
-    name: 'filter[name]'
-    in: query
-    schema:
-      type: string
-    description: Exact match filter on the NAME field.
-  sort:
+  'sort':
     name: sort
     in: query
+    type: string
     required: false
     schema:
       type: string
-    description: 'Sort by the selected field(s); comma separated values. To Invert order use -, eg: ''-name''. '
+    description: Sort order
   'page[number]':
     name: 'page[number]'
     in: query
+    type: integer
     schema:
       type: integer
     description: 'Return the Nth page based on page[size]'
@@ -2512,6 +2510,7 @@ parameters:
     name: 'page[size]'
     in: query
     required: false
+    type: integer    
     schema:
       type: integer
       default: 50
@@ -2520,6 +2519,7 @@ parameters:
     name: parent-id
     in: path
     required: true
+    type: integer
     schema:
       type: integer
     description: Unique Identifier of an Object in IT Glue
@@ -2533,11 +2533,18 @@ security:
   - API Key: []
 tags:
   - name: Attachments
-  - description: An attachment refers to a file upload associated with an asset.
+    description: An attachment refers to a file upload associated with an asset.
   - name: Configurations
+    description: A configuration refers to a device you manage for a client organization.
   - name: Contacts
+    description: A contact refers to a contact in a client organization.
   - name: Countries
+    description: A country refers to any distinct national entity.
   - name: Documents
+    description: The Documents resource allows you to manage documents on your account.
   - name: Domains
+    description: A domain refers to a domain name, such as example.com.
   - name: Flexible Assets
+    description: A flexible asset refers to a record that has been created using a specific flexible asset type.
   - name: Organizations
+    description: An organization refers to a client company.
