@@ -4,26 +4,14 @@ info:
   title: IT Glue
   description: |-
     OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
-
     CopyLeft 2021 - ZetaOne, Inc
     Author: Jeremy G Hodge mailto:jeremy.hodge@zetaone.com
-
     ***********************************
     ***    AS-IS and NO WARRANTY    ***
     ***    USE AT YOUR OWN RISK!    ***
     ***********************************
-
     For API  support, contact IT Glue directly. 
-    No support for this file is available from ZetaOne or Jeremy Hodge
-
-    Formatted for compatibility with Microsoft's Swagger Editor for
-      Micrsoft Power Automate custom connector.
-
-    Issues of note with compatibility:
-     - Microsoft's editor does not support path template parameters
-       being defined on the global path for a set of operations. Each
-       operation must define its path tempate parameters locally (but
-       can be a $ref).   
+    Formatted for compatibility with Swagger Editor for Power Automate custom connector.
   contact:
     name: IT Glue
     url: 'http://www.itglue.com'
@@ -53,6 +41,7 @@ paths:
             properties:
               data:
                 type: array
+                description: data
                 items:
                   type: object
                   properties:
@@ -64,6 +53,7 @@ paths:
                       description: type
                     attributes:
                       type: object
+                      description: attributes
                       properties:
                         name:
                           type: string
@@ -74,10 +64,9 @@ paths:
                         updated-at:
                           type: string
                           description: updated-at
-                      description: attributes
-                description: data
               meta:
                 type: object
+                description: meta
                 properties:
                   current-page:
                     type: integer
@@ -101,11 +90,13 @@ paths:
                     description: total-count
                   filters:
                     type: object
-                    properties: {}
                     description: filters
-                description: meta
+                    properties:
+                      '':
+                        type: string
               links:
                 type: object
+                description: links
                 properties:
                   self:
                     type: string
@@ -122,29 +113,7 @@ paths:
                   last:
                     type: string
                     description: last
-                description: links
-          examples:
-            Example:
-              data:
-                - id: string
-                  type: string
-                  attributes:
-                    name: string
-                    created-at: string
-                    updated-at: string
-              meta:
-                current-page: 0
-                next-page: 0
-                prev-page: 0
-                total-pages: 0
-                total-count: 0
-                filters: {}
-              links:
-                self: string
-                first: string
-                prev: string
-                next: string
-                last: string
+          examples: {}
         '401':
           description: Unauthorized
           schema:
@@ -194,16 +163,7 @@ paths:
                   - attributes
             required:
               - data
-          examples:
-            Example:
-              data:
-                id: string
-                type: string
-                attributes:
-                  name: string
-                  configurations-count: 0
-                  created-at: string
-                  updated-at: string
+          examples: {}
         '401':
           description: Unauthorized
           schema:
@@ -255,12 +215,7 @@ paths:
                   - type
             required:
               - data
-          x-examples:
-            Example:
-              data:
-                type: configuration-types
-                attributes:
-                  name: Power
+          x-examples: {}
       tags:
         - Configuration Types
   '/configuration_types/{object_id}':
@@ -311,16 +266,7 @@ paths:
                   - attributes
             required:
               - data
-          examples:
-            Example:
-              data:
-                id: string
-                type: string
-                attributes:
-                  name: string
-                  configurations-count: 0
-                  created-at: string
-                  updated-at: string
+          examples: {}
         '401':
           description: Unauthorized
           schema:
@@ -1790,71 +1736,22 @@ paths:
               data:
                 type: object
                 properties:
-                  id:
-                    type: string
-                    minLength: 1
                   type:
                     type: string
                     minLength: 1
                   attributes:
                     type: object
                     properties:
-                      name:
-                        type: string
-                        minLength: 1
-                      attachment-file-name:
-                        type: string
-                        minLength: 1
-                      attachment-content-type:
-                        type: string
-                        minLength: 1
-                      attachment-file-size:
+                      id:
                         type: number
-                      ext:
-                        type: string
-                        minLength: 1
-                      viewable:
-                        type: boolean
-                      download-url:
-                        type: string
-                        minLength: 1
-                      created-at:
-                        type: string
-                        minLength: 1
-                      updated-at:
-                        type: string
-                        minLength: 1
                     required:
-                      - name
-                      - attachment-file-name
-                      - attachment-content-type
-                      - attachment-file-size
-                      - ext
-                      - viewable
-                      - download-url
-                      - created-at
-                      - updated-at
+                      - id
                 required:
-                  - id
                   - type
                   - attributes
             required:
               - data
-          examples:
-            Example:
-              data:
-                id: string
-                type: string
-                attributes:
-                  name: string
-                  attachment-file-name: string
-                  attachment-content-type: string
-                  attachment-file-size: 0
-                  ext: string
-                  viewable: true
-                  download-url: string
-                  created-at: string
-                  updated-at: string
+          examples: {}
         '401':
           description: Unauthorized
           schema:
@@ -1909,54 +1806,34 @@ paths:
             type: object
             properties:
               data:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  required:
-                    - type
-                  properties:
-                    type:
-                      type: string
-                      minLength: 1
-                    attributes:
-                      type: object
-                      properties:
-                        attachment:
-                          type: object
-                          properties:
-                            content:
-                              type: string
-                              minLength: 1
-                            file_name:
-                              type: string
-                              minLength: 1
-                          required:
-                            - content
-                            - file_name
-                      required:
-                        - attachment
+                type: object
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                  attributes:
+                    type: object
+                    properties:
+                      attachment:
+                        type: object
+                        properties:
+                          content:
+                            type: string
+                            minLength: 1
+                          file_name:
+                            type: string
+                            minLength: 1
+                        required:
+                          - content
+                          - file_name
+                    required:
+                      - attachment
+                required:
+                  - type
+                  - attributes
             required:
               - data
-          x-examples:
-            Single Attachment:
-              data:
-                type: attachments
-                attributes:
-                  attachment:
-                    content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
-                    file_name: test.png
-            Multiple Attachments:
-              data:
-                - type: attachments
-                  attributes:
-                    attachment:
-                      content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
-                      file_name: test-1.png
-                - type: attachments
-                  attributes:
-                    content: R0lGODlhABAQAIAAAAAAAP///yH7BAEAAAAALAAAAAAEAABAAAIBRAA5
-                    file_name: test-2.png
+          x-examples: {}
           description: 'The request body must contain a JSON object. To create multiple attachments, provide an array of JSON objects.'
     delete:
       summary: Delete multiple Attachments for a particular Resource
@@ -1970,74 +1847,25 @@ paths:
             description: ''
             type: object
             properties:
-              Data:
+              data:
                 type: object
                 properties:
-                  id:
-                    type: string
-                    minLength: 1
                   type:
                     type: string
                     minLength: 1
                   attributes:
                     type: object
                     properties:
-                      name:
-                        type: string
-                        minLength: 1
-                      attachment-file-name:
-                        type: string
-                        minLength: 1
-                      attachment-content-type:
-                        type: string
-                        minLength: 1
-                      attachment-file-size:
+                      id:
                         type: number
-                      ext:
-                        type: string
-                        minLength: 1
-                      viewable:
-                        type: boolean
-                      download-url:
-                        type: string
-                        minLength: 1
-                      created-at:
-                        type: string
-                        minLength: 1
-                      updated-at:
-                        type: string
-                        minLength: 1
                     required:
-                      - name
-                      - attachment-file-name
-                      - attachment-content-type
-                      - attachment-file-size
-                      - ext
-                      - viewable
-                      - download-url
-                      - created-at
-                      - updated-at
+                      - id
                 required:
-                  - id
                   - type
                   - attributes
             required:
-              - Data
-          examples:
-            Example:
-              Data:
-                id: string
-                type: string
-                attributes:
-                  name: string
-                  attachment-file-name: string
-                  attachment-content-type: string
-                  attachment-file-size: 0
-                  ext: string
-                  viewable: true
-                  download-url: string
-                  created-at: string
-                  updated-at: string
+              - data
+          examples: {}
         '401':
           description: Unauthorized
           schema:
@@ -2090,38 +1918,23 @@ paths:
             properties:
               data:
                 type: object
-                uniqueItems: true
-                minItems: 1
-                items:
-                  required:
-                    - type
-                  properties:
-                    type:
-                      type: string
-                      minLength: 1
-                    attributes:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                      required:
-                        - id
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                    required:
+                      - id
+                required:
+                  - type
+                  - attributes
             required:
               - data
-          x-examples:
-            Multiple Attachment Delete:
-              data:
-                - type: attachments
-                  attributes:
-                    id: 2
-                - type: attachments
-                  attributes:
-                    id: 4
-            Single Attachment Delete:
-              data:
-                type: attachments
-                attributes:
-                  id: 2
+          x-examples: {}
           description: 'Data may contain a single object to delete one attachment, or an array of objects to delete multiple attachments.'
   '/{resource_type}/{resource_id}/relationships/attachments/{object_id}':
     patch:
@@ -2132,6 +1945,30 @@ paths:
       responses:
         '200':
           description: OK
+          examples: {}
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                    required:
+                      - name
+                required:
+                  - type
+                  - attributes
+            required:
+              - data
         '401':
           description: Unauthorized
           schema:
@@ -2205,12 +2042,7 @@ paths:
             required:
               - data
           description: The request body must contain a JSON object.
-          x-examples:
-            Example:
-              data:
-                type: attachments
-                attributes:
-                  name: new_name.png
+          x-examples: {}
   /configuration_interfaces:
     post:
       summary: Create a Configuration Interface
