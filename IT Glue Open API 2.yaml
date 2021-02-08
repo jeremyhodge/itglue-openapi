@@ -27,12 +27,51 @@ paths:
   /configuration_types:
     get:
       summary: List Configuration Types
-      description: Returns a list of configuration types in your account.
+      description: |-
+        Returns a list of configuration types in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: List_configuration_types
       parameters:
-        - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page-size'
         - $ref: '#/parameters/page-number'
+        - type: string
+          in: query
+          name: 'filter[name]'
+          description: Filter the results by the Name Field. Exact match only.
+          x-ms-summary: Name Field Filter
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+          x-ms-summary: Sort Order
+          x-ms-visibility: advanced
       responses:
         '200':
           description: default
@@ -185,7 +224,25 @@ paths:
             type: object
             properties: {}
       summary: Create a Configuration Type
-      description: Creates a new configuration type in your account. Returns the created object if successful.
+      description: |-
+        Creates a new configuration type in your account. Returns the created object if successful.
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Post_configuration_type
       parameters:
         - name: body
@@ -222,7 +279,26 @@ paths:
     get:
       summary: Get a Configuration Type
       operationId: Get_configuration_type
-      description: Returns the details of an existing configuration type.
+      description: |-
+        Returns the details of an existing configuration type.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - $ref: '#/parameters/object_id'
       responses:
@@ -331,7 +407,26 @@ paths:
       parameters:
         - $ref: '#/parameters/page-size'
         - $ref: '#/parameters/page-number'
-      description: Returns a list of flexible asset types in your account.
+      description: |-
+        Returns a list of flexible asset types in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       tags:
         - Flexible Asset Types
     post:
@@ -341,7 +436,26 @@ paths:
           schema: {}
       summary: Create a Flexible Asset Type
       operationId: Post_flexible_asset_type
-      description: Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested relationships route to add multiple flexible asset fields to a flexible asset type in bulk.
+      description: |-
+        Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested relationships route to add multiple flexible asset fields to a flexible asset type in bulk.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - name: body
           in: body
@@ -533,7 +647,26 @@ paths:
                       description: relationships
                 description: data
       summary: List Flexible Asset Fields
-      description: Returns a list of fields for the specified flexible asset type.
+      description: |-
+        Returns a list of fields for the specified flexible asset type.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: List_flexible_asset_fields
       tags:
         - Flexible Asset Types
@@ -762,7 +895,26 @@ paths:
                     description: last
                 description: links
       summary: List Organizations
-      description: Returns a list of organizations in your account.
+      description: |-
+        Returns a list of organizations in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: List_organizations
       parameters:
         - name: 'filter[id]'
@@ -918,7 +1070,26 @@ paths:
                 description: data
       summary: Create an Organization
       operationId: Post_organization
-      description: Creates an organization. Returns the created object if successful.
+      description: |-
+        Creates an organization. Returns the created object if successful.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - name: body
           in: body
@@ -984,7 +1155,26 @@ paths:
           description: default
           schema: {}
       summary: Get an Organization
-      description: Returns the details of an existing organization.
+      description: |-
+        Returns the details of an existing organization.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Get-organization
       parameters:
         - $ref: '#/parameters/object_id'
@@ -1002,7 +1192,26 @@ paths:
           description: default
           schema: {}
       summary: Update an Organization
-      description: 'Updates the details of an existing organization. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: alert, description, quick_notes. A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don''t specify will remain unchanged.'
+      description: |-
+        Updates the details of an existing organization. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: alert, description, quick_notes. A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Patch-organization
       parameters:
         - $ref: '#/parameters/object_id'
@@ -1143,7 +1352,26 @@ paths:
                     description: last
                 description: links
       summary: List Organization Types
-      description: Returns a list of organizations in your account.
+      description: |-
+        Returns a list of organizations in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: List-organization-types
       parameters:
         - name: 'filter[name]'
@@ -1200,7 +1428,26 @@ paths:
                     description: attributes
                 description: data
       summary: Create an Organization Type
-      description: Creates a new organization type in your account. Returns the created object if successful.
+      description: |-
+        Creates a new organization type in your account. Returns the created object if successful.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Post-organization-type
       parameters:
         - name: body
@@ -1266,7 +1513,26 @@ paths:
                     description: attributes
                 description: data
       summary: Get an Organization Type
-      description: Returns the details of an existing organization type.
+      description: |-
+        Returns the details of an existing organization type.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Get-organization-type
       tags:
         - Organization Types
@@ -1301,7 +1567,26 @@ paths:
                     description: attributes
                 description: data
       summary: Update an Organization Type
-      description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      description: |-
+        Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Patch-organization-type
       parameters:
         - $ref: '#/parameters/object_id'
@@ -1413,7 +1698,26 @@ paths:
                 description: links
       summary: List Organization Statuses
       operationId: List-organization-statuses
-      description: Returns a list of the organization statuses in your account.
+      description: |-
+        Returns a list of the organization statuses in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - name: 'filter[name]'
           in: query
@@ -1453,7 +1757,26 @@ paths:
           description: default
           schema: {}
       summary: Create an Organization Status
-      description: Creates a new organization status in your account. Returns the created object if successful.
+      description: |-
+        Creates a new organization status in your account. Returns the created object if successful.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Post-organization-status
       parameters:
         - name: body
@@ -1519,7 +1842,26 @@ paths:
                     description: attributes
                 description: data
       summary: Get an Organization Status
-      description: Returns the details of an existing organization status.
+      description: |-
+        Returns the details of an existing organization status.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Get-organization-status
       tags:
         - Organization Statuses
@@ -1529,7 +1871,26 @@ paths:
           description: default
           schema: {}
       summary: Update an Organization Status
-      description: Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      description: |-
+        Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Patch-organization-status
       parameters:
         - $ref: '#/parameters/object_id'
@@ -1707,7 +2068,26 @@ paths:
                       description: relationships
                 description: included
       summary: Get a Flexible Asset Type
-      description: Returns the details of an existing flexible asset type.
+      description: |-
+        Returns the details of an existing flexible asset type.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       operationId: Get_flexible_asset_type
       parameters:
         - $ref: '#/parameters/object_id'
@@ -1776,6 +2156,24 @@ paths:
         Attaches a file to the asset specified in the ID parameter. Returns the created object if successful. Can also be used to add multiple attachments to an asset in bulk.
 
         Attachments are uploaded by including media data on the asset the attachment is associated with. Attachments can be encoded and passed in JSON format for direct upload, in which case the file has to be strict encoded. You need to convert it using something like www.freeformatter.com/base64-encoder.html. This produces a string of text that goes into the content field. Note that the name of the attachment displayed on the asset view screen will be taken from the file_name attribute.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - in: path
           name: resource_type
@@ -1886,7 +2284,27 @@ paths:
           schema:
             type: object
             properties: {}
-      description: Deletes one or more specified attachments. Returns the deleted attachments and a 200 status code if successful.
+      description: |-
+        Deletes one or more specified attachments. Returns the deleted attachments and a 200 status code if successful.
+
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - in: path
           name: resource_type
@@ -1989,7 +2407,26 @@ paths:
           schema:
             type: object
             properties: {}
-      description: Updates the details of an existing attachment. Only the attachment name that is displayed on the asset view screen can be changed. The original file_name can't be changed.
+      description: |-
+        Updates the details of an existing attachment. Only the attachment name that is displayed on the asset view screen can be changed. The original file_name can't be changed.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - $ref: '#/parameters/object_id'
         - in: path
@@ -2052,7 +2489,26 @@ paths:
           description: OK
       tags:
         - Configuration Interfaces
-      description: Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
+      description: |-
+        Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       summary: Update multiple Configuration Interfaces
       operationId: Patch_configuration_interfaces
@@ -2065,6 +2521,24 @@ paths:
         Updates a list of configuration interfaces, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   '/configuration_interfaces/{object_id}':
     get:
       parameters:
@@ -2076,7 +2550,26 @@ paths:
         '200':
           description: default
       operationId: Get_configuration_interface_global
-      description: Returns the details of an existing configuration interface.
+      description: |-
+        Returns the details of an existing configuration interface.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       parameters:
         - $ref: '#/parameters/object_id'
@@ -2091,6 +2584,24 @@ paths:
         Updates the details of an existing configuration interface. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
 
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /configuration_statuses:
     get:
       summary: List Configuration Statuses
@@ -2100,7 +2611,26 @@ paths:
         '200':
           description: default
       operationId: List_configuration_statuses
-      description: Returns a list of the configuration statuses in your account.
+      description: |-
+        Returns a list of the configuration statuses in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     post:
       summary: Create a Configuration Status
       operationId: Post_configuration_status
@@ -2109,7 +2639,26 @@ paths:
           description: OK
       tags:
         - Configuration Statuses
-      description: Creates a new configuration status in your account. Returns the created object if successful.
+      description: |-
+        Creates a new configuration status in your account. Returns the created object if successful.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   '/configuration_statuses/{object_id}':
     get:
       summary: Get a Configuration Status
@@ -2119,7 +2668,26 @@ paths:
         '200':
           description: default
       operationId: Get_configuration_status
-      description: Returns the details of an existing configuration status.
+      description: |-
+        Returns the details of an existing configuration status.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       parameters:
         - $ref: '#/parameters/object_id'
     patch:
@@ -2132,7 +2700,26 @@ paths:
           description: OK
       tags:
         - Configuration Statuses
-      description: Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      description: |-
+        Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /configurations:
     get:
       summary: List Configurations
@@ -2142,7 +2729,26 @@ paths:
         '200':
           description: default
       operationId: Get_configurations
-      description: Returns a list of configurations for all organizations or for a specified organization.
+      description: |-
+        Returns a list of configurations for all organizations or for a specified organization.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     post:
       summary: Create a Configuration
       operationId: Post_configuration
@@ -2151,7 +2757,26 @@ paths:
           description: OK
       tags:
         - Configurations
-      description: Creates a configuration under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configurations to an organization in bulk.
+      description: |-
+        Creates a configuration under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configurations to an organization in bulk.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       summary: Update multiple Configurations
       operationId: Patch_configurations
@@ -2164,6 +2789,24 @@ paths:
         Updates a list of items, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 403 Forbidden error if any relationships are present in the request. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: archived, asset_tag, notes, purchased_at, restricted, serial_number, warranty_expires_at
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     delete:
       summary: Delete multiple Configurations
       operationId: Delete_configurations
@@ -2172,7 +2815,26 @@ paths:
           description: OK
       tags:
         - Configurations
-      description: Deletes one or more specified configurations. Returns the deleted configurations and a 200 status code if successful.
+      description: |-
+        Deletes one or more specified configurations. Returns the deleted configurations and a 200 status code if successful.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   '/configurations/{object_id}':
     get:
       summary: Get a Configuration
@@ -2184,7 +2846,26 @@ paths:
         '200':
           description: default
       operationId: Get_configuration
-      description: Returns the details of an existing configuration.
+      description: |-
+        Returns the details of an existing configuration.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       summary: Update a Configuration
       operationId: Patch_configuration
@@ -2199,6 +2880,24 @@ paths:
         Updates the details of an existing configuration. Returns 403 Forbidden error if any relationships are present in the request. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: archived, asset_tag, notes, purchased_at, restricted, serial_number, warranty_expires_at
 
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /contact_types:
     get:
       summary: List Contact Types
@@ -2208,7 +2907,26 @@ paths:
         '200':
           description: default
       operationId: List_contact_types
-      description: Returns a list of contact types in your account.
+      description: |-
+        Returns a list of contact types in your account.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     post:
       summary: Create a Contact Type
       operationId: Post_contact_type
@@ -2217,7 +2935,27 @@ paths:
           description: OK
       tags:
         - Contact Types
-      description: Creates a new contact type in your account. Returns the created object if successful.
+      description: |-
+        Creates a new contact type in your account. Returns the created object if successful.
+
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   '/contact_types/{object_id}':
     get:
       summary: Get a Contact Type
@@ -2229,7 +2967,26 @@ paths:
         '200':
           description: default
       operationId: Get_contact_type
-      description: Returns the details of an existing contact type.
+      description: |-
+        Returns the details of an existing contact type.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       summary: Update a Contact Type
       operationId: Patch_contact_type
@@ -2240,7 +2997,26 @@ paths:
           description: OK
       tags:
         - Contact Types
-      description: Updates a contact type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      description: |-
+        Updates a contact type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /contacts:
     get:
       summary: List Contacts
@@ -2250,7 +3026,26 @@ paths:
         '200':
           description: default
       operationId: List_contacts
-      description: Returns a list of contacts for all organizations or for a specified organization.
+      description: |-
+        Returns a list of contacts for all organizations or for a specified organization.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     post:
       summary: Create a Contact
       operationId: Post_contact
@@ -2259,7 +3054,26 @@ paths:
           description: OK
       tags:
         - Contacts
-      description: Creates a contact under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple contacts to an organization in bulk.
+      description: |-
+        Creates a contact under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple contacts to an organization in bulk.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       summary: Update multiple Contacts
       operationId: Patch_contacts
@@ -2272,6 +3086,24 @@ paths:
         Updates a list of contacts, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced record.
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     delete:
       summary: Delete multiple Contacts
       operationId: Delete_contacts
@@ -2280,7 +3112,26 @@ paths:
           description: OK
       tags:
         - Contacts
-      description: Deletes one or more specified contacts. Returns the deleted contacts and a 200 status code if successful.
+      description: |-
+        Deletes one or more specified contacts. Returns the deleted contacts and a 200 status code if successful.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   '/contacts/{object_id}':
     get:
       summary: Get a Contact
@@ -2292,7 +3143,26 @@ paths:
         '200':
           description: default
       operationId: Get_contact
-      description: Retrieve a contact for a particular organization.
+      description: |-
+        Retrieve a contact for a particular organization.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
     patch:
       summary: Update a Contact
       parameters:
@@ -2307,6 +3177,24 @@ paths:
         Updates the details of an existing contact. Returns 422 Bad Request error if trying to update an externally synced record.
 
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /countries:
     get:
       summary: List all Countries
@@ -2316,7 +3204,26 @@ paths:
         '200':
           description: default
       operationId: Get_countries
-      description: Returns a list of supported countries.
+      description: |-
+        Returns a list of supported countries.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   '/countries/{object_id}':
     get:
       summary: Get a Country
@@ -2328,7 +3235,26 @@ paths:
         '200':
           description: default
       operationId: Get_country
-      description: Returns the details of one of the supported countries.
+      description: |-
+        Returns the details of one of the supported countries.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /documents:
     patch:
       summary: Update multiple Documents
@@ -2342,6 +3268,25 @@ paths:
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
 
         Bulk updates using a nested relationships route are not supported.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
       tags:
         - Documents
   '/documents/{object_id}':
@@ -2359,11 +3304,33 @@ paths:
         Updates an existing document. Returns the updated object if successful.
 
         A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
+
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
   /domains:
     get:
       summary: List Domains
       tags:
         - Domains
+      externalDocs:
+        description: Learn More...
+        url: 'https://api.itglue.com/developer#domains-index'
       responses:
         '200':
           description: default
@@ -2395,51 +3362,272 @@ paths:
                         resource-url:
                           type: string
                           minLength: 1
+                        restricted:
+                          type: boolean
+                        my-glue:
+                          type: boolean
                         name:
                           type: string
                           minLength: 1
-                        screenshot:
+                        notes:
                           type: string
                           minLength: 1
-                        registrar-name:
-                          type: string
-                          minLength: 1
-                        notes: {}
-                        expires-on:
+                        created-at:
                           type: string
                           minLength: 1
                         updated-at:
                           type: string
                           minLength: 1
-                  required:
-                    - id
-                    - type
+                        registrar-name:
+                          type: string
+                          minLength: 1
+                        expires-on:
+                          type: string
+                          minLength: 1
+                        screenshot: {}
+                    relationships:
+                      type: object
+                      properties:
+                        user-resource-accesses:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                        group-resource-accesses:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                        passwords:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                        attachments:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+              included:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      minLength: 1
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        organization-id:
+                          type: number
+                        organization-name:
+                          type: string
+                          minLength: 1
+                        resource-url:
+                          type: string
+                          minLength: 1
+                        restricted:
+                          type: boolean
+                        my-glue:
+                          type: boolean
+                        name:
+                          type: string
+                          minLength: 1
+                        autofill-selectors: {}
+                        username:
+                          type: string
+                          minLength: 1
+                        url:
+                          type: string
+                          minLength: 1
+                        notes: {}
+                        password-updated-at:
+                          type: string
+                          minLength: 1
+                        updated-by:
+                          type: number
+                        updated-by-type:
+                          type: string
+                          minLength: 1
+                        resource-id:
+                          type: number
+                        cached-resource-type-name:
+                          type: string
+                          minLength: 1
+                        cached-resource-name:
+                          type: string
+                          minLength: 1
+                        password-category-id: {}
+                        password-category-name: {}
+                        created-at:
+                          type: string
+                          minLength: 1
+                        updated-at:
+                          type: string
+                          minLength: 1
+                        otp-enabled:
+                          type: boolean
+                        password-folder-id: {}
+                        resource-type:
+                          type: string
+                          minLength: 1
+                        parent-url:
+                          type: string
+                          minLength: 1
+                        vault-id: {}
+                        archived:
+                          type: boolean
+                    relationships:
+                      type: object
+                      properties:
+                        attachments:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: number
+                  next-page: {}
+                  prev-page: {}
+                  total-pages:
+                    type: number
+                  total-count:
+                    type: number
+                  filters:
+                    type: object
             required:
               - data
+          examples: {}
         '401':
           description: Unauthorized
           schema:
             type: object
             properties: {}
       operationId: List_domains
-      description: Returns a list of domains for all organizations or for a specified organization.
+      
+      description: |-
+        Returns a list of domains for all organizations or for a specified organization.
+        >Fully Implemented
       parameters:
-        - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page-number'
         - $ref: '#/parameters/page-size'
         - type: string
           in: query
-          name: 'filter[{filter_field}]'
-          description: Filter by the specified field name
+          name: 'filter[id]'
+          description: Filter by ID field
+          x-ms-summary: Filter by ID
+          x-ms-description: Specify the ID you wish to filter results by.
+          x-ms-visibility: advanced
+        - type: integer
+          in: query
+          name: 'filter[organization_id]'
+          description: Filter by Organization ID field
+          x-ms-summary: Organization ID
+          x-ms-description: Specify the Organization ID you wish to filter results by.
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          x-ms-description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          enum:
+            - created_at
+            - updated_at
+            - '-created_at'
+            - '-updated_at'
+          x-ms-summary: Sort Order
+          x-ms-visibility: advanced
         - type: string
           in: query
           name: include
-          description: Expand the Returned object to include...
+          description: Expand results to include...
           enum:
             - passwords
             - attachments
             - user_resource_accesses
             - group_resource_accesses
+          x-ms-summary: Expand Results
+          x-ms-description: Expand the returned objects to include the selected. Use Comma Separated List for multiple items.
+          x-ms-visibility: advanced
   '/configurations/{parent_id}/relationships/configuration_interfaces/{object_id}':
     get:
       summary: Get a Configuration Interface
@@ -2453,45 +3641,70 @@ paths:
         '200':
           description: default
       operationId: Get_configuration_interface_from_parent
-      description: Returns the details of an existing configuration interface.
+      description: |-
+        Returns the details of an existing configuration interface.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-description
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
 definitions: {}
 parameters:
-  sort:
-    name: sort
-    in: query
-    type: string
-    required: false
-    description: Sort order
   page-number:
     name: 'page[number]'
     in: query
     type: integer
-    description: 'Return the Nth page based on page[size]'
+    description: 'page[[number]]=N - Return the Nth page of data based on the current page size'
+    x-ms-description: Return the Nth page based on page size
+    x-ms-summary: Page Number
+    x-ms-visibility: advanced
   page-size:
     name: 'page[size]'
     in: query
     required: false
     type: integer
-    default: 50
     description: Number of records to return in the List
+    x-ms-description: Number of Rows
+    x-ms-summary: Number of rows to return per page
+    x-ms-visibility: advanced
   object_id:
     name: object_id
     in: path
     required: true
     type: integer
     description: ID of the object
+    x-ms-description: ID of the object
+    x-ms-summary: Object ID
+    x-ms-visibility: important
   parent_id:
     name: parent_id
     in: path
     required: true
     type: integer
     description: ID of the parent object
+    x-ms-description: ID of the parent object
+    x-ms-summary: Parent Object ID
+    x-ms-visibility: important
 responses: {}
 securityDefinitions:
   API Key:
     type: apiKey
     in: header
     name: x-api-key
+    description: Retreive and set the API Key from your IT Glue account.
 security:
   - API Key: []
 tags:
