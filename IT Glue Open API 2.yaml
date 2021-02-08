@@ -2625,10 +2625,45 @@ tags:
       The Organizations resource is used to manage information about organizations in your account.
       Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
   - name: Configuration Types
+    description: |-
+      A configuration type refers to the type categorization of a configuration, usually a type of device.
+      This resource is used to manage information about configuration types for your account. Configuration type IDs can be used to POST new configurations.
+      A configuration type may be referenced by one or more configurations. It's required that each configuration item have one configuration type.
   - name: Configuration Interfaces
+    description: |-
+      A configuration interface refers to an IP address for a networked device.
+      This resource allows you to manage all IP and MAC addresses associated with the configurations in your account. Configuration interface IDs can be used to POST new configurations.
+      A configuration interface can belong to only one configuration and can have only one IP address and one MAC address. Each configuration can have relationships with one or more configuration interfaces, one of which will be a primary interface.
+      Note that when a configuration is created or updated with a new primary IP or MAC address, this creates or updates the configuration Interface object. If the primary IP or MAC address in the configuration interface object is updated, this also updates the primary IP or MAC address on the configuration.
   - name: Configuration Statuses
+    description: |-
+      A configuration status refers to the status that can be maintained on a configuration, for example, active or inactive.
+      This resource is used to manage information about configuration statuses for your account. Configuration status IDs can be used to POST new configurations.
+      A configuration status may be referenced by one ore more configurations. Each configuration can have one configuration status, but it's not required.
   - name: Contact Types
+    description: |-
+      A contact type refers to the type categorization of a contact, for example, an approver or an owner.
+      This resource is used to manage information about contact types for your account. Contact type IDs can be used to POST new contacts.
+      A contact type may be referenced by one or more contacts. Each contact can have one contact type, but it's not required.
   - name: Organization Types
+    description: |-
+      An organization type refers to the type categorization of an organization, for example, customer or vendor.
+      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
+      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
   - name: Organization Statuses
+    description: |-
+      An organization status refers to the status that can be maintained on an organization, for example, active or inactive.
+      This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
+      An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
   - name: Flexible Asset Types
+    description: |-
+      A flexible asset type refers to a set of custom fields that can be used to generate structured documentation.
+      This resource lets you create and access information about the flexible asset types in your account. Flexible asset type IDs and flexible asset field name-key values can be used to POST new flexible assets.
+      The different flexible asset types let you document different parts of the IT infrastructure. For example, LAN is one flexible asset type, Backup is another, and Email yet another.
+      Note that when a flexible asset type is created with a flexible asset field, this creates a flexible asset field object. If the flexible asset field object is updated, this also updates the flexible asset type.
   - name: Flexible Asset Fields
+    description: |-
+      A flexible asset field refers to a field in a flexible asset type.
+      This resource lets you manage all of the flexible asset fields in your account. The name-key attributes of fields can be used to POST new flexible assets.
+      Each flexible asset field has, at most, one immediate parent flexible asset type, and may be created after or at the same time as a new flexible asset type. Note: To avoid POST/PATCH errors, make sure that the name and order attributes are unique. In other words, no two fields with the same parent flexible asset type can have identical values for name or order. It's also required that at least one field has show-in-list set to true.
+      To explore the different fields that are available, refer to our Flexible asset field definitions article.
