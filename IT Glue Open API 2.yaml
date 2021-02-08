@@ -2367,8 +2367,79 @@ paths:
       responses:
         '200':
           description: default
-      operationId: Get_domains
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      minLength: 1
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        organization-id:
+                          type: number
+                        organization-name:
+                          type: string
+                          minLength: 1
+                        resource-url:
+                          type: string
+                          minLength: 1
+                        name:
+                          type: string
+                          minLength: 1
+                        screenshot:
+                          type: string
+                          minLength: 1
+                        registrar-name:
+                          type: string
+                          minLength: 1
+                        notes: {}
+                        expires-on:
+                          type: string
+                          minLength: 1
+                        updated-at:
+                          type: string
+                          minLength: 1
+                  required:
+                    - id
+                    - type
+            required:
+              - data
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+      operationId: List_domains
       description: Returns a list of domains for all organizations or for a specified organization.
+      parameters:
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/page-number'
+        - $ref: '#/parameters/page-size'
+        - type: string
+          in: query
+          name: 'filter[{filter_field}]'
+          description: Filter by the specified field name
+        - type: string
+          in: query
+          name: include
+          description: Expand the Returned object to include...
+          enum:
+            - passwords
+            - attachments
+            - user_resource_accesses
+            - group_resource_accesses
   '/configurations/{parent_id}/relationships/configuration_interfaces/{object_id}':
     get:
       summary: Get a Configuration Interface
