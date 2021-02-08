@@ -1,27 +1,30 @@
-# OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
-# 
-# CopyLeft 2021 - ZetaOne, Inc
-# Author: Jeremy G Hodge mailto:<jeremy.hodge@zetaone.com>
-#
-# AS-IS and No Warranty, use at your own risk.
-# No support for this file is available from ZetaOne or Jeremy, for API 
-# support, contact IT Glue directly. 
-#
-# Formatted for compatibility with Microsoft's Swagger Editor for 
-#   Micrsoft Power Automate custom connector.
-#     Issues of note with compatibility:
-#       -  Microsoft's editor does not support path template parameters being
-#          defined on the global path for a set of operations. Each operation
-#          must define its path tempate parameters locally (but can be a $ref).
-#
-#
 swagger: '2.0'
 info:
   version: 1.0.0
   title: IT Glue
-  description: IT Glue
+  description: |-
+    OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
+
+    CopyLeft 2021 - ZetaOne, Inc
+    Author: Jeremy G Hodge mailto:jeremy.hodge@zetaone.com
+
+    ***********************************
+    ***    AS-IS and No Warranty    ***
+    ***    USE AT YOUR OWN RISK!    ***
+    ***********************************
+
+    No support for this file is available from ZetaOne or Jeremy HODGE
+    For API  support, contact IT Glue directly. 
+
+    Formatted for compatibility with Microsoft's Swagger Editor for  Micrsoft Power Automate custom connector.
+
+    Issues of note with compatibility:
+     - Microsoft's editor does not support path template parameters
+       being defined on the global path for a set of operations. Each
+       operation must define its path tempate parameters locally (but
+       can be a $ref).   
   contact:
-    name: Jeremy Hodge
+    name: IT Glue
     url: 'http://www.itglue.com'
     email: support@itglue.com
   termsOfService: 'https://api.itglue.com/developer'
