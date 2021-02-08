@@ -329,7 +329,7 @@ paths:
             properties: {}
       tags:
         - Configurations
-    parameters: []      
+    parameters: []
   /flexible_asset_types:
     get:
       responses:
@@ -490,8 +490,10 @@ paths:
               - data
       tags:
         - Flexible Assets
-  '/flexible_asset_types/{parent-id}/relationships/flexible_asset_fields':
+  '/flexible_asset_types/{parent_id}/relationships/flexible_asset_fields':
     get:
+      parameters:
+        - $ref: '#/parameters/parent_id'
       responses:
         '200':
           description: default
@@ -585,12 +587,6 @@ paths:
       operationId: List_flexible_asset_fields
       tags:
         - Flexible Assets
-    parameters:
-      - in: path
-        name: parent-id
-        required: true
-        type: integer
-        description: Unique Identifier of an Object in IT Glue
   /organizations:
     get:
       responses:
@@ -1038,7 +1034,7 @@ paths:
           schema: {}
       summary: Get an Organization
       description: Returns the details of an existing organization.
-      operationId: Get_organization
+      operationId: Get-organization
       parameters:
         - $ref: '#/parameters/object_id'
         - name: include
@@ -1056,7 +1052,7 @@ paths:
           schema: {}
       summary: Update an Organization
       description: 'Updates the details of an existing organization. Returns 422 Bad Request error if trying to update an externally synced record on attributes other than: alert, description, quick_notes. A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don''t specify will remain unchanged.'
-      operationId: Patch_organization
+      operationId: Patch-organization
       parameters:
         - $ref: '#/parameters/object_id'
         - name: body
@@ -1197,7 +1193,7 @@ paths:
                 description: links
       summary: List Organization Types
       description: Returns a list of organizations in your account.
-      operationId: List_organization_types
+      operationId: List-organization-types
       parameters:
         - name: 'filter[name]'
           in: query
@@ -1254,7 +1250,7 @@ paths:
                 description: data
       summary: Create an Organization Type
       description: Creates a new organization type in your account. Returns the created object if successful.
-      operationId: Post_organization_type
+      operationId: Post-organization-type
       parameters:
         - name: body
           in: body
@@ -1320,10 +1316,10 @@ paths:
                 description: data
       summary: Get an Organization Type
       description: Returns the details of an existing organization type.
-      operationId: Get_organization_type
+      operationId: Get-organization-type
       tags:
         - Organizations
-    patch:       
+    patch:
       responses:
         '200':
           description: default
@@ -1355,9 +1351,9 @@ paths:
                 description: data
       summary: Update an Organization Type
       description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
-      operationId: Patch_organization_type
+      operationId: Patch-organization-type
       parameters:
-        - $ref: '#/parameters/object_id'        
+        - $ref: '#/parameters/object_id'
         - name: body
           in: body
           required: false
@@ -1465,7 +1461,7 @@ paths:
                     description: last
                 description: links
       summary: List Organization Statuses
-      operationId: List_organization_status
+      operationId: List-organization-statuses
       description: Returns a list of the organization statuses in your account.
       parameters:
         - name: 'filter[name]'
@@ -1507,7 +1503,7 @@ paths:
           schema: {}
       summary: Create an Organization Status
       description: Creates a new organization status in your account. Returns the created object if successful.
-      operationId: Post_organization_statuses
+      operationId: Post-organization-status
       parameters:
         - name: body
           in: body
@@ -1541,7 +1537,7 @@ paths:
   '/organization_statuses/{object_id}':
     get:
       parameters:
-        - $ref: '#/parameters/object_id'        
+        - $ref: '#/parameters/object_id'
       responses:
         '200':
           description: default
@@ -1573,7 +1569,7 @@ paths:
                 description: data
       summary: Get an Organization Status
       description: Returns the details of an existing organization status.
-      operationId: Get_organization_status
+      operationId: Get-organization-status
       tags:
         - Organizations
     patch:
@@ -1583,7 +1579,7 @@ paths:
           schema: {}
       summary: Update an Organization Status
       description: Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
-      operationId: Patch_organization_statuses
+      operationId: Patch-organization-status
       parameters:
         - $ref: '#/parameters/object_id'
         - name: body
@@ -1774,32 +1770,9 @@ paths:
         - Flexible Assets
     parameters: []
   '/{resource_type}/{resource_id}/relationships/attachments':
-    parameters:
-      - in: path
-        name: resource_type
-        type: string
-        enum:
-          - checklists
-          - checklist_templates
-          - configurations
-          - contacts
-          - documents
-          - domains
-          - locations
-          - passwords
-          - ssl_certificates
-          - flexible_assets
-          - tickets
-        required: true
-        description: The resource type of the parent resource
-      - in: path
-        name: resource_id
-        type: integer
-        description: The resource id of the parent resource.
-        required: true
     post:
       summary: Create an Attachment for a particular Resource
-      operationId: Post-attachment
+      operationId: Post_attachment
       tags:
         - Attachments
       responses:
@@ -1902,6 +1875,28 @@ paths:
 
         Attachments are uploaded by including media data on the asset the attachment is associated with. Attachments can be encoded and passed in JSON format for direct upload, in which case the file has to be strict encoded. You need to convert it using something like www.freeformatter.com/base64-encoder.html. This produces a string of text that goes into the content field. Note that the name of the attachment displayed on the asset view screen will be taken from the file_name attribute.
       parameters:
+        - in: path
+          name: resource_type
+          type: string
+          enum:
+            - checklists
+            - checklist_templates
+            - configurations
+            - contacts
+            - documents
+            - domains
+            - locations
+            - passwords
+            - ssl_certificates
+            - flexible_assets
+            - tickets
+          required: true
+          description: The resource type of the parent resource
+        - in: path
+          name: resource_id
+          type: integer
+          description: The resource id of the parent resource.
+          required: true
         - in: body
           name: body
           schema:
@@ -1960,7 +1955,7 @@ paths:
           description: 'The request body must contain a JSON object. To create multiple attachments, provide an array of JSON objects.'
     delete:
       summary: Delete multiple Attachments for a particular Resource
-      operationId: Delete-attachments
+      operationId: Delete_attachments
       tags:
         - Attachments
       responses:
@@ -2060,6 +2055,28 @@ paths:
             properties: {}
       description: Deletes one or more specified attachments. Returns the deleted attachments and a 200 status code if successful.
       parameters:
+        - in: path
+          name: resource_type
+          type: string
+          enum:
+            - checklists
+            - checklist_templates
+            - configurations
+            - contacts
+            - documents
+            - domains
+            - locations
+            - passwords
+            - ssl_certificates
+            - flexible_assets
+            - tickets
+          required: true
+          description: The resource type of the parent resource
+        - in: path
+          name: resource_id
+          type: integer
+          description: The resource id of the parent resource.
+          required: true
         - in: body
           name: body
           schema:
@@ -2067,7 +2084,7 @@ paths:
             type: object
             properties:
               data:
-                type: array
+                type: object
                 uniqueItems: true
                 minItems: 1
                 items:
@@ -2102,33 +2119,9 @@ paths:
                   id: 2
           description: 'Data may contain a single object to delete one attachment, or an array of objects to delete multiple attachments.'
   '/{resource_type}/{resource_id}/relationships/attachments/{object_id}':
-    parameters:
-      - in: path
-        name: resource_type
-        type: string
-        enum:
-          - checklists
-          - checklist_templates
-          - configurations
-          - contacts
-          - documents
-          - domains
-          - locations
-          - passwords
-          - ssl_certificates
-          - flexible_assets
-          - tickets
-        required: true
-        description: The resource type of the parent resource
-      - in: path
-        name: resource_id
-        type: integer
-        description: The resource id of the parent resource.
-        required: true
-      - $ref: '#/parameters/object_id'
     patch:
       summary: Update an Attachment for a particular Resource
-      operationId: Update-attachment
+      operationId: Patch_attachment
       tags:
         - Attachments
       responses:
@@ -2157,6 +2150,28 @@ paths:
       description: Updates the details of an existing attachment. Only the attachment name that is displayed on the asset view screen can be changed. The original file_name can't be changed.
       parameters:
         - $ref: '#/parameters/object_id'
+        - in: path
+          name: resource_type
+          type: string
+          enum:
+            - checklists
+            - checklist_templates
+            - configurations
+            - contacts
+            - documents
+            - domains
+            - locations
+            - passwords
+            - ssl_certificates
+            - flexible_assets
+            - tickets
+          required: true
+          description: The resource type of the parent resource
+        - in: path
+          name: resource_id
+          type: integer
+          description: The resource id of the parent resource.
+          required: true
         - in: body
           name: body
           schema:
@@ -2194,7 +2209,7 @@ paths:
   /configuration_interfaces:
     post:
       summary: Create a Configuration Interface
-      operationId: post-configuration_interfaces
+      operationId: Post_configuration_interface
       responses:
         '200':
           description: OK
@@ -2203,7 +2218,7 @@ paths:
       description: Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
     patch:
       summary: Update multiple Configuration Interfaces
-      operationId: patch-configuration_interfaces
+      operationId: Patch_configuration_interfaces
       responses:
         '200':
           description: OK
@@ -2214,7 +2229,6 @@ paths:
 
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
   '/configuration_interfaces/{object_id}':
-
     get:
       parameters:
         - $ref: '#/parameters/object_id'
@@ -2224,13 +2238,13 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-configuration_interfaces-id
+      operationId: Get_configuration_interface_global
       description: Returns the details of an existing configuration interface.
     patch:
       parameters:
         - $ref: '#/parameters/object_id'
       summary: Update a Configuration Interface
-      operationId: patch-configuration_interfaces-id
+      operationId: Patch_configuration_interface
       responses:
         '200':
           description: OK
@@ -2248,11 +2262,11 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-configuration_statuses
+      operationId: List_configuration_statuses
       description: Returns a list of the configuration statuses in your account.
     post:
       summary: Create a Configuration Status
-      operationId: post-configuration_statuses
+      operationId: Post_configuration_status
       responses:
         '200':
           description: OK
@@ -2267,13 +2281,13 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-configuration_statuses-id
+      operationId: Get_configuration_status
       description: Returns the details of an existing configuration status.
       parameters:
         - $ref: '#/parameters/object_id'
     patch:
       summary: Update a Configuration Status
-      operationId: patch-configuration_statuses-id
+      operationId: Patch_configuration_status
       parameters:
         - $ref: '#/parameters/object_id'
       responses:
@@ -2290,11 +2304,11 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-configurations
+      operationId: Get_configurations
       description: Returns a list of configurations for all organizations or for a specified organization.
     post:
       summary: Create a Configuration
-      operationId: post-configurations
+      operationId: Post_configuration
       responses:
         '200':
           description: OK
@@ -2303,7 +2317,7 @@ paths:
       description: Creates a configuration under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configurations to an organization in bulk.
     patch:
       summary: Update multiple Configurations
-      operationId: patch-configurations
+      operationId: Patch_configurations
       responses:
         '200':
           description: OK
@@ -2315,7 +2329,7 @@ paths:
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
     delete:
       summary: Delete multiple Configurations
-      operationId: delete-configurations
+      operationId: Delete_configurations
       responses:
         '200':
           description: OK
@@ -2332,11 +2346,11 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-configurations-id
+      operationId: Get_configuration
       description: Returns the details of an existing configuration.
     patch:
       summary: Update a Configuration
-      operationId: patch-configurations-id
+      operationId: Patch_configuration
       parameters:
         - $ref: '#/parameters/object_id'
       responses:
@@ -2356,11 +2370,11 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-contact_types
+      operationId: List_contact_types
       description: Returns a list of contact types in your account.
     post:
       summary: Create a Contact Type
-      operationId: post-contact_types
+      operationId: Post_contact_type
       responses:
         '200':
           description: OK
@@ -2377,11 +2391,11 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-contact_types-id
+      operationId: Get_contact_type
       description: Returns the details of an existing contact type.
     patch:
       summary: Update a Contact Type
-      operationId: patch-contact_types-id
+      operationId: Patch_contact_type
       parameters:
         - $ref: '#/parameters/object_id'
       responses:
@@ -2398,11 +2412,11 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-contacts
+      operationId: List_contacts
       description: Returns a list of contacts for all organizations or for a specified organization.
     post:
       summary: Create a Contact
-      operationId: post-contacts
+      operationId: Post_contact
       responses:
         '200':
           description: OK
@@ -2411,7 +2425,7 @@ paths:
       description: Creates a contact under the organization specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple contacts to an organization in bulk.
     patch:
       summary: Update multiple Contacts
-      operationId: patch-contacts
+      operationId: Patch_contacts
       responses:
         '200':
           description: OK
@@ -2423,7 +2437,7 @@ paths:
         The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
     delete:
       summary: Delete multiple Contacts
-      operationId: delete-contacts
+      operationId: Delete_contacts
       responses:
         '200':
           description: OK
@@ -2440,13 +2454,13 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-contacts-id
+      operationId: Get_contact
       description: Retrieve a contact for a particular organization.
     patch:
       summary: Update a Contact
       parameters:
         - $ref: '#/parameters/object_id'
-      operationId: patch-contacts-id
+      operationId: Patch_contact
       responses:
         '200':
           description: OK
@@ -2464,7 +2478,7 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-countries
+      operationId: Get_countries
       description: Returns a list of supported countries.
   '/countries/{object_id}':
     get:
@@ -2476,12 +2490,12 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-countries-id
+      operationId: Get_country
       description: Returns the details of one of the supported countries.
   /documents:
     patch:
       summary: Update multiple Documents
-      operationId: patch-documents
+      operationId: Patch_documents
       responses:
         '200':
           description: OK
@@ -2496,7 +2510,7 @@ paths:
   '/documents/{object_id}':
     patch:
       summary: Update a Document
-      operationId: patch-documents-id
+      operationId: Patch_document
       parameters:
         - $ref: '#/parameters/object_id'
       responses:
@@ -2516,25 +2530,20 @@ paths:
       responses:
         '200':
           description: default
-      operationId: get-domains
+      operationId: Get_domains
       description: Returns a list of domains for all organizations or for a specified organization.
-  '/configurations/{parent-id}/relationships/configuration_interfaces/{object_id}':
-    parameters:
-      - in: path
-        name: parent-id
-        required: true
-        type: integer
-        description: Unique Identifier of an Object in IT Glue
+  '/configurations/{parent_id}/relationships/configuration_interfaces/{object_id}':
     get:
       summary: Get a Configuration Interface
       parameters:
+        - $ref: '#/parameters/parent_id'
         - $ref: '#/parameters/object_id'
       tags:
         - Configurations
       responses:
         '200':
           description: default
-      operationId: get-configurations-id-relationships-configuration_interfaces-id
+      operationId: Get_configuration_interface_from_parent
       description: Returns the details of an existing configuration interface.
 definitions: {}
 parameters:
@@ -2560,8 +2569,14 @@ parameters:
     name: object_id
     in: path
     required: true
-    type: number
-    description: ID of the object to be updated.
+    type: integer
+    description: ID of the object
+  parent_id:
+    name: parent_id
+    in: path
+    required: true
+    type: integer
+    description: ID of the parent object
 responses: {}
 securityDefinitions:
   API Key:
