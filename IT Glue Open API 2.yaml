@@ -9,14 +9,15 @@ info:
     Author: Jeremy G Hodge mailto:jeremy.hodge@zetaone.com
 
     ***********************************
-    ***    AS-IS and No Warranty    ***
+    ***    AS-IS and NO WARRANTY    ***
     ***    USE AT YOUR OWN RISK!    ***
     ***********************************
 
-    No support for this file is available from ZetaOne or Jeremy HODGE
     For API  support, contact IT Glue directly. 
+    No support for this file is available from ZetaOne or Jeremy Hodge
 
-    Formatted for compatibility with Microsoft's Swagger Editor for  Micrsoft Power Automate custom connector.
+    Formatted for compatibility with Microsoft's Swagger Editor for
+      Micrsoft Power Automate custom connector.
 
     Issues of note with compatibility:
      - Microsoft's editor does not support path template parameters
@@ -150,7 +151,7 @@ paths:
             type: object
             properties: {}
       tags:
-        - Configurations
+        - Configuration Types
     post:
       responses:
         '200':
@@ -261,7 +262,7 @@ paths:
                 attributes:
                   name: Power
       tags:
-        - Configurations
+        - Configuration Types
   '/configuration_types/{object_id}':
     get:
       summary: Get a Configuration Type
@@ -331,7 +332,7 @@ paths:
             type: object
             properties: {}
       tags:
-        - Configurations
+        - Configuration Types
     parameters: []
   /flexible_asset_types:
     get:
@@ -386,7 +387,7 @@ paths:
         - $ref: '#/parameters/page-number'
       description: Returns a list of flexible asset types in your account.
       tags:
-        - Flexible Assets
+        - Flexible Asset Types
     post:
       responses:
         '200':
@@ -492,7 +493,7 @@ paths:
             required:
               - data
       tags:
-        - Flexible Assets
+        - Flexible Asset Types
   '/flexible_asset_types/{parent_id}/relationships/flexible_asset_fields':
     get:
       parameters:
@@ -589,7 +590,8 @@ paths:
       description: Returns a list of fields for the specified flexible asset type.
       operationId: List_flexible_asset_fields
       tags:
-        - Flexible Assets
+        - Flexible Asset Types
+        - Flexible Asset Fields
   /organizations:
     get:
       responses:
@@ -1220,7 +1222,7 @@ paths:
           required: false
           type: integer
       tags:
-        - Organizations
+        - Organization Types
     post:
       responses:
         '200':
@@ -1283,7 +1285,7 @@ paths:
             required:
               - data
       tags:
-        - Organizations
+        - Organization Types
   '/organization_types/{object_id}':
     get:
       parameters:
@@ -1321,7 +1323,7 @@ paths:
       description: Returns the details of an existing organization type.
       operationId: Get-organization-type
       tags:
-        - Organizations
+        - Organization Types
     patch:
       responses:
         '200':
@@ -1378,7 +1380,7 @@ paths:
                     description: attributes
                 description: data
       tags:
-        - Organizations
+        - Organization Types
     parameters: []
   /organization_statuses:
     get:
@@ -1498,7 +1500,7 @@ paths:
           required: false
           format: int32
       tags:
-        - Organizations
+        - Organization Statuses
     post:
       responses:
         '200':
@@ -1536,7 +1538,7 @@ paths:
             required:
               - data
       tags:
-        - Organizations
+        - Organization Statuses
   '/organization_statuses/{object_id}':
     get:
       parameters:
@@ -1574,7 +1576,7 @@ paths:
       description: Returns the details of an existing organization status.
       operationId: Get-organization-status
       tags:
-        - Organizations
+        - Organization Statuses
     patch:
       responses:
         '200':
@@ -1613,7 +1615,7 @@ paths:
             required:
               - data
       tags:
-        - Organizations
+        - Organization Statuses
     parameters: []
   '/flexible_asset_types/{object_id}':
     get:
@@ -1770,7 +1772,7 @@ paths:
           enum:
             - flexible_asset_fields
       tags:
-        - Flexible Assets
+        - Flexible Asset Types
     parameters: []
   '/{resource_type}/{resource_id}/relationships/attachments':
     post:
@@ -2217,7 +2219,7 @@ paths:
         '200':
           description: OK
       tags:
-        - Configurations
+        - Configuration Interfaces
       description: Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
     patch:
       summary: Update multiple Configuration Interfaces
@@ -2226,7 +2228,7 @@ paths:
         '200':
           description: OK
       tags:
-        - Configurations
+        - Configuration Interfaces
       description: |-
         Updates a list of configuration interfaces, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
 
@@ -2237,7 +2239,7 @@ paths:
         - $ref: '#/parameters/object_id'
       summary: Get a Configuration Interface
       tags:
-        - Configurations
+        - Configuration Interfaces
       responses:
         '200':
           description: default
@@ -2252,7 +2254,7 @@ paths:
         '200':
           description: OK
       tags:
-        - Configurations
+        - Configuration Interfaces
       description: |-
         Updates the details of an existing configuration interface. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
 
@@ -2261,7 +2263,7 @@ paths:
     get:
       summary: List Configuration Statuses
       tags:
-        - Configurations
+        - Configuration Statuses
       responses:
         '200':
           description: default
@@ -2274,13 +2276,13 @@ paths:
         '200':
           description: OK
       tags:
-        - Configurations
+        - Configuration Statuses
       description: Creates a new configuration status in your account. Returns the created object if successful.
   '/configuration_statuses/{object_id}':
     get:
       summary: Get a Configuration Status
       tags:
-        - Configurations
+        - Configuration Statuses
       responses:
         '200':
           description: default
@@ -2297,7 +2299,7 @@ paths:
         '200':
           description: OK
       tags:
-        - Configurations
+        - Configuration Statuses
       description: Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
   /configurations:
     get:
@@ -2369,7 +2371,7 @@ paths:
     get:
       summary: List Contact Types
       tags:
-        - Contacts
+        - Contact Types
       responses:
         '200':
           description: default
@@ -2382,13 +2384,13 @@ paths:
         '200':
           description: OK
       tags:
-        - Contacts
+        - Contact Types
       description: Creates a new contact type in your account. Returns the created object if successful.
   '/contact_types/{object_id}':
     get:
       summary: Get a Contact Type
       tags:
-        - Contacts
+        - Contact Types
       parameters:
         - $ref: '#/parameters/object_id'
       responses:
@@ -2405,7 +2407,7 @@ paths:
         '200':
           description: OK
       tags:
-        - Contacts
+        - Contact Types
       description: Updates a contact type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
   /contacts:
     get:
@@ -2543,6 +2545,7 @@ paths:
         - $ref: '#/parameters/object_id'
       tags:
         - Configurations
+        - Configuration Interfaces
       responses:
         '200':
           description: default
@@ -2616,15 +2619,16 @@ tags:
       A domain refers to a domain name, such as example.com.
       The Domains resource allows you to manage information about all domains in your account.
       A domain can belong to only one organization.
-  - name: Flexible Assets
-    description: |-
-      A flexible asset refers to a record that has been created using a specific flexible asset type.
-      This resource lets you manage all of the flexible assets in your account.
-      Before you can have a flexible asset, a flexible asset type must exist. Flexible asset types pre-define the data structure as a table containing one or more fields with defined data types.
-      Every flexible asset (record) has a set of traits. Each trait is a JSON key-value pair. The key part of the key-value pair is the name-key for the corresponding flexible asset field. The value part is the field data. For example, if you have a key called ip-address, then you would enter an actual IP address as its value.
-      Note: The use-for-title property of fields in the flexible asset type is what determines the name of each associated flexible asset. If more than one field has the use-for-title property set to true, the text strings are joined into one string.
   - name: Organizations
     description: |-
       An organization refers to a client company.
       The Organizations resource is used to manage information about organizations in your account.
       Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
+  - name: Configuration Types
+  - name: Configuration Interfaces
+  - name: Configuration Statuses
+  - name: Contact Types
+  - name: Organization Types
+  - name: Organization Statuses
+  - name: Flexible Asset Types
+  - name: Flexible Asset Fields
