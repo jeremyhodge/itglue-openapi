@@ -549,7 +549,7 @@ paths:
         - type: string
           in: query
           name: 'filter[name]'
-          x=-ms-summary: Filter by Name
+          x-ms-summary: Filter by Name
           description: Filter the list based on the Type's name field
           x-ms-visibility: advanced
         - type: string
@@ -595,11 +595,11 @@ paths:
 
         > NOT COMPLETE.
         >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
+        > 1. ~~Verify Summary~~
+        > 1. ~~Verify Description~~
+        > 1. ~~Verify OperationID naming and format conventions~~
+        > 1. ~~Verify Query Parameters~~
+        > 1. ~~Separate local vs global params~~
         > 1. For Requests, verify JSON body schema
         > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
