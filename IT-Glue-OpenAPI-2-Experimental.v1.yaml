@@ -3,20 +3,29 @@ info:
   version: 1.0.0
   title: IT Glue
   description: |-
-    OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
-    CopyLeft 2021 - ZetaOne, Inc
+    # OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
+    #### Formatted for compatibility with Swagger Editor for Power Automate custom connectors
+
+    > This file is the EXPERIMENTAL BRANCH of this implementation. Portions are under development and may not work, are probably broken, may cause unexpected results, including but not limited to the accidental deletion of all your mom's data, panic inducing hot flashes, general malevolence, and world-ending split end in your hair.
+    >
+    > **AS-IS AND NO WARRANTY - USE AT YOUR OWN RISK!**
+    >
+    > For API  support, contact IT Glue directly. 
+
+    Copyright 2021 ZetaOne, Inc.
     Author: Jeremy G Hodge mailto:jeremy.hodge@zetaone.com
-    ***********************************
-    ***    AS-IS and NO WARRANTY    ***
-    ***    USE AT YOUR OWN RISK!    ***
-    ***********************************
-    For API  support, contact IT Glue directly. 
-    Formatted for compatibility with Swagger Editor for Power Automate custom connector.
+
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
   contact:
     name: IT Glue
     url: 'http://www.itglue.com'
     email: support@itglue.com
   termsOfService: 'https://api.itglue.com/developer'
+  license:
+    name: Apache 2.0
+    url: ' http://www.apache.org/licenses/LICENSE-2.0'
 host: api.itglue.com
 schemes:
   - https

@@ -1,0 +1,1098 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: IT Glue
+  description: |-
+    # OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
+    #### Formatted for compatibility with Swagger Editor for Power Automate custom connectors
+
+    > This file is the STABLE BRANCH of this implementation. Endpoints in this branch have been fairly well tested and should work without issue, but as always:
+    >
+    > **AS-IS AND NO WARRANTY - USE AT YOUR OWN RISK!**
+    >
+    > For API  support, contact IT Glue directly. 
+
+    Copyright 2021 ZetaOne, Inc.
+    Author: Jeremy G Hodge mailto:jeremy.hodge@zetaone.com
+
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+  contact:
+    name: IT Glue
+    url: 'http://www.itglue.com'
+    email: support@itglue.com
+  termsOfService: 'https://api.itglue.com/developer'
+host: api.itglue.com
+schemes:
+  - https
+consumes: []
+produces:
+  - application/json
+paths:
+  /flexible_asset_types:
+    get:
+      responses:
+        '200':
+          description: default
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      minLength: 1
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        created-at:
+                          type: string
+                          minLength: 1
+                        updated-at:
+                          type: string
+                          minLength: 1
+                        icon:
+                          type: string
+                          minLength: 1
+                        enabled:
+                          type: boolean
+                    relationships:
+                      type: object
+                      properties:
+                        flexible-asset-fields:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                  required:
+                    - id
+                    - type
+              included:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      minLength: 1
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        order:
+                          type: number
+                        name:
+                          type: string
+                          minLength: 1
+                        kind:
+                          type: string
+                          minLength: 1
+                        hint:
+                          type: string
+                          minLength: 1
+                        decimals:
+                          type: number
+                        tag-type: {}
+                        required:
+                          type: boolean
+                        use-for-title:
+                          type: boolean
+                        expiration:
+                          type: boolean
+                        show-in-list:
+                          type: boolean
+                        name-key:
+                          type: string
+                          minLength: 1
+                        created-at:
+                          type: string
+                          minLength: 1
+                        updated-at:
+                          type: string
+                          minLength: 1
+                        flexible-asset-type-id:
+                          type: number
+                        default-value:
+                          type: string
+                          minLength: 1
+                    relationships:
+                      type: object
+                      properties:
+                        flexible-asset-type:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              required:
+                                - id
+                                - type
+                              properties:
+                                id:
+                                  type: string
+                                  minLength: 1
+                                type:
+                                  type: string
+                                  minLength: 1
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: number
+                  next-page:
+                    type: number
+                  prev-page:
+                    type: number
+                  total-pages:
+                    type: number
+                  total-count:
+                    type: number
+                  filters:
+                    type: object
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    minLength: 1
+                  first:
+                    type: string
+                    minLength: 1
+                  prev:
+                    type: string
+                    minLength: 1
+                  next:
+                    type: string
+                    minLength: 1
+                  last:
+                    type: string
+                    minLength: 1
+            required:
+              - data
+              - meta
+              - links
+          examples:
+            example-1:
+              data:
+                - id: string
+                  type: string
+                  attributes:
+                    name: string
+                    description: string
+                    created-at: string
+                    updated-at: string
+                    icon: string
+                    enabled: true
+                  relationships:
+                    flexible-asset-fields:
+                      data:
+                        - id: string
+                          type: string
+              included:
+                - id: string
+                  type: string
+                  attributes:
+                    order: 0
+                    name: string
+                    kind: string
+                    hint: string
+                    decimals: 0
+                    tag-type: null
+                    required: true
+                    use-for-title: true
+                    expiration: true
+                    show-in-list: true
+                    name-key: string
+                    created-at: string
+                    updated-at: string
+                    flexible-asset-type-id: 0
+                    default-value: string
+                  relationships:
+                    flexible-asset-type:
+                      data:
+                        id: string
+                        type: string
+              meta:
+                current-page: 0
+                next-page: 0
+                prev-page: 0
+                total-pages: 0
+                total-count: 0
+                filters: {}
+              links:
+                self: string
+                first: string
+                prev: string
+                next: string
+                last: string
+        '401':
+          $ref: '#/responses/401-Forbidden'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+      summary: List Flexible Asset Types
+      operationId: List_flexible_asset_types
+      externalDocs:
+        description: Learn More...
+        url: 'https://api.itglue.com/developer#flexible-asset-types-index'
+      parameters:
+        - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
+        - type: number
+          in: query
+          name: 'filter[id]'
+          x-ms-summary: Filter by ID
+          description: Filter the list based on an Object ID
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[name]'
+          x-ms-summary: Filter by Name
+          description: Filter the list based on the Type's name field
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[icon]'
+          x-ms-summary: Filter by Icon
+          description: Filter the list based on the Type's icon field
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[enabled]'
+          x-ms-summary: Filter by Enabled
+          description: Filter the list based on the Type's enabled status
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          x-ms-summary: Sort Order
+          description: 'Sort the list based on one of id, name, created_at, or updated_at fields'
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: include
+          x-ms-summary: Include
+          description: Expand the results to also include flexible_asset_fields
+          x-ms-visibility: advanced
+      description: Returns a list of flexible asset types in your account.
+      tags:
+        - Flexible Asset Types
+  /domains:
+    get:
+      summary: List Domains
+      tags:
+        - Domains
+      externalDocs:
+        description: Learn More...
+        url: 'https://api.itglue.com/developer#domains-index'
+      responses:
+        '200':
+          description: default
+          schema:
+            $ref: '#/definitions/domains-list'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Forbidden'
+      operationId: List_domains
+      description: Returns a list of domains for all organizations or for a specified organization.
+      parameters:
+        - $ref: '#/parameters/page-number'
+        - $ref: '#/parameters/page-size'
+        - type: string
+          in: query
+          name: 'filter[id]'
+          description: Specify the ID you wish to filter results by.
+          x-ms-summary: Filter by ID
+          x-ms-visibility: advanced
+        - type: integer
+          in: query
+          name: 'filter[organization_id]'
+          description: Specify the Organization ID you wish to filter results by.
+          x-ms-summary: Organization ID
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          enum:
+            - created_at
+            - updated_at
+            - '-created_at'
+            - '-updated_at'
+          x-ms-summary: Sort Order
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: include
+          description: Expand the returned objects to include the selected. Use Comma Separated List for multiple items.
+          enum:
+            - passwords
+            - attachments
+            - user_resource_accesses
+            - group_resource_accesses
+          x-ms-summary: Expand Results
+          x-ms-visibility: advanced
+definitions:
+  generic-object:
+    type: object
+    discriminator: type
+    properties:
+      id:
+        type: integer
+      type:
+        type: string
+        enum:
+          - domains
+          - attachments
+          - flexible-asset-types
+          - passwords
+          - resource-accesses
+        minLength: 1
+    required:
+      - id
+      - type
+  domains:
+    allOf:
+      - $ref: '#/definitions/generic-object'
+      - type: object
+        properties:
+          attributes:
+            $ref: '#/definitions/domains-attributes'
+          relationships:
+            type: object
+            properties:
+              user-resource-accesses:
+                $ref: '#/definitions/related-objects'
+              group-resource-accesses:
+                $ref: '#/definitions/related-objects'
+              passwords:
+                $ref: '#/definitions/related-objects'
+              attachments:
+                $ref: '#/definitions/related-objects'
+    description: ''
+    x-examples:
+      example-1:
+        id: 0
+        type: domains
+        attributes:
+          id: 0
+          name: string
+          created-at: string
+          updated-at: string
+          organization-id: 0
+          organization-name: string
+          resource-url: string
+          restricted: true
+          my-glue: true
+          notes: string
+          registrar-name: string
+          expires-on: string
+          screenshot: null
+        relationships:
+          user-resource-accesses:
+            data:
+              - id: 0
+                type: domains
+          group-resource-accesses:
+            data:
+              - id: 0
+                type: domains
+          passwords:
+            data:
+              - id: 0
+                type: domains
+          attachments:
+            data:
+              - id: 0
+                type: domains
+  related-objects:
+    description: ''
+    type: object
+    x-examples:
+      example-1:
+        data:
+          - id: string
+            type: string
+    properties:
+      data:
+        type: array
+        uniqueItems: true
+        minItems: 1
+        items:
+          $ref: '#/definitions/generic-object'
+    required:
+      - data
+  domains-attributes:
+    description: ''
+    allOf:
+      - $ref: '#/definitions/generic-attributes'
+      - type: object
+        properties:
+          organization-id:
+            type: number
+          organization-name:
+            type: string
+            minLength: 1
+          resource-url:
+            type: string
+            minLength: 1
+          restricted:
+            type: boolean
+          my-glue:
+            type: boolean
+          notes:
+            type: string
+            minLength: 1
+          registrar-name:
+            type: string
+            minLength: 1
+          expires-on:
+            type: string
+            minLength: 1
+          screenshot: {}
+    x-examples:
+      example-1:
+        id: 0
+        name: string
+        created-at: string
+        updated-at: string
+        organization-id: 0
+        organization-name: string
+        resource-url: string
+        restricted: true
+        my-glue: true
+        notes: string
+        registrar-name: string
+        expires-on: string
+        screenshot: null
+  attachments:
+    description: ''
+    allOf:
+      - $ref: '#/definitions/generic-object'
+      - type: object
+        properties:
+          attributes:
+            $ref: '#/definitions/attachments-attributes'
+    x-examples:
+      example-1:
+        id: 0
+        type: domains
+        attributes:
+          id: 0
+          name: string
+          attachment-file-name: string
+          attachment-content-type: string
+          attachment-file-size: 0
+          ext: string
+          created-at: string
+          updated-at: string
+          viewable: true
+          download-url: string
+  attachments-attributes:
+    description: ''
+    allOf:
+      - $ref: '#/definitions/generic-attributes'
+      - type: object
+        properties:
+          attachment-file-name:
+            type: string
+            minLength: 1
+          attachment-content-type:
+            type: string
+            minLength: 1
+          attachment-file-size:
+            type: number
+          ext:
+            type: string
+            minLength: 1
+          viewable:
+            type: boolean
+          download-url:
+            type: string
+            minLength: 1
+    x-examples:
+      example-1:
+        id: 0
+        name: string
+        created-at: string
+        updated-at: string
+        attachment-file-name: string
+        attachment-content-type: string
+        attachment-file-size: 0
+        ext: string
+        viewable: true
+        download-url: string
+  passwords-attributes:
+    description: ''
+    allOf:
+      - $ref: '#/definitions/generic-attributes'
+      - type: object
+        properties:
+          organization-id:
+            type: number
+          organization-name:
+            type: string
+            minLength: 1
+          resource-url:
+            type: string
+            minLength: 1
+          restricted:
+            type: boolean
+          my-glue:
+            type: boolean
+          autofill-selectors: {}
+          username:
+            type: string
+            minLength: 1
+          url:
+            type: string
+            minLength: 1
+          notes: {}
+          password-updated-at:
+            type: string
+            minLength: 1
+          updated-by:
+            type: number
+          updated-by-type:
+            type: string
+            minLength: 1
+          resource-id:
+            type: number
+          cached-resource-type-name:
+            type: string
+            minLength: 1
+          cached-resource-name:
+            type: string
+            minLength: 1
+          password-category-id: {}
+          password-category-name: {}
+          otp-enabled:
+            type: boolean
+          password-folder-id: {}
+          resource-type:
+            type: string
+            minLength: 1
+          parent-url:
+            type: string
+            minLength: 1
+          vault-id: {}
+          archived:
+            type: boolean
+    x-examples:
+      example-1:
+        id: 0
+        name: string
+        created-at: string
+        updated-at: string
+        organization-id: 0
+        organization-name: string
+        resource-url: string
+        restricted: true
+        my-glue: true
+        autofill-selectors: null
+        username: string
+        url: string
+        notes: null
+        password-updated-at: string
+        updated-by: 0
+        updated-by-type: string
+        resource-id: 0
+        cached-resource-type-name: string
+        cached-resource-name: string
+        password-category-id: null
+        password-category-name: null
+        otp-enabled: true
+        password-folder-id: null
+        resource-type: string
+        parent-url: string
+        vault-id: null
+        archived: true
+  passwords:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: integer
+      type:
+        type: string
+        minLength: 1
+        enum:
+          - passwords
+      attributes:
+        $ref: '#/definitions/passwords-attributes'
+      relationships:
+        type: array
+        items:
+          $ref: '#/definitions/attachments'
+    required:
+      - id
+      - type
+      - attributes
+      - relationships
+    x-examples:
+      example-1:
+        id: 0
+        type: passwords
+        attributes:
+          organization-id: 0
+          organization-name: string
+          resource-url: string
+          restricted: true
+          my-glue: true
+          name: string
+          autofill-selectors: null
+          username: string
+          url: string
+          notes: null
+          password-updated-at: string
+          updated-by: 0
+          updated-by-type: string
+          resource-id: 0
+          cached-resource-type-name: string
+          cached-resource-name: string
+          password-category-id: null
+          password-category-name: null
+          created-at: string
+          updated-at: string
+          otp-enabled: true
+          password-folder-id: null
+          resource-type: string
+          parent-url: string
+          vault-id: null
+          archived: true
+        relationships:
+          - id: 0
+            type: attachments
+            attributes:
+              id: 0
+              name: string
+              attachment-file-name: string
+              attachment-content-type: string
+              attachment-file-size: 0
+              ext: string
+              created-at: string
+              updated-at: string
+              viewable: true
+              download-url: string
+  resource-accesses-attributes:
+    description: ''
+    type: object
+    properties:
+      accessor-id:
+        type: number
+      accessor-type:
+        type: string
+        minLength: 1
+      name:
+        type: string
+        minLength: 1
+      meta:
+        type: object
+        properties:
+          role-name:
+            type: string
+  resource-accesses:
+    title: resource-access
+    allOf:
+      - $ref: '#/definitions/generic-object'
+      - type: object
+        properties:
+          attributes:
+            $ref: '#/definitions/resource-accesses-attributes'
+  list-meta:
+    description: ''
+    type: object
+    properties:
+      current-page:
+        type: number
+      next-page:
+        type: number
+      prev-page:
+        type: number
+      total-pages:
+        type: number
+      total-count:
+        type: number
+      filters:
+        type: object
+  list-links:
+    description: ''
+    type: object
+    properties:
+      self:
+        type: string
+        minLength: 1
+      first:
+        type: string
+        minLength: 1
+      prev:
+        type: string
+        minLength: 1
+      next:
+        type: string
+        minLength: 1
+      last:
+        type: string
+        minLength: 1
+  domains-list:
+    description: ''
+    type: object
+    x-examples:
+      example-1:
+        data:
+          - id: 0
+            type: domains
+            attributes:
+              organization-id: 0
+              organization-name: string
+              resource-url: string
+              restricted: true
+              my-glue: true
+              name: string
+              notes: string
+              created-at: string
+              updated-at: string
+              registrar-name: string
+              expires-on: string
+              screenshot: null
+            relationships:
+              user-resource-accesses:
+                data:
+                  - id: string
+                    type: string
+              group-resource-accesses:
+                data:
+                  - id: string
+                    type: string
+              passwords:
+                data:
+                  - id: string
+                    type: string
+              attachments:
+                data:
+                  - id: string
+                    type: string
+        included:
+          - id: 0
+            type: attachments
+            attributes:
+              id: 0
+              name: string
+              attachment-file-name: string
+              attachment-content-type: string
+              attachment-file-size: 0
+              ext: string
+              created-at: string
+              updated-at: string
+              viewable: true
+              download-url: string
+        meta:
+          current-page: 0
+          next-page: 0
+          prev-page: 0
+          total-pages: 0
+          total-count: 0
+          filters: {}
+        links:
+          self: string
+          first: string
+          prev: string
+          next: string
+          last: string
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/domains'
+      included:
+        type: array
+        items:
+          $ref: '#/definitions/generic-object'
+      meta:
+        $ref: '#/definitions/list-meta'
+      links:
+        $ref: '#/definitions/list-links'
+    required:
+      - data
+      - meta
+      - links
+  generic-attributes:
+    title: generic-attributes
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      created-at:
+        type: string
+      updated-at:
+        type: string
+  error-response:
+    description: ''
+    type: object
+    properties:
+      message:
+        type: string
+        minLength: 1
+    required:
+      - message
+  flexible-asset-types-attributes:
+    description: ''
+    allOf:
+      - $ref: '#/definitions/generic-attributes'
+      - type: object
+        properties:
+          description:
+            type: string
+            minLength: 1
+          icon:
+            type: string
+            minLength: 1
+          enabled:
+            type: boolean
+    x-examples: {}
+  flexible-asset-types:
+    title: flexible-asset-types
+    allOf:
+      - $ref: '#/definitions/generic-object'
+      - type: object
+        properties:
+          attributes:
+            $ref: '#/definitions/flexible-asset-types-attributes'
+          relationships:
+            type: object
+            properties:
+              flexible-asset-fields:
+                $ref: '#/definitions/related-objects'
+    x-examples: {}
+  flexible-asset-types-list:
+    title: flexible-asset-types-list
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/flexible-asset-types'
+      included:
+        type: array
+        items:
+          $ref: '#/definitions/generic-object'
+      meta:
+        $ref: '#/definitions/list-meta'
+      links:
+        $ref: '#/definitions/list-links'
+    x-examples: {}
+  flexible-asset-fields-attributes:
+    description: ''
+    allOf:
+      - $ref: '#/definitions/generic-attributes'
+      - type: object
+        properties:
+          order:
+            type: number
+          kind:
+            type: string
+            minLength: 1
+          hint:
+            type: string
+            minLength: 1
+          decimals:
+            type: number
+          tag-type: {}
+          required:
+            type: boolean
+          use-for-title:
+            type: boolean
+          expiration:
+            type: boolean
+          show-in-list:
+            type: boolean
+          name-key:
+            type: string
+            minLength: 1
+          flexible-asset-type-id:
+            type: number
+          default-value:
+            type: string
+            minLength: 1
+        required:
+          - order
+          - kind
+          - hint
+          - decimals
+          - required
+          - use-for-title
+          - expiration
+          - show-in-list
+          - name-key
+          - flexible-asset-type-id
+          - default-value
+    x-examples: {}
+  flexible-asset-fields:
+    title: flexible-asset-fields
+    allOf:
+      - $ref: '#/definitions/generic-object'
+      - type: object
+        properties:
+          attributes:
+            $ref: '#/definitions/flexible-asset-fields-attributes'
+    x-examples: {}
+parameters:
+  page-number:
+    name: 'page[number]'
+    in: query
+    type: integer
+    description: Return the Nth page based on page size
+    x-ms-summary: Page Number
+    x-ms-visibility: advanced
+  page-size:
+    name: 'page[size]'
+    in: query
+    required: false
+    type: integer
+    description: Number of rows to return per page
+    x-ms-summary: Rows per Page
+    x-ms-visibility: advanced
+  object_id:
+    name: object_id
+    in: path
+    required: true
+    type: integer
+    description: ID of the object
+    x-ms-summary: Object ID
+    x-ms-visibility: important
+  parent_id:
+    name: parent_id
+    in: path
+    required: true
+    type: integer
+    description: ID of the parent object
+    x-ms-summary: Parent Object ID
+    x-ms-visibility: important
+responses:
+  401-Forbidden:
+    description: Forbidden Response
+    schema:
+      $ref: '#/definitions/error-response'
+    examples: {}
+  404-Not-Found:
+    description: Example response
+    schema:
+      $ref: '#/definitions/error-response'
+securityDefinitions:
+  API Key:
+    type: apiKey
+    in: header
+    name: x-api-key
+    description: Retreive and set the API Key from your IT Glue account.
+security:
+  - API Key: []
+tags:
+  - name: Attachments
+    description: |-
+      An attachment refers to a file upload associated with an asset.
+      This resource allows you to manage all attachments in your account. Note that attachments are accessed from the relevant endpoints (GET /configurations, GET /passwords, etc.) using the include=attachments parameter to return the file attachments in the relationships attributes of the requested objects. Example: /configurations/1?include=attachments
+      An attachment can belong to only one asset. Each asset can have relationships with one or more attachments.
+  - name: Configurations
+    description: |-
+      A configuration refers to a device you manage for a client organization.
+      The Configurations resource allows you to manage information about all configurations in your account.
+      A configuration can belong to only one organization. Each configuration can have a primary IP address, a primary MAC address, plus one or more additional IP and MAC addresses that are maintained in a separate Configuration Interfaces resource.
+  - name: Contacts
+    description: |-
+      A contact refers to a contact in a client organization.
+      The Contacts resource allows you to manage information about all contacts in your account.
+      A contact can belong to only one organization. Each contact can have one location, which is maintained as a separate Locations resource.
+  - name: Countries
+    description: |-
+      A country refers to any distinct national entity.
+      The Countries resource allows you to retrieve information about the country names that IT Glue supports. Country IDs can be used to POST new locations.
+      Supported countries may be referenced by one or more locations. Each location can have one country, but it's not required.
+  - name: Documents
+    description: The Documents resource allows you to manage documents on your account.
+  - name: Domains
+    description: |-
+      A domain refers to a domain name, such as example.com.
+      The Domains resource allows you to manage information about all domains in your account.
+      A domain can belong to only one organization.
+  - name: Organizations
+    description: |-
+      An organization refers to a client company.
+      The Organizations resource is used to manage information about organizations in your account.
+      Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
+  - name: Configuration Types
+    description: |-
+      A configuration type refers to the type categorization of a configuration, usually a type of device.
+      This resource is used to manage information about configuration types for your account. Configuration type IDs can be used to POST new configurations.
+      A configuration type may be referenced by one or more configurations. It's required that each configuration item have one configuration type.
+  - name: Configuration Interfaces
+    description: |-
+      A configuration interface refers to an IP address for a networked device.
+      This resource allows you to manage all IP and MAC addresses associated with the configurations in your account. Configuration interface IDs can be used to POST new configurations.
+      A configuration interface can belong to only one configuration and can have only one IP address and one MAC address. Each configuration can have relationships with one or more configuration interfaces, one of which will be a primary interface.
+      Note that when a configuration is created or updated with a new primary IP or MAC address, this creates or updates the configuration Interface object. If the primary IP or MAC address in the configuration interface object is updated, this also updates the primary IP or MAC address on the configuration.
+  - name: Configuration Statuses
+    description: |-
+      A configuration status refers to the status that can be maintained on a configuration, for example, active or inactive.
+      This resource is used to manage information about configuration statuses for your account. Configuration status IDs can be used to POST new configurations.
+      A configuration status may be referenced by one ore more configurations. Each configuration can have one configuration status, but it's not required.
+  - name: Contact Types
+    description: |-
+      A contact type refers to the type categorization of a contact, for example, an approver or an owner.
+      This resource is used to manage information about contact types for your account. Contact type IDs can be used to POST new contacts.
+      A contact type may be referenced by one or more contacts. Each contact can have one contact type, but it's not required.
+  - name: Organization Types
+    description: |-
+      An organization type refers to the type categorization of an organization, for example, customer or vendor.
+      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
+      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
+  - name: Organization Statuses
+    description: |-
+      An organization status refers to the status that can be maintained on an organization, for example, active or inactive.
+      This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
+      An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
+  - name: Flexible Asset Types
+    description: |-
+      A flexible asset type refers to a set of custom fields that can be used to generate structured documentation.
+      This resource lets you create and access information about the flexible asset types in your account. Flexible asset type IDs and flexible asset field name-key values can be used to POST new flexible assets.
+      The different flexible asset types let you document different parts of the IT infrastructure. For example, LAN is one flexible asset type, Backup is another, and Email yet another.
+      Note that when a flexible asset type is created with a flexible asset field, this creates a flexible asset field object. If the flexible asset field object is updated, this also updates the flexible asset type.
+  - name: Flexible Asset Fields
+    description: |-
+      A flexible asset field refers to a field in a flexible asset type.
+      This resource lets you manage all of the flexible asset fields in your account. The name-key attributes of fields can be used to POST new flexible assets.
+      Each flexible asset field has, at most, one immediate parent flexible asset type, and may be created after or at the same time as a new flexible asset type. Note: To avoid POST/PATCH errors, make sure that the name and order attributes are unique. In other words, no two fields with the same parent flexible asset type can have identical values for name or order. It's also required that at least one field has show-in-list set to true.
+      To explore the different fields that are available, refer to our Flexible asset field definitions article.
