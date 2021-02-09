@@ -39,12 +39,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: List_configuration_types
@@ -235,12 +234,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Post_configuration_type
@@ -291,12 +289,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -362,71 +359,227 @@ paths:
         '200':
           description: default
           schema:
+            description: ''
             type: object
             properties:
               data:
                 type: array
+                uniqueItems: true
+                minItems: 1
                 items:
                   type: object
                   properties:
                     id:
                       type: string
-                      description: id
+                      minLength: 1
                     type:
                       type: string
-                      description: type
+                      minLength: 1
                     attributes:
                       type: object
                       properties:
                         name:
                           type: string
-                          description: name
+                          minLength: 1
                         description:
                           type: string
-                          description: description
+                          minLength: 1
                         created-at:
                           type: string
-                          description: created-at
+                          minLength: 1
                         updated-at:
                           type: string
-                          description: updated-at
+                          minLength: 1
                         icon:
                           type: string
-                          description: icon
+                          minLength: 1
                         enabled:
                           type: boolean
-                          description: enabled
-                      description: attributes
                     relationships:
                       type: object
-                      properties: {}
-                      description: relationships
-                description: data
+                      properties:
+                        flexible-asset-fields:
+                          type: object
+                          properties:
+                            data:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                  required:
+                    - id
+                    - type
+              included:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      minLength: 1
+                    type:
+                      type: string
+                      minLength: 1
+                    attributes:
+                      type: object
+                      properties:
+                        order:
+                          type: number
+                        name:
+                          type: string
+                          minLength: 1
+                        kind:
+                          type: string
+                          minLength: 1
+                        hint:
+                          type: string
+                          minLength: 1
+                        decimals:
+                          type: number
+                        tag-type: {}
+                        required:
+                          type: boolean
+                        use-for-title:
+                          type: boolean
+                        expiration:
+                          type: boolean
+                        show-in-list:
+                          type: boolean
+                        name-key:
+                          type: string
+                          minLength: 1
+                        created-at:
+                          type: string
+                          minLength: 1
+                        updated-at:
+                          type: string
+                          minLength: 1
+                        flexible-asset-type-id:
+                          type: number
+                        default-value:
+                          type: string
+                          minLength: 1
+                    relationships:
+                      type: object
+                      properties:
+                        flexible-asset-type:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              required:
+                                - id
+                                - type
+                              properties:
+                                id:
+                                  type: string
+                                  minLength: 1
+                                type:
+                                  type: string
+                                  minLength: 1
+              meta:
+                type: object
+                properties:
+                  current-page:
+                    type: number
+                  next-page:
+                    type: number
+                  prev-page:
+                    type: number
+                  total-pages:
+                    type: number
+                  total-count:
+                    type: number
+                  filters:
+                    type: object
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    minLength: 1
+                  first:
+                    type: string
+                    minLength: 1
+                  prev:
+                    type: string
+                    minLength: 1
+                  next:
+                    type: string
+                    minLength: 1
+                  last:
+                    type: string
+                    minLength: 1
+            required:
+              - data
+              - meta
+              - links
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
       summary: List Flexible Asset Types
       operationId: List_flexible_asset_types
+      externalDocs:
+        description: Learn More...
+        url: 'https://api.itglue.com/developer#flexible-asset-types-index'
       parameters:
         - $ref: '#/parameters/page-size'
         - $ref: '#/parameters/page-number'
+        - type: number
+          in: query
+          name: 'filter[id]'
+          x-ms-summary: Filter by ID
+          description: Filter the list based on an Object ID
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[name]'
+          x=-ms-summary: Filter by Name
+          description: Filter the list based on the Type's name field
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[icon]'
+          x-ms-summary: Filter by Icon
+          description: Filter the list based on the Type's icon field
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[enabled]'
+          x-ms-summary: Filter by Enabled
+          description: Filter the list based on the Type's enabled status
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          x-ms-summary: Sort Order
+          description: 'Sort the list based on one of id, name, created_at, or updated_at fields'
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: include
+          x-ms-summary: Include
+          description: Expand the results to also include flexible_asset_fields
+          x-ms-visibility: advanced
       description: |-
         Returns a list of flexible asset types in your account.
 
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-description
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
+        > Fully Implemented.
       tags:
         - Flexible Asset Types
     post:
@@ -448,12 +601,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -659,12 +811,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: List_flexible_asset_fields
@@ -907,12 +1058,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: List_organizations
@@ -1082,12 +1232,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -1167,12 +1316,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Get-organization
@@ -1204,12 +1352,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Patch-organization
@@ -1364,12 +1511,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: List-organization-types
@@ -1440,12 +1586,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Post-organization-type
@@ -1525,12 +1670,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Get-organization-type
@@ -1579,12 +1723,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Patch-organization-type
@@ -1710,12 +1853,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -1769,12 +1911,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Post-organization-status
@@ -1854,12 +1995,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Get-organization-status
@@ -1883,12 +2023,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Patch-organization-status
@@ -2080,12 +2219,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Get_flexible_asset_type
@@ -2166,12 +2304,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -2297,12 +2434,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -2419,12 +2555,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -2501,12 +2636,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -2531,12 +2665,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   '/configuration_interfaces/{object_id}':
@@ -2562,12 +2695,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -2594,12 +2726,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /configuration_statuses:
@@ -2623,12 +2754,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     post:
@@ -2651,12 +2781,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   '/configuration_statuses/{object_id}':
@@ -2680,12 +2809,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       parameters:
@@ -2712,12 +2840,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /configurations:
@@ -2741,12 +2868,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     post:
@@ -2769,12 +2895,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -2799,12 +2924,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     delete:
@@ -2827,12 +2951,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   '/configurations/{object_id}':
@@ -2858,12 +2981,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -2890,12 +3012,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /contact_types:
@@ -2919,12 +3040,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     post:
@@ -2948,12 +3068,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   '/contact_types/{object_id}':
@@ -2979,12 +3098,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -3009,12 +3127,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /contacts:
@@ -3038,12 +3155,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     post:
@@ -3066,12 +3182,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -3096,12 +3211,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     delete:
@@ -3124,12 +3238,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   '/contacts/{object_id}':
@@ -3155,12 +3268,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
     patch:
@@ -3187,12 +3299,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /countries:
@@ -3216,12 +3327,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   '/countries/{object_id}':
@@ -3247,12 +3357,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /documents:
@@ -3278,13 +3387,12 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       tags:
@@ -3315,12 +3423,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
   /domains:
@@ -3583,7 +3690,6 @@ paths:
             type: object
             properties: {}
       operationId: List_domains
-      
       description: |-
         Returns a list of domains for all organizations or for a specified organization.
         >Fully Implemented
@@ -3593,21 +3699,18 @@ paths:
         - type: string
           in: query
           name: 'filter[id]'
-          description: Filter by ID field
+          description: Specify the ID you wish to filter results by.
           x-ms-summary: Filter by ID
-          x-ms-description: Specify the ID you wish to filter results by.
           x-ms-visibility: advanced
         - type: integer
           in: query
           name: 'filter[organization_id]'
-          description: Filter by Organization ID field
+          description: Specify the Organization ID you wish to filter results by.
           x-ms-summary: Organization ID
-          x-ms-description: Specify the Organization ID you wish to filter results by.
           x-ms-visibility: advanced
         - type: string
           in: query
           name: sort
-          x-ms-description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
           description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
           enum:
             - created_at
@@ -3619,14 +3722,13 @@ paths:
         - type: string
           in: query
           name: include
-          description: Expand results to include...
+          description: Expand the returned objects to include the selected. Use Comma Separated List for multiple items.
           enum:
             - passwords
             - attachments
             - user_resource_accesses
             - group_resource_accesses
           x-ms-summary: Expand Results
-          x-ms-description: Expand the returned objects to include the selected. Use Comma Separated List for multiple items.
           x-ms-visibility: advanced
   '/configurations/{parent_id}/relationships/configuration_interfaces/{object_id}':
     get:
@@ -3653,12 +3755,11 @@ paths:
         > 1. Verify Query Parameters
         > 1. Separate local vs global params
         > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
         > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
-        >> 1. x-ms-description
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
 definitions: {}
@@ -3667,8 +3768,7 @@ parameters:
     name: 'page[number]'
     in: query
     type: integer
-    description: 'page[[number]]=N - Return the Nth page of data based on the current page size'
-    x-ms-description: Return the Nth page based on page size
+    description: Return the Nth page based on page size
     x-ms-summary: Page Number
     x-ms-visibility: advanced
   page-size:
@@ -3676,9 +3776,8 @@ parameters:
     in: query
     required: false
     type: integer
-    description: Number of records to return in the List
-    x-ms-description: Number of Rows
-    x-ms-summary: Number of rows to return per page
+    description: Number of rows to return per page
+    x-ms-summary: Rows per Page
     x-ms-visibility: advanced
   object_id:
     name: object_id
@@ -3686,7 +3785,6 @@ parameters:
     required: true
     type: integer
     description: ID of the object
-    x-ms-description: ID of the object
     x-ms-summary: Object ID
     x-ms-visibility: important
   parent_id:
@@ -3695,7 +3793,6 @@ parameters:
     required: true
     type: integer
     description: ID of the parent object
-    x-ms-description: ID of the parent object
     x-ms-summary: Parent Object ID
     x-ms-visibility: important
 responses: {}
