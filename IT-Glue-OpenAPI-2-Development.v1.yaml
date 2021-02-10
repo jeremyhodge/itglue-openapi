@@ -40,13 +40,117 @@ paths:
         '200':
           description: default
           schema:
-            $ref: '#/definitions/flexible-asset-types-list'
-          examples: {}
-        '201':
-          description: Created
-          schema:
             type: object
-            properties: {}
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/flexible-asset-types'
+              included:
+                type: array
+                items:
+                  $ref: '#/definitions/global-includable-objects'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+          examples:
+            example-1:
+              data:
+                - id: 0
+                  type: string
+                  attributes:
+                    id: 0
+                    name: string
+                    created-at: string
+                    updated-at: string
+                    description: string
+                    icon: string
+                    enabled: true
+                  relationships:
+                    flexible-asset-fields:
+                      data:
+                        - id: 0
+                          type: string
+              included:
+                - id: 0
+                  type: string
+                  attributes:
+                    name: string
+                    attachment-file-name: string
+                    attachment-content-type: string
+                    attachment-file-size: 0
+                    ext: string
+                    created-at: string
+                    updated-at: string
+                    viewable: true
+                    download-url: string
+                    organization-id: 0
+                    organization-name: string
+                    resource-url: string
+                    restricted: true
+                    my-glue: true
+                    autofill-selectors: null
+                    username: string
+                    url: string
+                    notes: null
+                    password-updated-at: string
+                    updated-by: 0
+                    updated-by-type: string
+                    resource-id: 0
+                    cached-resource-type-name: string
+                    cached-resource-name: string
+                    password-category-id: null
+                    password-category-name: null
+                    otp-enabled: true
+                    password-folder-id: null
+                    resource-type: string
+                    parent-url: string
+                    vault-id: null
+                    archived: true
+                    id: 0
+                    order: 0
+                    kind: string
+                    hint: string
+                    decimals: 0
+                    tag-type: null
+                    required: true
+                    use-for-title: true
+                    expiration: true
+                    show-in-list: true
+                    name-key: string
+                    flexible-asset-type-id: 0
+                    default-value: string
+                    accessor-id: 0
+                    accessor-type: string
+                    meta:
+                      role-name: string
+                  relationships:
+                    - id: 0
+                      type: string
+                      attributes:
+                        name: string
+                        attachment-file-name: string
+                        attachment-content-type: string
+                        attachment-file-size: 0
+                        ext: string
+                        created-at: string
+                        updated-at: string
+                        viewable: true
+                        download-url: string
+              meta:
+                current-page: 0
+                next-page: 0
+                prev-page: 0
+                total-pages: 0
+                total-count: 0
+                filters: {}
+              links:
+                self: string
+                first: string
+                prev: string
+                next: string
+                last: string
         '401':
           $ref: '#/responses/401-Forbidden'
         '404':
@@ -94,6 +198,8 @@ paths:
           name: include
           x-ms-summary: Include
           description: Expand the results to also include flexible_asset_fields
+          enum:
+            - flexible_asset_fields
           x-ms-visibility: advanced
       description: Returns a list of flexible asset types in your account.
       tags:
@@ -249,8 +355,8 @@ paths:
       operationId: List_domains
       description: Returns a list of domains for all organizations or for a specified organization.
       parameters:
-        - $ref: '#/parameters/page-number'
         - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
         - type: string
           in: query
           name: 'filter[id]'
@@ -697,88 +803,6 @@ definitions:
       last:
         type: string
         minLength: 1
-  domains-list-x:
-    description: ''
-    type: object
-    x-examples:
-      example-1:
-        data:
-          - id: 0
-            type: domains
-            attributes:
-              organization-id: 0
-              organization-name: string
-              resource-url: string
-              restricted: true
-              my-glue: true
-              name: string
-              notes: string
-              created-at: string
-              updated-at: string
-              registrar-name: string
-              expires-on: string
-              screenshot: null
-            relationships:
-              user-resource-accesses:
-                data:
-                  - id: string
-                    type: string
-              group-resource-accesses:
-                data:
-                  - id: string
-                    type: string
-              passwords:
-                data:
-                  - id: string
-                    type: string
-              attachments:
-                data:
-                  - id: string
-                    type: string
-        included:
-          - id: 0
-            type: attachments
-            attributes:
-              id: 0
-              name: string
-              attachment-file-name: string
-              attachment-content-type: string
-              attachment-file-size: 0
-              ext: string
-              created-at: string
-              updated-at: string
-              viewable: true
-              download-url: string
-        meta:
-          current-page: 0
-          next-page: 0
-          prev-page: 0
-          total-pages: 0
-          total-count: 0
-          filters: {}
-        links:
-          self: string
-          first: string
-          prev: string
-          next: string
-          last: string
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/domains'
-      included:
-        type: array
-        items:
-          $ref: '#/definitions/generic-object'
-      meta:
-        $ref: '#/definitions/list-meta'
-      links:
-        $ref: '#/definitions/list-links'
-    required:
-      - data
-      - meta
-      - links
   error-response:
     description: ''
     type: object
