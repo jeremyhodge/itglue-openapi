@@ -6,7 +6,11 @@ info:
     # OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
     #### Formatted for compatibility with Swagger Editor for Power Automate custom connectors
 
-    > This file is the STABLE BRANCH of this implementation. Endpoints in this branch have been fairly well tested and should work without issue, but as always:
+    > This file is the DEVELOPMENT BRANCH of this implementation. Endpoints in this branch are under development and should be considered more stable than the experimental branch, but full functionality or usability is not guaranteed. ~~have been fairly well tested and should work without issue, but as always:~~
+    >
+    > In general Endpoints will move from Experimental > Development > Stable as they are developed.
+    >
+    > BUT AS ALWAYS:
     >
     > **AS-IS AND NO WARRANTY - USE AT YOUR OWN RISK!**
     >
@@ -36,228 +40,13 @@ paths:
         '200':
           description: default
           schema:
-            description: ''
+            $ref: '#/definitions/flexible-asset-types-list'
+          examples: {}
+        '201':
+          description: Created
+          schema:
             type: object
-            properties:
-              data:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      minLength: 1
-                    type:
-                      type: string
-                      minLength: 1
-                    attributes:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                          minLength: 1
-                        description:
-                          type: string
-                          minLength: 1
-                        created-at:
-                          type: string
-                          minLength: 1
-                        updated-at:
-                          type: string
-                          minLength: 1
-                        icon:
-                          type: string
-                          minLength: 1
-                        enabled:
-                          type: boolean
-                    relationships:
-                      type: object
-                      properties:
-                        flexible-asset-fields:
-                          type: object
-                          properties:
-                            data:
-                              type: array
-                              uniqueItems: true
-                              minItems: 1
-                              items:
-                                type: object
-                                properties:
-                                  id:
-                                    type: string
-                                    minLength: 1
-                                  type:
-                                    type: string
-                                    minLength: 1
-                                required:
-                                  - id
-                                  - type
-                  required:
-                    - id
-                    - type
-              included:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      minLength: 1
-                    type:
-                      type: string
-                      minLength: 1
-                    attributes:
-                      type: object
-                      properties:
-                        order:
-                          type: number
-                        name:
-                          type: string
-                          minLength: 1
-                        kind:
-                          type: string
-                          minLength: 1
-                        hint:
-                          type: string
-                          minLength: 1
-                        decimals:
-                          type: number
-                        tag-type: {}
-                        required:
-                          type: boolean
-                        use-for-title:
-                          type: boolean
-                        expiration:
-                          type: boolean
-                        show-in-list:
-                          type: boolean
-                        name-key:
-                          type: string
-                          minLength: 1
-                        created-at:
-                          type: string
-                          minLength: 1
-                        updated-at:
-                          type: string
-                          minLength: 1
-                        flexible-asset-type-id:
-                          type: number
-                        default-value:
-                          type: string
-                          minLength: 1
-                    relationships:
-                      type: object
-                      properties:
-                        flexible-asset-type:
-                          type: object
-                          properties:
-                            data:
-                              type: object
-                              required:
-                                - id
-                                - type
-                              properties:
-                                id:
-                                  type: string
-                                  minLength: 1
-                                type:
-                                  type: string
-                                  minLength: 1
-              meta:
-                type: object
-                properties:
-                  current-page:
-                    type: number
-                  next-page:
-                    type: number
-                  prev-page:
-                    type: number
-                  total-pages:
-                    type: number
-                  total-count:
-                    type: number
-                  filters:
-                    type: object
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    minLength: 1
-                  first:
-                    type: string
-                    minLength: 1
-                  prev:
-                    type: string
-                    minLength: 1
-                  next:
-                    type: string
-                    minLength: 1
-                  last:
-                    type: string
-                    minLength: 1
-            required:
-              - data
-              - meta
-              - links
-          examples:
-            example-1:
-              data:
-                - id: string
-                  type: string
-                  attributes:
-                    name: string
-                    description: string
-                    created-at: string
-                    updated-at: string
-                    icon: string
-                    enabled: true
-                  relationships:
-                    flexible-asset-fields:
-                      data:
-                        - id: string
-                          type: string
-              included:
-                - id: string
-                  type: string
-                  attributes:
-                    order: 0
-                    name: string
-                    kind: string
-                    hint: string
-                    decimals: 0
-                    tag-type: null
-                    required: true
-                    use-for-title: true
-                    expiration: true
-                    show-in-list: true
-                    name-key: string
-                    created-at: string
-                    updated-at: string
-                    flexible-asset-type-id: 0
-                    default-value: string
-                  relationships:
-                    flexible-asset-type:
-                      data:
-                        id: string
-                        type: string
-              meta:
-                current-page: 0
-                next-page: 0
-                prev-page: 0
-                total-pages: 0
-                total-count: 0
-                filters: {}
-              links:
-                self: string
-                first: string
-                prev: string
-                next: string
-                last: string
+            properties: {}
         '401':
           $ref: '#/responses/401-Forbidden'
         '404':
@@ -319,10 +108,142 @@ paths:
         url: 'https://api.itglue.com/developer#domains-index'
       responses:
         '200':
-          description: default
+          description: Success
           schema:
-            $ref: '#/definitions/domains-list'
-          examples: {}
+            description: ''
+            type: object
+            properties:
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  $ref: '#/definitions/domains'
+              included:
+                type: array
+                items:
+                  $ref: '#/definitions/global-includable-objects'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+            required:
+              - data
+          examples:
+            example-1:
+              data:
+                - id: 0
+                  type: string
+                  attributes:
+                    id: 0
+                    name: string
+                    created-at: string
+                    updated-at: string
+                    organization-id: 0
+                    organization-name: string
+                    resource-url: string
+                    restricted: true
+                    my-glue: true
+                    notes: string
+                    registrar-name: string
+                    expires-on: string
+                    screenshot: null
+                  relationships:
+                    user-resource-accesses:
+                      data:
+                        - id: 0
+                          type: resource-accesses
+                    group-resource-accesses:
+                      data:
+                        - id: 0
+                          type: group-resource-accesses
+                    passwords:
+                      data:
+                        - id: 0
+                          type: passwords
+                    attachments:
+                      data:
+                        - id: 0
+                          type: attachments
+              included:
+                - id: 0
+                  type: string
+                  attributes:
+                    name: string
+                    attachment-file-name: string
+                    attachment-content-type: string
+                    attachment-file-size: 0
+                    ext: string
+                    created-at: string
+                    updated-at: string
+                    viewable: true
+                    download-url: string
+                    id: 0
+                    order: 0
+                    kind: string
+                    hint: string
+                    decimals: 0
+                    tag-type: null
+                    required: true
+                    use-for-title: true
+                    expiration: true
+                    show-in-list: true
+                    name-key: string
+                    flexible-asset-type-id: 0
+                    default-value: string
+                    organization-id: 0
+                    organization-name: string
+                    resource-url: string
+                    restricted: true
+                    my-glue: true
+                    autofill-selectors: null
+                    username: string
+                    url: string
+                    notes: null
+                    password-updated-at: string
+                    updated-by: 0
+                    updated-by-type: string
+                    resource-id: 0
+                    cached-resource-type-name: string
+                    cached-resource-name: string
+                    password-category-id: null
+                    password-category-name: null
+                    otp-enabled: true
+                    password-folder-id: null
+                    resource-type: string
+                    parent-url: string
+                    vault-id: null
+                    archived: true
+                    accessor-id: 0
+                    accessor-type: string
+                    meta:
+                      role-name: string
+                  relationships:
+                    - id: 0
+                      type: string
+                      attributes:
+                        name: string
+                        attachment-file-name: string
+                        attachment-content-type: string
+                        attachment-file-size: 0
+                        ext: string
+                        created-at: string
+                        updated-at: string
+                        viewable: true
+                        download-url: string
+              meta:
+                current-page: 0
+                next-page: 0
+                prev-page: 0
+                total-pages: 0
+                total-count: 0
+                filters: {}
+              links:
+                self: string
+                first: string
+                prev: string
+                next: string
+                last: string
         '401':
           $ref: '#/responses/401-Forbidden'
       operationId: List_domains
@@ -373,39 +294,16 @@ definitions:
         type: integer
       type:
         type: string
-        enum:
-          - domains
-          - attachments
-          - flexible-asset-types
-          - passwords
-          - resource-accesses
-        minLength: 1
     required:
       - id
       - type
   domains:
-    allOf:
-      - $ref: '#/definitions/generic-object'
-      - type: object
-        properties:
-          attributes:
-            $ref: '#/definitions/domains-attributes'
-          relationships:
-            type: object
-            properties:
-              user-resource-accesses:
-                $ref: '#/definitions/related-objects'
-              group-resource-accesses:
-                $ref: '#/definitions/related-objects'
-              passwords:
-                $ref: '#/definitions/related-objects'
-              attachments:
-                $ref: '#/definitions/related-objects'
     description: ''
+    type: object
     x-examples:
       example-1:
         id: 0
-        type: domains
+        type: string
         attributes:
           id: 0
           name: string
@@ -424,42 +322,39 @@ definitions:
           user-resource-accesses:
             data:
               - id: 0
-                type: domains
+                type: resource-accesses
           group-resource-accesses:
             data:
               - id: 0
-                type: domains
+                type: group-resource-accesses
           passwords:
             data:
               - id: 0
-                type: domains
+                type: passwords
           attachments:
             data:
               - id: 0
-                type: domains
-  related-objects:
-    description: ''
-    type: object
-    x-examples:
-      example-1:
-        data:
-          - id: string
-            type: string
+                type: attachments
     properties:
-      data:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          $ref: '#/definitions/generic-object'
-    required:
-      - data
-  domains-attributes:
-    description: ''
-    allOf:
-      - $ref: '#/definitions/generic-attributes'
-      - type: object
+      id:
+        type: number
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
         properties:
+          id:
+            type: number
+          name:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
           organization-id:
             type: number
           organization-name:
@@ -482,50 +377,109 @@ definitions:
             type: string
             minLength: 1
           screenshot: {}
-    x-examples:
-      example-1:
-        id: 0
-        name: string
-        created-at: string
-        updated-at: string
-        organization-id: 0
-        organization-name: string
-        resource-url: string
-        restricted: true
-        my-glue: true
-        notes: string
-        registrar-name: string
-        expires-on: string
-        screenshot: null
+      relationships:
+        type: object
+        properties:
+          user-resource-accesses:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                      enum:
+                        - resource-accesses
+                      minLength: 1
+          group-resource-accesses:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                      enum:
+                        - group-resource-accesses
+                      minLength: 1
+          passwords:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                      enum:
+                        - passwords
+                      minLength: 1
+          attachments:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                      enum:
+                        - attachments
+                      minLength: 1
+    required:
+      - id
+      - type
+      - attributes
+  related-objects:
+    description: ''
+    type: object
+    properties:
+      data:
+        type: array
+        uniqueItems: true
+        minItems: 1
+        items:
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+    required:
+      - data
   attachments:
     description: ''
-    allOf:
-      - $ref: '#/definitions/generic-object'
-      - type: object
+    type: object
+    properties:
+      id:
+        type: number
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
         properties:
-          attributes:
-            $ref: '#/definitions/attachments-attributes'
-    x-examples:
-      example-1:
-        id: 0
-        type: domains
-        attributes:
-          id: 0
-          name: string
-          attachment-file-name: string
-          attachment-content-type: string
-          attachment-file-size: 0
-          ext: string
-          created-at: string
-          updated-at: string
-          viewable: true
-          download-url: string
-  attachments-attributes:
-    description: ''
-    allOf:
-      - $ref: '#/definitions/generic-attributes'
-      - type: object
-        properties:
+          name:
+            type: string
+            minLength: 1
           attachment-file-name:
             type: string
             minLength: 1
@@ -537,134 +491,28 @@ definitions:
           ext:
             type: string
             minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
           viewable:
             type: boolean
           download-url:
             type: string
             minLength: 1
-    x-examples:
-      example-1:
-        id: 0
-        name: string
-        created-at: string
-        updated-at: string
-        attachment-file-name: string
-        attachment-content-type: string
-        attachment-file-size: 0
-        ext: string
-        viewable: true
-        download-url: string
-  passwords-attributes:
-    description: ''
-    allOf:
-      - $ref: '#/definitions/generic-attributes'
-      - type: object
-        properties:
-          organization-id:
-            type: number
-          organization-name:
-            type: string
-            minLength: 1
-          resource-url:
-            type: string
-            minLength: 1
-          restricted:
-            type: boolean
-          my-glue:
-            type: boolean
-          autofill-selectors: {}
-          username:
-            type: string
-            minLength: 1
-          url:
-            type: string
-            minLength: 1
-          notes: {}
-          password-updated-at:
-            type: string
-            minLength: 1
-          updated-by:
-            type: number
-          updated-by-type:
-            type: string
-            minLength: 1
-          resource-id:
-            type: number
-          cached-resource-type-name:
-            type: string
-            minLength: 1
-          cached-resource-name:
-            type: string
-            minLength: 1
-          password-category-id: {}
-          password-category-name: {}
-          otp-enabled:
-            type: boolean
-          password-folder-id: {}
-          resource-type:
-            type: string
-            minLength: 1
-          parent-url:
-            type: string
-            minLength: 1
-          vault-id: {}
-          archived:
-            type: boolean
-    x-examples:
-      example-1:
-        id: 0
-        name: string
-        created-at: string
-        updated-at: string
-        organization-id: 0
-        organization-name: string
-        resource-url: string
-        restricted: true
-        my-glue: true
-        autofill-selectors: null
-        username: string
-        url: string
-        notes: null
-        password-updated-at: string
-        updated-by: 0
-        updated-by-type: string
-        resource-id: 0
-        cached-resource-type-name: string
-        cached-resource-name: string
-        password-category-id: null
-        password-category-name: null
-        otp-enabled: true
-        password-folder-id: null
-        resource-type: string
-        parent-url: string
-        vault-id: null
-        archived: true
-  passwords:
-    description: ''
-    type: object
-    properties:
-      id:
-        type: integer
-      type:
-        type: string
-        minLength: 1
-        enum:
-          - passwords
-      attributes:
-        $ref: '#/definitions/passwords-attributes'
-      relationships:
-        type: array
-        items:
-          $ref: '#/definitions/attachments'
     required:
       - id
       - type
       - attributes
-      - relationships
+  passwords:
+    description: ''
+    type: object
     x-examples:
       example-1:
         id: 0
-        type: passwords
+        type: string
         attributes:
           organization-id: 0
           organization-name: string
@@ -694,7 +542,7 @@ definitions:
           archived: true
         relationships:
           - id: 0
-            type: attachments
+            type: string
             attributes:
               id: 0
               name: string
@@ -706,31 +554,114 @@ definitions:
               updated-at: string
               viewable: true
               download-url: string
-  resource-accesses-attributes:
+    properties:
+      id:
+        type: number
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
+        properties:
+          organization-id:
+            type: number
+          organization-name:
+            type: string
+            minLength: 1
+          resource-url:
+            type: string
+            minLength: 1
+          restricted:
+            type: boolean
+          my-glue:
+            type: boolean
+          name:
+            type: string
+            minLength: 1
+          autofill-selectors: {}
+          username:
+            type: string
+            minLength: 1
+          url:
+            type: string
+            minLength: 1
+          notes: {}
+          password-updated-at:
+            type: string
+            minLength: 1
+          updated-by:
+            type: number
+          updated-by-type:
+            type: string
+            minLength: 1
+          resource-id:
+            type: number
+          cached-resource-type-name:
+            type: string
+            minLength: 1
+          cached-resource-name:
+            type: string
+            minLength: 1
+          password-category-id: {}
+          password-category-name: {}
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+          otp-enabled:
+            type: boolean
+          password-folder-id: {}
+          resource-type:
+            type: string
+            minLength: 1
+          parent-url:
+            type: string
+            minLength: 1
+          vault-id: {}
+          archived:
+            type: boolean
+      relationships:
+        type: array
+        uniqueItems: true
+        minItems: 1
+        items:
+          $ref: '#/definitions/attachments'
+    required:
+      - id
+      - type
+      - attributes
+  resource-accesses:
     description: ''
     type: object
     properties:
-      accessor-id:
+      id:
         type: number
-      accessor-type:
+      type:
         type: string
         minLength: 1
-      name:
-        type: string
-        minLength: 1
-      meta:
+      attributes:
         type: object
         properties:
-          role-name:
+          accessor-id:
+            type: number
+          accessor-type:
             type: string
-  resource-accesses:
-    title: resource-access
-    allOf:
-      - $ref: '#/definitions/generic-object'
-      - type: object
-        properties:
-          attributes:
-            $ref: '#/definitions/resource-accesses-attributes'
+            minLength: 1
+          name:
+            type: string
+            minLength: 1
+          meta:
+            type: object
+            properties:
+              role-name:
+                type: string
+                minLength: 1
+    required:
+      - id
+      - type
+      - attributes
   list-meta:
     description: ''
     type: object
@@ -766,7 +697,7 @@ definitions:
       last:
         type: string
         minLength: 1
-  domains-list:
+  domains-list-x:
     description: ''
     type: object
     x-examples:
@@ -848,18 +779,6 @@ definitions:
       - data
       - meta
       - links
-  generic-attributes:
-    title: generic-attributes
-    type: object
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      created-at:
-        type: string
-      updated-at:
-        type: string
   error-response:
     description: ''
     type: object
@@ -869,12 +788,47 @@ definitions:
         minLength: 1
     required:
       - message
-  flexible-asset-types-attributes:
+    x-examples: {}
+  flexible-asset-types:
     description: ''
-    allOf:
-      - $ref: '#/definitions/generic-attributes'
-      - type: object
+    type: object
+    x-examples:
+      example-1:
+        id: 0
+        type: string
+        attributes:
+          id: 0
+          name: string
+          created-at: string
+          updated-at: string
+          description: string
+          icon: string
+          enabled: true
+        relationships:
+          flexible-asset-fields:
+            data:
+              - id: 0
+                type: string
+    properties:
+      id:
+        type: number
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
         properties:
+          id:
+            type: number
+          name:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
           description:
             type: string
             minLength: 1
@@ -883,21 +837,22 @@ definitions:
             minLength: 1
           enabled:
             type: boolean
-    x-examples: {}
-  flexible-asset-types:
-    title: flexible-asset-types
-    allOf:
-      - $ref: '#/definitions/generic-object'
-      - type: object
+      relationships:
+        type: object
         properties:
-          attributes:
-            $ref: '#/definitions/flexible-asset-types-attributes'
-          relationships:
+          flexible-asset-fields:
             type: object
             properties:
-              flexible-asset-fields:
-                $ref: '#/definitions/related-objects'
-    x-examples: {}
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  $ref: '#/definitions/generic-object'
+    required:
+      - id
+      - type
+      - attributes
   flexible-asset-types-list:
     title: flexible-asset-types-list
     type: object
@@ -915,12 +870,50 @@ definitions:
       links:
         $ref: '#/definitions/list-links'
     x-examples: {}
-  flexible-asset-fields-attributes:
+  flexible-asset-fields:
     description: ''
-    allOf:
-      - $ref: '#/definitions/generic-attributes'
-      - type: object
+    type: object
+    x-examples:
+      example-1:
+        id: 0
+        type: string
+        attributes:
+          id: 0
+          name: string
+          created-at: string
+          updated-at: string
+          order: 0
+          kind: string
+          hint: string
+          decimals: 0
+          tag-type: null
+          required: true
+          use-for-title: true
+          expiration: true
+          show-in-list: true
+          name-key: string
+          flexible-asset-type-id: 0
+          default-value: string
+    properties:
+      id:
+        type: number
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
         properties:
+          id:
+            type: number
+          name:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
           order:
             type: number
           kind:
@@ -948,7 +941,167 @@ definitions:
           default-value:
             type: string
             minLength: 1
+    required:
+      - id
+      - type
+      - attributes
+  global-includable-objects:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: number
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          attachment-file-name:
+            type: string
+            minLength: 1
+          attachment-content-type:
+            type: string
+            minLength: 1
+          attachment-file-size:
+            type: number
+          ext:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+          viewable:
+            type: boolean
+          download-url:
+            type: string
+            minLength: 1
+          organization-id:
+            type: number
+          organization-name:
+            type: string
+            minLength: 1
+          resource-url:
+            type: string
+            minLength: 1
+          restricted:
+            type: boolean
+          my-glue:
+            type: boolean
+          autofill-selectors: {}
+          username:
+            type: string
+            minLength: 1
+          url:
+            type: string
+            minLength: 1
+          notes: {}
+          password-updated-at:
+            type: string
+            minLength: 1
+          updated-by:
+            type: number
+          updated-by-type:
+            type: string
+            minLength: 1
+          resource-id:
+            type: number
+          cached-resource-type-name:
+            type: string
+            minLength: 1
+          cached-resource-name:
+            type: string
+            minLength: 1
+          password-category-id: {}
+          password-category-name: {}
+          otp-enabled:
+            type: boolean
+          password-folder-id: {}
+          resource-type:
+            type: string
+            minLength: 1
+          parent-url:
+            type: string
+            minLength: 1
+          vault-id: {}
+          archived:
+            type: boolean
+          id:
+            type: number
+          order:
+            type: number
+          kind:
+            type: string
+            minLength: 1
+          hint:
+            type: string
+            minLength: 1
+          decimals:
+            type: number
+          tag-type: {}
+          required:
+            type: boolean
+          use-for-title:
+            type: boolean
+          expiration:
+            type: boolean
+          show-in-list:
+            type: boolean
+          name-key:
+            type: string
+            minLength: 1
+          flexible-asset-type-id:
+            type: number
+          default-value:
+            type: string
+            minLength: 1
+          accessor-id:
+            type: number
+          accessor-type:
+            type: string
+            minLength: 1
+          meta:
+            type: object
+            properties:
+              role-name:
+                type: string
+                minLength: 1
+            required:
+              - role-name
         required:
+          - name
+          - attachment-file-name
+          - attachment-content-type
+          - attachment-file-size
+          - ext
+          - created-at
+          - updated-at
+          - viewable
+          - download-url
+          - organization-id
+          - organization-name
+          - resource-url
+          - restricted
+          - my-glue
+          - username
+          - url
+          - password-updated-at
+          - updated-by
+          - updated-by-type
+          - resource-id
+          - cached-resource-type-name
+          - cached-resource-name
+          - otp-enabled
+          - resource-type
+          - parent-url
+          - archived
+          - id
           - order
           - kind
           - hint
@@ -960,16 +1113,140 @@ definitions:
           - name-key
           - flexible-asset-type-id
           - default-value
-    x-examples: {}
-  flexible-asset-fields:
-    title: flexible-asset-fields
+          - accessor-id
+          - accessor-type
+          - meta
+      relationships:
+        type: array
+        uniqueItems: true
+        minItems: 1
+        items:
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: number
+            type:
+              type: string
+              minLength: 1
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                attachment-file-name:
+                  type: string
+                  minLength: 1
+                attachment-content-type:
+                  type: string
+                  minLength: 1
+                attachment-file-size:
+                  type: number
+                ext:
+                  type: string
+                  minLength: 1
+                created-at:
+                  type: string
+                  minLength: 1
+                updated-at:
+                  type: string
+                  minLength: 1
+                viewable:
+                  type: boolean
+                download-url:
+                  type: string
+                  minLength: 1
+              required:
+                - name
+                - attachment-file-name
+                - attachment-content-type
+                - attachment-file-size
+                - ext
+                - created-at
+                - updated-at
+                - viewable
+                - download-url
+    required:
+      - id
+      - type
+      - attributes
+      - relationships
+  global-includable-objects-generator:
+    title: global-includable-objects-generator
     allOf:
-      - $ref: '#/definitions/generic-object'
-      - type: object
-        properties:
-          attributes:
-            $ref: '#/definitions/flexible-asset-fields-attributes'
-    x-examples: {}
+      - $ref: '#/definitions/attachments'
+      - $ref: '#/definitions/passwords'
+      - $ref: '#/definitions/flexible-asset-fields'
+      - $ref: '#/definitions/resource-accesses'
+    x-examples:
+      example-1:
+        id: 0
+        type: string
+        attributes:
+          name: string
+          attachment-file-name: string
+          attachment-content-type: string
+          attachment-file-size: 0
+          ext: string
+          created-at: string
+          updated-at: string
+          viewable: true
+          download-url: string
+          organization-id: 0
+          organization-name: string
+          resource-url: string
+          restricted: true
+          my-glue: true
+          autofill-selectors: null
+          username: string
+          url: string
+          notes: null
+          password-updated-at: string
+          updated-by: 0
+          updated-by-type: string
+          resource-id: 0
+          cached-resource-type-name: string
+          cached-resource-name: string
+          password-category-id: null
+          password-category-name: null
+          otp-enabled: true
+          password-folder-id: null
+          resource-type: string
+          parent-url: string
+          vault-id: null
+          archived: true
+          id: 0
+          order: 0
+          kind: string
+          hint: string
+          decimals: 0
+          tag-type: null
+          required: true
+          use-for-title: true
+          expiration: true
+          show-in-list: true
+          name-key: string
+          flexible-asset-type-id: 0
+          default-value: string
+          accessor-id: 0
+          accessor-type: string
+          meta:
+            role-name: string
+        relationships:
+          - id: 0
+            type: string
+            attributes:
+              name: string
+              attachment-file-name: string
+              attachment-content-type: string
+              attachment-file-size: 0
+              ext: string
+              created-at: string
+              updated-at: string
+              viewable: true
+              download-url: string
 parameters:
   page-number:
     name: 'page[number]'

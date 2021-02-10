@@ -6,7 +6,9 @@ info:
     # OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
     #### Formatted for compatibility with Swagger Editor for Power Automate custom connectors
 
-    > This file is the EXPERIMENTAL BRANCH of this implementation. Portions are under development and may not work, are probably broken, may cause unexpected results, including but not limited to the accidental deletion of all your mom's data, panic inducing hot flashes, general malevolence, and world-ending split end in your hair.
+    > This file is the EXPERIMENTAL BRANCH of this implementation. Portions are under development and may not work, are probably broken, may cause unexpected results, including but not limited to the accidental deletion of all your mom's data, panic inducing hot flashes, general malevolence, and world-ending split ends in your hair.
+    >
+    > In general Endpoints will move from Experimental > Development > Stable as they are developed.
     >
     > **AS-IS AND NO WARRANTY - USE AT YOUR OWN RISK!**
     >
