@@ -1,4 +1,4 @@
-# Power Platform Custom Connector for IT Glue
+# I. Power Platform Custom Connector for IT Glue
 
 > This is the DEVELOPMENT BRANCH of this implementation. Endpoints in this branch are under development and should be considered more stable than the experimental branch, but full functionality or usability is not guaranteed.
 >
