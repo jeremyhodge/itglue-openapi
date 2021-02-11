@@ -6,7 +6,7 @@ info:
     # OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
     #### Formatted for compatibility with Swagger Editor for Power Automate custom connectors
 
-    > This file is the DEVELOPMENT BRANCH of this implementation. Endpoints in this branch are under development and should be considered more stable than the experimental branch, but full functionality or usability is not guaranteed. ~~have been fairly well tested and should work without issue, but as always:~~
+    > This file is the DEVELOPMENT BRANCH of this implementation. Endpoints in this branch are under development and should be considered more stable than the experimental branch, but full functionality or usability is not guaranteed.
     >
     > In general Endpoints will move from Experimental > Development > Stable as they are developed.
     >
@@ -66,6 +66,7 @@ paths:
                     description: string
                     icon: string
                     enabled: true
+                    show-in-menu: true
                   relationships:
                     flexible-asset-fields:
                       data:
@@ -109,7 +110,7 @@ paths:
                 next: string
                 last: string
         '401':
-          $ref: '#/responses/401-Forbidden'
+          $ref: '#/responses/401-Unauthorized'
       summary: List Flexible Asset Types
       operationId: List_flexible_asset_types
       externalDocs:
@@ -421,7 +422,7 @@ paths:
                 next: string
                 last: string
         '401':
-          $ref: '#/responses/401-Forbidden'
+          $ref: '#/responses/401-Unauthorized'
       operationId: List_domains
       description: Returns a list of domains for all organizations or for a specified organization.
       parameters:
@@ -962,7 +963,7 @@ definitions:
       data:
         type: array
         items:
-          $ref: '#/definitions/flexible-asset-types'
+          $ref: '#/definitions/flexible-asset-types-read'
       included:
         type: array
         items:
@@ -1497,7 +1498,7 @@ definitions:
                           minLength: 1
                           x-ms-summary: Tag Type
                           x-ms-visibility: advanced
-                          description: If Field Type is Tag, what type of asset should the tag be?
+                          description: 'If Field Type is Tag, what type of asset should the tag be?'
                           enum:
                             - AccountsUsers
                             - Checklists
@@ -1526,7 +1527,7 @@ definitions:
                           type: integer
                           x-ms-summary: Number of Decimals
                           x-ms-visibility: advanced
-                          description: For number fields, how many desimals to show / store.
+                          description: 'For number fields, how many desimals to show / store.'
                         default_value:
                           type: string
                           x-ms-summary: Default Value
@@ -1541,7 +1542,7 @@ definitions:
                           type: boolean
                           x-ms-summary: Expiration
                           x-ms-visibility: advanced
-                          description: For date fields, field is treated at an expiration date for the Asset.
+                          description: 'For date fields, field is treated at an expiration date for the Asset.'
     required:
       - type
       - attributes
@@ -1591,30 +1592,14 @@ responses:
       $ref: '#/definitions/error-response'
   403-Forbidden:
     description: Example response
-    content:
-      application/json:
-        schema:
-          properties:
-            id:
-              type: string
+    schema:
+      $ref: '#/definitions/error-response'
   415-Bad_Content_Type:
     description: Example response
-    content:
-      application/json:
-        schema:
-          properties:
-            id:
-              type: string
     schema:
       $ref: '#/definitions/error-response'
   422-Bad_Request:
     description: Example response
-    content:
-      application/json:
-        schema:
-          properties:
-            id:
-              type: string
     schema:
       $ref: '#/definitions/error-response'
   500-Internal_Server_Error:
@@ -1624,12 +1609,6 @@ responses:
       > As an example, Creating (POST) a flexible_asset_types object with the fields definition inline in the
       > attributes object will create an error 500. The only / propwer way to create fields is trough the 
       > relationships object adjacent to the data tag.
-    content:
-      application/json:
-        schema:
-          properties:
-            id:
-              type: string
     schema:
       type: 'null'
 securityDefinitions:
