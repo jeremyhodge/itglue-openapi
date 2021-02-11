@@ -216,7 +216,10 @@ paths:
         '401':
           $ref: '#/responses/401-Unauthorized'
       operationId: List_domains
-      description: Returns a list of domains for all organizations or for a specified organization.
+      description: |-
+        Returns a list of domains for all organizations or for a specified organization.
+
+        ![List Domains Action](./docs/assets/images/List-Domains.png)
       parameters:
         - $ref: '#/parameters/page-size'
         - $ref: '#/parameters/page-number'

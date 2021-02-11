@@ -1,4 +1,9 @@
-### List Domains
+
+![List Domains Action](../../assets/images/.png)
+
+| ACTION | List Domains |
+|--------|--------------|
+
 #### Returns a list of flexible asset types in your account.
 ***
 
