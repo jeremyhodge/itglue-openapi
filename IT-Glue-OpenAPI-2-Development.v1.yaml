@@ -54,61 +54,7 @@ paths:
                 $ref: '#/definitions/list-meta'
               links:
                 $ref: '#/definitions/list-links'
-          examples:
-            example-1:
-              data:
-                - id: 0
-                  type: string
-                  attributes:
-                    name: string
-                    created-at: string
-                    updated-at: string
-                    description: string
-                    icon: string
-                    enabled: true
-                    show-in-menu: true
-                  relationships:
-                    flexible-asset-fields:
-                      data:
-                        - id: 0
-                          type: flexible-asset-fields
-              included:
-                - id: 0
-                  type: string
-                  attributes:
-                    order: 0
-                    name: string
-                    kind: string
-                    hint: string
-                    decimals: 0
-                    tag-type: null
-                    required: true
-                    use-for-title: true
-                    expiration: true
-                    show-in-list: true
-                    name-key: string
-                    created-at: string
-                    updated-at: string
-                    flexible-asset-type-id: 0
-                    default-value: string
-                  relationships:
-                    flexible-asset-type:
-                      data:
-                        id: string
-                        type: string
-              meta:
-                current-page: 0
-                next-page: 0
-                prev-page: 0
-                total-pages: 0
-                total-count: 0
-                filters: {}
-              links:
-                self: string
-                first: string
-                prev: string
-                next: string
-                last: string
+          examples: {}
         '401':
           $ref: '#/responses/401-Unauthorized'
       summary: List Flexible Asset Types
@@ -172,24 +118,7 @@ paths:
             properties:
               data:
                 $ref: '#/definitions/flexible-asset-types-read'
-          examples:
-            example-1:
-              data:
-                id: 0
-                type: string
-                attributes:
-                  name: string
-                  created-at: string
-                  updated-at: string
-                  description: string
-                  icon: string
-                  enabled: true
-                  show-in-menu: true
-                relationships:
-                  flexible-asset-fields:
-                    data:
-                      - id: 0
-                        type: flexible-asset-fields
+          examples: {}
         '401':
           $ref: '#/responses/401-Unauthorized'
         '403':
@@ -202,25 +131,8 @@ paths:
           $ref: '#/responses/500-Internal_Server_Error'
       summary: Create a Flexible Asset Type
       operationId: Post_flexible_asset_type
-      description: |-
-        Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested relationships route to add multiple flexible asset fields to a flexible asset type in bulk.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. ~~Verify Summary~~
-        > 1. ~~Verify Description~~
-        > 1. ~~Verify OperationID naming and format conventions~~
-        > 1. ~~Verify Query Parameters~~
-        > 1. ~~Separate local vs global params~~
-        > 1. ~~For Requests, verify JSON body schema~~
-        > 1. ~~Test Response / Gather response schema / Verify Response Codes~~
-        > 1. ~~Verify Response Schema / fully fleshed~~
-        > 1. ~~externalDocs~~
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
+      description: |
+        Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested Fields array to add multiple flexible asset fields to a flexible asset type in bulk. Creating a new flexible asset type requires at least the first field to be defined in the nested Fields array (locuated under advanced), and at least one field needs to be set as Use for Title and Show in List as well, or the server will generate an error.
       parameters:
         - name: body
           in: body
@@ -237,25 +149,12 @@ paths:
               data:
                 type: flexible_asset_types
                 attributes:
+                  id: 0
                   name: string
                   description: string
                   icon: string
                   enabled: true
                   show-in-menu: true
-                  fields:
-                    - id: 0
-                      flexible_asset_type_id: 0
-                      order: 0
-                      name: string
-                      kind: Checkbox
-                      hint: string
-                      decimals: 0
-                      default_value: string
-                      tag_type: AccountsUsers
-                      required: true
-                      use_for_title: null
-                      expiration: true
-                      show_in_list: true
                 relationships:
                   flexible-asset-fields:
                     data:
@@ -273,6 +172,13 @@ paths:
                           use_for_title: true
                           expiration: true
           description: ''
+        - type: string
+          in: header
+          name: Content-Type
+          description: POST Methods must set Content-Type to application/vnd.api+json
+          required: true
+          default: application/vnd.api+json
+          x-ms-visibility: internal
       tags:
         - Flexible Asset Types
   /domains:
@@ -306,121 +212,7 @@ paths:
                 $ref: '#/definitions/list-links'
             required:
               - data
-          examples:
-            example-1:
-              data:
-                - id: 0
-                  type: string
-                  attributes:
-                    id: 0
-                    name: string
-                    created-at: string
-                    updated-at: string
-                    organization-id: 0
-                    organization-name: string
-                    resource-url: string
-                    restricted: true
-                    my-glue: true
-                    notes: string
-                    registrar-name: string
-                    expires-on: string
-                    screenshot: null
-                  relationships:
-                    user-resource-accesses:
-                      data:
-                        - id: 0
-                          type: resource-accesses
-                    group-resource-accesses:
-                      data:
-                        - id: 0
-                          type: group-resource-accesses
-                    passwords:
-                      data:
-                        - id: 0
-                          type: passwords
-                    attachments:
-                      data:
-                        - id: 0
-                          type: attachments
-              included:
-                - id: 0
-                  type: attachments
-                  attributes:
-                    name: string
-                    attachment-file-name: string
-                    attachment-content-type: string
-                    attachment-file-size: 0
-                    ext: string
-                    created-at: string
-                    updated-at: string
-                    viewable: true
-                    download-url: string
-                    organization-id: 0
-                    organization-name: string
-                    resource-url: string
-                    restricted: true
-                    my-glue: true
-                    autofill-selectors: null
-                    username: string
-                    url: string
-                    notes: null
-                    password-updated-at: string
-                    updated-by: 0
-                    updated-by-type: string
-                    resource-id: 0
-                    cached-resource-type-name: string
-                    cached-resource-name: string
-                    password-category-id: null
-                    password-category-name: null
-                    otp-enabled: true
-                    password-folder-id: null
-                    resource-type: string
-                    parent-url: string
-                    vault-id: null
-                    archived: true
-                    id: 0
-                    order: 0
-                    kind: string
-                    hint: string
-                    decimals: 0
-                    tag-type: null
-                    required: true
-                    use-for-title: true
-                    expiration: true
-                    show-in-list: true
-                    name-key: string
-                    flexible-asset-type-id: 0
-                    default-value: string
-                    accessor-id: 0
-                    accessor-type: string
-                    meta:
-                      role-name: string
-                  relationships:
-                    - id: 0
-                      type: string
-                      attributes:
-                        name: string
-                        attachment-file-name: string
-                        attachment-content-type: string
-                        attachment-file-size: 0
-                        ext: string
-                        created-at: string
-                        updated-at: string
-                        viewable: true
-                        download-url: string
-              meta:
-                current-page: 0
-                next-page: 0
-                prev-page: 0
-                total-pages: 0
-                total-count: 0
-                filters: {}
-              links:
-                self: string
-                first: string
-                prev: string
-                next: string
-                last: string
+          examples: {}
         '401':
           $ref: '#/responses/401-Unauthorized'
       operationId: List_domains
@@ -463,17 +255,6 @@ paths:
           x-ms-summary: Expand Results
           x-ms-visibility: advanced
 definitions:
-  generic-object:
-    type: object
-    discriminator: type
-    properties:
-      id:
-        type: integer
-      type:
-        type: string
-    required:
-      - id
-      - type
   domains:
     description: ''
     type: object
@@ -621,27 +402,6 @@ definitions:
       - id
       - type
       - attributes
-  related-objects:
-    description: ''
-    type: object
-    properties:
-      data:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-            - id
-            - type
-          properties:
-            id:
-              type: string
-              minLength: 1
-            type:
-              type: string
-              minLength: 1
-    required:
-      - data
   attachments:
     description: ''
     type: object
@@ -956,23 +716,6 @@ definitions:
     required:
       - type
       - attributes
-  flexible-asset-types-list:
-    title: flexible-asset-types-list
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/flexible-asset-types-read'
-      included:
-        type: array
-        items:
-          $ref: '#/definitions/generic-object'
-      meta:
-        $ref: '#/definitions/list-meta'
-      links:
-        $ref: '#/definitions/list-links'
-    x-examples: {}
   flexible-asset-fields:
     description: ''
     type: object
@@ -1444,6 +1187,9 @@ definitions:
                 type: array
                 uniqueItems: true
                 minItems: 1
+                x-ms-summary: Fields
+                x-ms-visibility: advanced
+                description: JSON object representing the Fixed Asset Fields. Must include at least 1 field as title and show in list.
                 items:
                   type: object
                   properties:
@@ -1583,9 +1329,7 @@ responses:
     description: Forbidden Response
     schema:
       $ref: '#/definitions/error-response'
-    examples:
-      example-1:
-        message: string
+    examples: {}
   404-Not-Found:
     description: Example response
     schema:
@@ -1601,7 +1345,30 @@ responses:
   422-Bad_Request:
     description: Example response
     schema:
-      $ref: '#/definitions/error-response'
+      description: ''
+      type: object
+      properties:
+        errors:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                    minLength: 1
+              detail:
+                type: string
+                minLength: 1
+              title:
+                type: string
+                minLength: 1
+              status:
+                type: number
   500-Internal_Server_Error:
     description: |-
       Error 500 cill be returned when using certain parts of the API that are documented, but appear to be no longer in play.
@@ -1610,7 +1377,7 @@ responses:
       > attributes object will create an error 500. The only / propwer way to create fields is trough the 
       > relationships object adjacent to the data tag.
     schema:
-      type: 'null'
+      type: object
 securityDefinitions:
   API Key:
     type: apiKey
