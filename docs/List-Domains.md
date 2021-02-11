@@ -7,6 +7,6 @@ Returns a list of flexible asset types in your account.
 >
 > v1.0 Released to Stable branch.
 
-![List Domains Action](./Images/List-Domains.png)
+![List Domains Action](images/List-Domains.png)
 
 
