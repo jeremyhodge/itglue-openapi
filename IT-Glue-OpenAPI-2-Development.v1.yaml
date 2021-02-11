@@ -38,18 +38,18 @@ paths:
     get:
       responses:
         '200':
-          description: default
+          description: Success
           schema:
             type: object
             properties:
               data:
                 type: array
                 items:
-                  $ref: '#/definitions/flexible-asset-types'
+                  $ref: '#/definitions/flexible-asset-types-read'
               included:
                 type: array
                 items:
-                  $ref: '#/definitions/global-includable-objects'
+                  $ref: '#/definitions/flexible-asset-fields'
               meta:
                 $ref: '#/definitions/list-meta'
               links:
@@ -60,7 +60,6 @@ paths:
                 - id: 0
                   type: string
                   attributes:
-                    id: 0
                     name: string
                     created-at: string
                     updated-at: string
@@ -71,45 +70,13 @@ paths:
                     flexible-asset-fields:
                       data:
                         - id: 0
-                          type: string
+                          type: flexible-asset-fields
               included:
                 - id: 0
                   type: string
                   attributes:
-                    name: string
-                    attachment-file-name: string
-                    attachment-content-type: string
-                    attachment-file-size: 0
-                    ext: string
-                    created-at: string
-                    updated-at: string
-                    viewable: true
-                    download-url: string
-                    organization-id: 0
-                    organization-name: string
-                    resource-url: string
-                    restricted: true
-                    my-glue: true
-                    autofill-selectors: null
-                    username: string
-                    url: string
-                    notes: null
-                    password-updated-at: string
-                    updated-by: 0
-                    updated-by-type: string
-                    resource-id: 0
-                    cached-resource-type-name: string
-                    cached-resource-name: string
-                    password-category-id: null
-                    password-category-name: null
-                    otp-enabled: true
-                    password-folder-id: null
-                    resource-type: string
-                    parent-url: string
-                    vault-id: null
-                    archived: true
-                    id: 0
                     order: 0
+                    name: string
                     kind: string
                     hint: string
                     decimals: 0
@@ -119,25 +86,15 @@ paths:
                     expiration: true
                     show-in-list: true
                     name-key: string
+                    created-at: string
+                    updated-at: string
                     flexible-asset-type-id: 0
                     default-value: string
-                    accessor-id: 0
-                    accessor-type: string
-                    meta:
-                      role-name: string
                   relationships:
-                    - id: 0
-                      type: string
-                      attributes:
-                        name: string
-                        attachment-file-name: string
-                        attachment-content-type: string
-                        attachment-file-size: 0
-                        ext: string
-                        created-at: string
-                        updated-at: string
-                        viewable: true
-                        download-url: string
+                    flexible-asset-type:
+                      data:
+                        id: string
+                        type: string
               meta:
                 current-page: 0
                 next-page: 0
@@ -153,8 +110,6 @@ paths:
                 last: string
         '401':
           $ref: '#/responses/401-Forbidden'
-        '404':
-          $ref: '#/responses/404-Not-Found'
       summary: List Flexible Asset Types
       operationId: List_flexible_asset_types
       externalDocs:
@@ -202,6 +157,121 @@ paths:
             - flexible_asset_fields
           x-ms-visibility: advanced
       description: Returns a list of flexible asset types in your account.
+      tags:
+        - Flexible Asset Types
+    post:
+      externalDocs:
+        description: Learn More...
+        url: 'https://api.itglue.com/developer#flexible-asset-types-create'
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/flexible-asset-types-read'
+          examples:
+            example-1:
+              data:
+                id: 0
+                type: string
+                attributes:
+                  name: string
+                  created-at: string
+                  updated-at: string
+                  description: string
+                  icon: string
+                  enabled: true
+                  show-in-menu: true
+                relationships:
+                  flexible-asset-fields:
+                    data:
+                      - id: 0
+                        type: flexible-asset-fields
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '403':
+          $ref: '#/responses/403-Forbidden'
+        '415':
+          $ref: '#/responses/415-Bad_Content_Type'
+        '422':
+          $ref: '#/responses/422-Bad_Request'
+        '500':
+          $ref: '#/responses/500-Internal_Server_Error'
+      summary: Create a Flexible Asset Type
+      operationId: Post_flexible_asset_type
+      description: |-
+        Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested relationships route to add multiple flexible asset fields to a flexible asset type in bulk.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. ~~Verify Summary~~
+        > 1. ~~Verify Description~~
+        > 1. ~~Verify OperationID naming and format conventions~~
+        > 1. ~~Verify Query Parameters~~
+        > 1. ~~Separate local vs global params~~
+        > 1. ~~For Requests, verify JSON body schema~~
+        > 1. ~~Test Response / Gather response schema / Verify Response Codes~~
+        > 1. ~~Verify Response Schema / fully fleshed~~
+        > 1. ~~externalDocs~~
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/flexible-asset-types-write'
+            required:
+              - data
+          x-examples:
+            example-1:
+              data:
+                type: flexible_asset_types
+                attributes:
+                  name: string
+                  description: string
+                  icon: string
+                  enabled: true
+                  show-in-menu: true
+                  fields:
+                    - id: 0
+                      flexible_asset_type_id: 0
+                      order: 0
+                      name: string
+                      kind: Checkbox
+                      hint: string
+                      decimals: 0
+                      default_value: string
+                      tag_type: AccountsUsers
+                      required: true
+                      use_for_title: null
+                      expiration: true
+                      show_in_list: true
+                relationships:
+                  flexible-asset-fields:
+                    data:
+                      - type: flexible_asset_fields
+                        attributes:
+                          order: 0
+                          name: string
+                          kind: Checkbox
+                          hint: string
+                          tag-type: AccountsUsers
+                          required: true
+                          show-in-list: true
+                          decimals: 0
+                          default_value: string
+                          use_for_title: true
+                          expiration: true
+          description: ''
       tags:
         - Flexible Asset Types
   /domains:
@@ -273,7 +343,7 @@ paths:
                           type: attachments
               included:
                 - id: 0
-                  type: string
+                  type: attachments
                   attributes:
                     name: string
                     attachment-file-name: string
@@ -284,19 +354,6 @@ paths:
                     updated-at: string
                     viewable: true
                     download-url: string
-                    id: 0
-                    order: 0
-                    kind: string
-                    hint: string
-                    decimals: 0
-                    tag-type: null
-                    required: true
-                    use-for-title: true
-                    expiration: true
-                    show-in-list: true
-                    name-key: string
-                    flexible-asset-type-id: 0
-                    default-value: string
                     organization-id: 0
                     organization-name: string
                     resource-url: string
@@ -320,6 +377,19 @@ paths:
                     parent-url: string
                     vault-id: null
                     archived: true
+                    id: 0
+                    order: 0
+                    kind: string
+                    hint: string
+                    decimals: 0
+                    tag-type: null
+                    required: true
+                    use-for-title: true
+                    expiration: true
+                    show-in-list: true
+                    name-key: string
+                    flexible-asset-type-id: 0
+                    default-value: string
                     accessor-id: 0
                     accessor-type: string
                     meta:
@@ -813,7 +883,7 @@ definitions:
     required:
       - message
     x-examples: {}
-  flexible-asset-types:
+  flexible-asset-types-read:
     description: ''
     type: object
     x-examples:
@@ -821,38 +891,39 @@ definitions:
         id: 0
         type: string
         attributes:
-          id: 0
           name: string
           created-at: string
           updated-at: string
           description: string
           icon: string
           enabled: true
+          show-in-menu: true
         relationships:
           flexible-asset-fields:
             data:
               - id: 0
-                type: string
+                type: flexible-asset-fields
     properties:
       id:
-        type: number
+        type: integer
+        readOnly: true
       type:
         type: string
         minLength: 1
       attributes:
         type: object
         properties:
-          id:
-            type: number
           name:
             type: string
             minLength: 1
           created-at:
             type: string
             minLength: 1
+            readOnly: true
           updated-at:
             type: string
             minLength: 1
+            readOnly: true
           description:
             type: string
             minLength: 1
@@ -860,6 +931,8 @@ definitions:
             type: string
             minLength: 1
           enabled:
+            type: boolean
+          show-in-menu:
             type: boolean
       relationships:
         type: object
@@ -869,12 +942,17 @@ definitions:
             properties:
               data:
                 type: array
-                uniqueItems: true
-                minItems: 1
                 items:
-                  $ref: '#/definitions/generic-object'
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    type:
+                      type: string
+                      enum:
+                        - flexible-asset-fields
     required:
-      - id
       - type
       - attributes
   flexible-asset-types-list:
@@ -897,49 +975,22 @@ definitions:
   flexible-asset-fields:
     description: ''
     type: object
-    x-examples:
-      example-1:
-        id: 0
-        type: string
-        attributes:
-          id: 0
-          name: string
-          created-at: string
-          updated-at: string
-          order: 0
-          kind: string
-          hint: string
-          decimals: 0
-          tag-type: null
-          required: true
-          use-for-title: true
-          expiration: true
-          show-in-list: true
-          name-key: string
-          flexible-asset-type-id: 0
-          default-value: string
     properties:
       id:
-        type: number
+        type: integer
       type:
         type: string
         minLength: 1
       attributes:
         type: object
+        required:
+          - kind
         properties:
-          id:
+          order:
             type: number
           name:
             type: string
             minLength: 1
-          created-at:
-            type: string
-            minLength: 1
-          updated-at:
-            type: string
-            minLength: 1
-          order:
-            type: number
           kind:
             type: string
             minLength: 1
@@ -960,11 +1011,32 @@ definitions:
           name-key:
             type: string
             minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
           flexible-asset-type-id:
             type: number
           default-value:
             type: string
             minLength: 1
+      relationships:
+        type: object
+        properties:
+          flexible-asset-type:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  type:
+                    type: string
+                    minLength: 1
     required:
       - id
       - type
@@ -972,11 +1044,83 @@ definitions:
   global-includable-objects:
     description: ''
     type: object
+    x-examples:
+      example-1:
+        id: 0
+        type: attachments
+        attributes:
+          name: string
+          attachment-file-name: string
+          attachment-content-type: string
+          attachment-file-size: 0
+          ext: string
+          created-at: string
+          updated-at: string
+          viewable: true
+          download-url: string
+          organization-id: 0
+          organization-name: string
+          resource-url: string
+          restricted: true
+          my-glue: true
+          autofill-selectors: null
+          username: string
+          url: string
+          notes: null
+          password-updated-at: string
+          updated-by: 0
+          updated-by-type: string
+          resource-id: 0
+          cached-resource-type-name: string
+          cached-resource-name: string
+          password-category-id: null
+          password-category-name: null
+          otp-enabled: true
+          password-folder-id: null
+          resource-type: string
+          parent-url: string
+          vault-id: null
+          archived: true
+          id: 0
+          order: 0
+          kind: string
+          hint: string
+          decimals: 0
+          tag-type: null
+          required: true
+          use-for-title: true
+          expiration: true
+          show-in-list: true
+          name-key: string
+          flexible-asset-type-id: 0
+          default-value: string
+          accessor-id: 0
+          accessor-type: string
+          meta:
+            role-name: string
+        relationships:
+          - id: 0
+            type: string
+            attributes:
+              name: string
+              attachment-file-name: string
+              attachment-content-type: string
+              attachment-file-size: 0
+              ext: string
+              created-at: string
+              updated-at: string
+              viewable: true
+              download-url: string
     properties:
       id:
         type: number
       type:
         type: string
+        enum:
+          - attachments
+          - passwords
+          - resource-accesses
+          - group-resource-access
         minLength: 1
       attributes:
         type: object
@@ -1096,58 +1240,12 @@ definitions:
               role-name:
                 type: string
                 minLength: 1
-            required:
-              - role-name
-        required:
-          - name
-          - attachment-file-name
-          - attachment-content-type
-          - attachment-file-size
-          - ext
-          - created-at
-          - updated-at
-          - viewable
-          - download-url
-          - organization-id
-          - organization-name
-          - resource-url
-          - restricted
-          - my-glue
-          - username
-          - url
-          - password-updated-at
-          - updated-by
-          - updated-by-type
-          - resource-id
-          - cached-resource-type-name
-          - cached-resource-name
-          - otp-enabled
-          - resource-type
-          - parent-url
-          - archived
-          - id
-          - order
-          - kind
-          - hint
-          - decimals
-          - required
-          - use-for-title
-          - expiration
-          - show-in-list
-          - name-key
-          - flexible-asset-type-id
-          - default-value
-          - accessor-id
-          - accessor-type
-          - meta
       relationships:
         type: array
         uniqueItems: true
         minItems: 1
         items:
-          required:
-            - id
-            - type
+          type: object
           properties:
             id:
               type: number
@@ -1182,27 +1280,15 @@ definitions:
                 download-url:
                   type: string
                   minLength: 1
-              required:
-                - name
-                - attachment-file-name
-                - attachment-content-type
-                - attachment-file-size
-                - ext
-                - created-at
-                - updated-at
-                - viewable
-                - download-url
     required:
       - id
       - type
       - attributes
-      - relationships
   global-includable-objects-generator:
     title: global-includable-objects-generator
     allOf:
       - $ref: '#/definitions/attachments'
       - $ref: '#/definitions/passwords'
-      - $ref: '#/definitions/flexible-asset-fields'
       - $ref: '#/definitions/resource-accesses'
     x-examples:
       example-1:
@@ -1271,6 +1357,194 @@ definitions:
               updated-at: string
               viewable: true
               download-url: string
+  flexible-asset-types-write:
+    description: ''
+    type: object
+    x-examples:
+      example-1:
+        type: flexible_asset_types
+        attributes:
+          id: 0
+          name: string
+          description: string
+          icon: string
+          enabled: true
+          show-in-menu: true
+        relationships:
+          flexible-asset-fields:
+            data:
+              - type: flexible_asset_fields
+                attributes:
+                  order: 0
+                  name: string
+                  kind: Checkbox
+                  hint: string
+                  tag-type: AccountsUsers
+                  required: true
+                  show-in-list: true
+                  decimals: 0
+                  default_value: string
+                  use_for_title: true
+                  expiration: true
+    properties:
+      type:
+        type: string
+        minLength: 1
+        enum:
+          - flexible_asset_types
+        x-ms-summary: Record Type
+        x-ms-visibility: internal
+        description: The record type this object represents
+        default: flexible_asset_types
+      attributes:
+        type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+            x-ms-summary: Record ID
+            x-ms-visibility: advanced
+            description: Read Only. Record ID used only for record identification during bulk updates only.
+          name:
+            type: string
+            minLength: 1
+            x-ms-summary: Name
+            x-ms-visibility: important
+            description: Name of this flexible asset type.
+          description:
+            type: string
+            minLength: 1
+            x-ms-summary: Description
+            x-ms-visibility: important
+            description: Description of this flexible asset type.
+          icon:
+            type: string
+            minLength: 1
+            x-ms-summary: Icon
+            x-ms-visbility: important
+            description: Name of the standard icon to use (e.g. envelope). Names can be found on the new flexible asset form in IT Glue under the Pick Icon button.
+          enabled:
+            type: boolean
+            x-ms-summary: Enabled
+            x-ms-visibility: advanced
+            description: Is the new flexible asset enabled?
+          show-in-menu:
+            type: boolean
+            x-ms-summary: In Menu
+            x-ms-visibility: advanced
+            description: Is the new flexible asset viewable in the side menu?
+      relationships:
+        type: object
+        properties:
+          flexible-asset-fields:
+            type: object
+            properties:
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      minLength: 1
+                      enum:
+                        - flexible_asset_fields
+                      x-ms-summary: Record Type
+                      x-ms-visibility: internal
+                      description: Type of record this object represents
+                    attributes:
+                      type: object
+                      properties:
+                        order:
+                          type: number
+                          x-ms-summary: Order
+                          x-ms-visibility: important
+                          description: Postion of this field on the Flexible asset form.
+                        name:
+                          type: string
+                          minLength: 1
+                          x-ms-summary: Field Name
+                          x-ms-visibility: important
+                          description: Name of the field
+                        kind:
+                          type: string
+                          minLength: 1
+                          x-ms-summary: Field Type
+                          x-ms-visibility: important
+                          description: Data type of the new field
+                          enum:
+                            - Checkbox
+                            - Header
+                            - Date
+                            - Number
+                            - Select
+                            - Text
+                            - Textbox
+                            - Upload
+                            - Tag
+                            - Precent
+                            - Password
+                        hint:
+                          type: string
+                          minLength: 1
+                          x-ms-summary: Field Hint
+                          x-ms-visibility: advanced
+                          description: Hint Text for field
+                        tag-type:
+                          type: string
+                          minLength: 1
+                          x-ms-summary: Tag Type
+                          x-ms-visibility: advanced
+                          description: If Field Type is Tag, what type of asset should the tag be?
+                          enum:
+                            - AccountsUsers
+                            - Checklists
+                            - ChecklistTemplates
+                            - Contacts
+                            - Configurations
+                            - Documents
+                            - Domains
+                            - Passwords
+                            - Locations
+                            - Organizations
+                            - SslCertificates
+                            - Tickets
+                            - '[FlexibleAssetType: id]'
+                        required:
+                          type: boolean
+                          x-ms-summary: Required
+                          x-ms-visibility: advanced
+                          description: Is the field required
+                        show-in-list:
+                          type: boolean
+                          x-ms-summary: Show in List?
+                          x-ms-visibility: advanced
+                          description: Should this field show in the asset listing view.
+                        decimals:
+                          type: integer
+                          x-ms-summary: Number of Decimals
+                          x-ms-visibility: advanced
+                          description: For number fields, how many desimals to show / store.
+                        default_value:
+                          type: string
+                          x-ms-summary: Default Value
+                          x-ms-visibility: advanced
+                          description: Default value for new Assets
+                        use_for_title:
+                          type: boolean
+                          x-ms-summary: Title Field
+                          x-ms-visibility: advanced
+                          description: Use this field in generating the Asset's title.
+                        expiration:
+                          type: boolean
+                          x-ms-summary: Expiration
+                          x-ms-visibility: advanced
+                          description: For date fields, field is treated at an expiration date for the Asset.
+    required:
+      - type
+      - attributes
 parameters:
   page-number:
     name: 'page[number]'
@@ -1304,15 +1578,60 @@ parameters:
     x-ms-summary: Parent Object ID
     x-ms-visibility: important
 responses:
-  401-Forbidden:
+  401-Unauthorized:
     description: Forbidden Response
     schema:
       $ref: '#/definitions/error-response'
-    examples: {}
+    examples:
+      example-1:
+        message: string
   404-Not-Found:
     description: Example response
     schema:
       $ref: '#/definitions/error-response'
+  403-Forbidden:
+    description: Example response
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              type: string
+  415-Bad_Content_Type:
+    description: Example response
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              type: string
+    schema:
+      $ref: '#/definitions/error-response'
+  422-Bad_Request:
+    description: Example response
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              type: string
+    schema:
+      $ref: '#/definitions/error-response'
+  500-Internal_Server_Error:
+    description: |-
+      Error 500 cill be returned when using certain parts of the API that are documented, but appear to be no longer in play.
+
+      > As an example, Creating (POST) a flexible_asset_types object with the fields definition inline in the
+      > attributes object will create an error 500. The only / propwer way to create fields is trough the 
+      > relationships object adjacent to the data tag.
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              type: string
+    schema:
+      type: 'null'
 securityDefinitions:
   API Key:
     type: apiKey
