@@ -34,7 +34,7 @@
 <h3>Additional References</h3>
 <hr>
 
-[IT Glue Developer Documentation for the GET /domains API Endpoint](http://itglue.com/developer#domains-index)
-[IT Glue Open API Documentation for the List-Domains OperationID]
+- [IT Glue Developer Documentation for the GET /domains API Endpoint](http://itglue.com/developer#domains-index)
+- [IT Glue Open API Documentation for the List-Domains OperationID](/docs/itglue-openapi/IT-Glue-OpenAPI-2-Development.v1.yaml/paths/~1domains/get)
 
 
