@@ -128,7 +128,7 @@ paths:
       summary: Create a Flexible Asset Type
       operationId: Post_flexible_asset_type
       description: |
-        Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested Fields array to add multiple flexible asset fields to a flexible asset type in bulk. Creating a new flexible asset type requires at least the first field to be defined in the nested Fields array (locuated under advanced), and at least one field needs to be set as Use for Title and Show in List as well, or the server will generate an error.
+        Creates a new flexible asset type in your account. Returns the created object if successful. Use the nested Fields array to add one or more flexible asset fields to a flexible asset type. Creating a new flexible asset type requires a)at least the first field to be defined in the nested Fields array (located under advanced); b) at least one field needs to be set as Use for Title; and c) one field set as Show in List. Failure to meet all three criteria will generate an error 422.
       parameters:
         - name: body
           in: body
@@ -177,6 +177,179 @@ paths:
           x-ms-visibility: internal
       tags:
         - Flexible Asset Types
+  '/flexible_asset_types/{object_id}':
+    get:
+      responses:
+        '200':
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      description:
+                        type: string
+                        description: description
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                      icon:
+                        type: string
+                        description: icon
+                      show-in-menu:
+                        type: boolean
+                        description: show-in-menu
+                    description: attributes
+                  relationships:
+                    type: object
+                    properties:
+                      flexible-asset-fields:
+                        type: object
+                        properties:
+                          data:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: id
+                                type:
+                                  type: string
+                                  description: type
+                            description: data
+                        description: flexible-asset-fields
+                    description: relationships
+                description: data
+              included:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int32
+                      description: id
+                    type:
+                      type: string
+                      description: type
+                    attributes:
+                      type: object
+                      properties:
+                        flexible-asset-type-id:
+                          type: integer
+                          format: int32
+                          description: flexible-asset-type-id
+                        order:
+                          type: integer
+                          format: int32
+                          description: order
+                        name:
+                          type: string
+                          description: name
+                        kind:
+                          type: string
+                          description: kind
+                        hint:
+                          type: string
+                          description: hint
+                        decimals:
+                          type: integer
+                          format: int32
+                          description: decimals
+                        default-value:
+                          type: string
+                          description: default-value
+                        tag-type:
+                          type: string
+                          description: tag-type
+                        required:
+                          type: boolean
+                          description: required
+                        use-for-title:
+                          type: boolean
+                          description: use-for-title
+                        expiration:
+                          type: boolean
+                          description: expiration
+                        show-in-list:
+                          type: boolean
+                          description: show-in-list
+                        name-key:
+                          type: string
+                          description: name-key
+                        created-at:
+                          type: string
+                          description: created-at
+                        updated-at:
+                          type: string
+                          description: updated-at
+                      description: attributes
+                    relationships:
+                      type: object
+                      properties:
+                        flexible-asset-type:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: id
+                                type:
+                                  type: string
+                                  description: type
+                              description: data
+                          description: flexible-asset-type
+                      description: relationships
+                description: included
+      summary: Get a Flexible Asset Type
+      description: |-
+        Returns the details of an existing flexible asset type.
+
+
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
+      operationId: Get_flexible_asset_type
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: include
+          in: query
+          required: false
+          type: string
+          enum:
+            - flexible_asset_fields
+      tags:
+        - Flexible Asset Types
+    parameters: []
   /domains:
     get:
       summary: List Domains
@@ -1103,32 +1276,7 @@ definitions:
   flexible-asset-types-write:
     description: ''
     type: object
-    x-examples:
-      example-1:
-        type: flexible_asset_types
-        attributes:
-          id: 0
-          name: string
-          description: string
-          icon: string
-          enabled: true
-          show-in-menu: true
-        relationships:
-          flexible-asset-fields:
-            data:
-              - type: flexible_asset_fields
-                attributes:
-                  order: 0
-                  name: string
-                  kind: Checkbox
-                  hint: string
-                  tag-type: AccountsUsers
-                  required: true
-                  show-in-list: true
-                  decimals: 0
-                  default_value: string
-                  use_for_title: true
-                  expiration: true
+    x-examples: {}
     properties:
       type:
         type: string
@@ -1144,10 +1292,10 @@ definitions:
         properties:
           id:
             type: integer
-            readOnly: true
             x-ms-summary: Record ID
             x-ms-visibility: advanced
             description: Read Only. Record ID used only for record identification during bulk updates only.
+            readOnly: true
           name:
             type: string
             minLength: 1
@@ -1200,11 +1348,12 @@ definitions:
                       x-ms-summary: Record Type
                       x-ms-visibility: internal
                       description: Type of record this object represents
+                      default: flexible_asset_fields
                     attributes:
                       type: object
                       properties:
                         order:
-                          type: number
+                          type: integer
                           x-ms-summary: Order
                           x-ms-visibility: important
                           description: Postion of this field on the Flexible asset form.
@@ -1288,6 +1437,8 @@ definitions:
                           x-ms-summary: Expiration
                           x-ms-visibility: advanced
                           description: 'For date fields, field is treated at an expiration date for the Asset.'
+                  required:
+                    - type
     required:
       - type
       - attributes
@@ -1357,9 +1508,7 @@ responses:
               source:
                 type: object
                 properties:
-                  pointer:
-                    type: string
-                    minLength: 1
+                  pointer: {}
               detail:
                 type: string
                 minLength: 1
@@ -1373,7 +1522,7 @@ responses:
       Error 500 cill be returned when using certain parts of the API that are documented, but appear to be no longer in play.
 
       > As an example, Creating (POST) a flexible_asset_types object with the fields definition inline in the
-      > attributes object will create an error 500. The only / propwer way to create fields is trough the 
+      > attributes object will create an error 500. The only / proper way to create fields is through the 
       > relationships object adjacent to the data tag.
     schema:
       type: object
