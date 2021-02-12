@@ -57,7 +57,7 @@ paths:
       operationId: List_flexible_asset_types
       externalDocs:
         description: Learn More...
-        url: 'https://api.itglue.com/developer#flexible-asset-types-index'
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Flexible-Asset-Types'
       parameters:
         - $ref: '#/parameters/page-size'
         - $ref: '#/parameters/page-number'
@@ -184,7 +184,7 @@ paths:
         - Domains
       externalDocs:
         description: Learn More...
-        url: 'https://api.itglue.com/developer#domains-index'
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Domains'
       responses:
         '200':
           description: Success
