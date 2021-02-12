@@ -3,14 +3,11 @@ info:
   version: 1.0.0
   title: IT Glue
   description: |-
-    # OpenAPI 2.0 / Swagger Definition for IT Glue API Endpoints
-    #### Formatted for compatibility with Swagger Editor for Power Automate custom connectors
+    # IT Glue Power Platform Endpoints
 
-    > This file is the STABLE BRANCH of this implementation. Endpoints in this branch are considered released and stable with full functionality and have been fairly well tested and should work without issue.
-    >
-    > **AS-IS AND NO WARRANTY - USE AT YOUR OWN RISK!**
-    >
-    > For API  support, contact IT Glue directly. 
+    For API  support, contact IT Glue directly.
+
+    [IT Glue Power Platform Endpoints Wiki](https://github.com/jeremyhodge/itglue-openapi/wiki/IT-Glue-Open-API---Power-Platform-Custom-Connector) 
 
     Copyright 2021 ZetaOne, Inc.
     Author: Jeremy G Hodge mailto:jeremy.hodge@zetaone.com
@@ -23,6 +20,9 @@ info:
     url: 'http://www.itglue.com'
     email: support@itglue.com
   termsOfService: 'https://api.itglue.com/developer'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
 host: api.itglue.com
 schemes:
   - https
