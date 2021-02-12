@@ -105,7 +105,7 @@ paths:
     post:
       externalDocs:
         description: Learn More...
-        url: 'https://api.itglue.com/developer#flexible-asset-types-create'
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Flexible-Asset-Type'
       responses:
         '200':
           description: Success
