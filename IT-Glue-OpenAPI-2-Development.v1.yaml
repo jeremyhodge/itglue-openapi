@@ -50,7 +50,61 @@ paths:
                 $ref: '#/definitions/list-meta'
               links:
                 $ref: '#/definitions/list-links'
-          examples: {}
+          examples:
+            example-1:
+              data:
+                - id: string
+                  type: string
+                  attributes:
+                    name: string
+                    created-at: string
+                    updated-at: string
+                    description: string
+                    icon: string
+                    enabled: true
+                    show-in-menu: true
+                  relationships:
+                    flexible-asset-fields:
+                      data:
+                        - id: 0
+                          type: flexible-asset-fields
+              included:
+                - id: 0
+                  type: string
+                  attributes:
+                    order: 0
+                    name: string
+                    kind: string
+                    hint: string
+                    decimals: 0
+                    tag-type: null
+                    required: true
+                    use-for-title: true
+                    expiration: true
+                    show-in-list: true
+                    name-key: string
+                    created-at: string
+                    updated-at: string
+                    flexible-asset-type-id: 0
+                    default-value: string
+                  relationships:
+                    flexible-asset-type:
+                      data:
+                        id: string
+                        type: string
+              meta:
+                current-page: 0
+                next-page: 0
+                prev-page: 0
+                total-pages: 0
+                total-count: 0
+                filters: {}
+              links:
+                self: string
+                first: string
+                prev: string
+                next: string
+                last: string
         '401':
           $ref: '#/responses/401-Unauthorized'
       summary: List Flexible Asset Types
@@ -186,157 +240,20 @@ paths:
             type: object
             properties:
               data:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: id
-                  type:
-                    type: string
-                    description: type
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                      description:
-                        type: string
-                        description: description
-                      created-at:
-                        type: string
-                        description: created-at
-                      updated-at:
-                        type: string
-                        description: updated-at
-                      icon:
-                        type: string
-                        description: icon
-                      show-in-menu:
-                        type: boolean
-                        description: show-in-menu
-                    description: attributes
-                  relationships:
-                    type: object
-                    properties:
-                      flexible-asset-fields:
-                        type: object
-                        properties:
-                          data:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                id:
-                                  type: string
-                                  description: id
-                                type:
-                                  type: string
-                                  description: type
-                            description: data
-                        description: flexible-asset-fields
-                    description: relationships
-                description: data
+                $ref: '#/definitions/flexible-asset-types-read'
               included:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      format: int32
-                      description: id
-                    type:
-                      type: string
-                      description: type
-                    attributes:
-                      type: object
-                      properties:
-                        flexible-asset-type-id:
-                          type: integer
-                          format: int32
-                          description: flexible-asset-type-id
-                        order:
-                          type: integer
-                          format: int32
-                          description: order
-                        name:
-                          type: string
-                          description: name
-                        kind:
-                          type: string
-                          description: kind
-                        hint:
-                          type: string
-                          description: hint
-                        decimals:
-                          type: integer
-                          format: int32
-                          description: decimals
-                        default-value:
-                          type: string
-                          description: default-value
-                        tag-type:
-                          type: string
-                          description: tag-type
-                        required:
-                          type: boolean
-                          description: required
-                        use-for-title:
-                          type: boolean
-                          description: use-for-title
-                        expiration:
-                          type: boolean
-                          description: expiration
-                        show-in-list:
-                          type: boolean
-                          description: show-in-list
-                        name-key:
-                          type: string
-                          description: name-key
-                        created-at:
-                          type: string
-                          description: created-at
-                        updated-at:
-                          type: string
-                          description: updated-at
-                      description: attributes
-                    relationships:
-                      type: object
-                      properties:
-                        flexible-asset-type:
-                          type: object
-                          properties:
-                            data:
-                              type: object
-                              properties:
-                                id:
-                                  type: string
-                                  description: id
-                                type:
-                                  type: string
-                                  description: type
-                              description: data
-                          description: flexible-asset-type
-                      description: relationships
-                description: included
+                $ref: '#/definitions/flexible-asset-fields'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/404-Not-Found'
       summary: Get a Flexible Asset Type
       description: |-
         Returns the details of an existing flexible asset type.
 
 
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
         > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
       operationId: Get_flexible_asset_type
       parameters:
@@ -347,9 +264,16 @@ paths:
           type: string
           enum:
             - flexible_asset_fields
+          x-ms-summary: Expand Results
+          description: Expand the returned objects to include the selected. Use Comma Separated List for multiple items.
+          x-ms-visibility: advanced
       tags:
         - Flexible Asset Types
-    parameters: []
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-a-Flexible-Asset-Type'
+    parameters:
+      - $ref: '#/parameters/object_id'
   /domains:
     get:
       summary: List Domains
@@ -819,26 +743,10 @@ definitions:
   flexible-asset-types-read:
     description: ''
     type: object
-    x-examples:
-      example-1:
-        id: 0
-        type: string
-        attributes:
-          name: string
-          created-at: string
-          updated-at: string
-          description: string
-          icon: string
-          enabled: true
-          show-in-menu: true
-        relationships:
-          flexible-asset-fields:
-            data:
-              - id: 0
-                type: flexible-asset-fields
+    x-examples: {}
     properties:
       id:
-        type: integer
+        type: string
         readOnly: true
       type:
         type: string
@@ -1463,7 +1371,7 @@ parameters:
     in: path
     required: true
     type: integer
-    description: ID of the object
+    description: ID of the object to return
     x-ms-summary: Object ID
     x-ms-visibility: important
   parent_id:
@@ -1483,7 +1391,29 @@ responses:
   404-Not-Found:
     description: Example response
     schema:
-      $ref: '#/definitions/error-response'
+      description: ''
+      type: object
+      properties:
+        errors:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              status:
+                type: number
+              title:
+                type: string
+                minLength: 1
+              detail:
+                type: string
+                minLength: 1
+              source:
+                type: object
+                properties:
+                  pointer: {}
+    examples: {}
   403-Forbidden:
     description: Example response
     schema:
