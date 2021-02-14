@@ -189,8 +189,253 @@ paths:
           $ref: '#/responses/401-Unauthorized'
       tags:
         - Configuration Types
-    parameters:
-      - $ref: '#/parameters/object_id'
+    patch:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Type'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '403':
+          $ref: '#/responses/403-Forbidden'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+        '415':
+          $ref: '#/responses/415-Bad_Content_Type'
+        '422':
+          $ref: '#/responses/422-Bad_Request'
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-create'
+            required:
+              - data
+          x-examples: {}
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Update a Configuration Type
+      description: Updates a configuration type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_configuration_type
+      tags:
+        - Configuration Types
+  /configuration_statuses:
+    get:
+      summary: List Configuration Statuses
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Configuration-Statuses'
+      description: Returns a list of configuration statuses in your account.
+      operationId: List_configuration_statuses
+      parameters:
+        - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
+        - type: string
+          in: query
+          name: 'filter[name]'
+          description: Filter the results by the Name Field. Exact match only.
+          x-ms-summary: Filter By Name
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+          x-ms-summary: Sort Order
+          x-ms-visibility: advanced
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: data
+                items:
+                  $ref: '#/definitions/configuration-statuses-read'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+      tags:
+        - Configuration Statuses
+    post:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Status'
+      responses:
+        '201':
+          description: Created
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-read'
+          examples: {}
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Unsupported Media Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          schema:
+            type: object
+            properties: {}
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-create'
+            required:
+              - data
+          x-examples:
+            example-1:
+              data:
+                type: flexible_asset_types
+                attributes:
+                  id: 0
+                  name: string
+                  description: string
+                  icon: string
+                  enabled: true
+                  show-in-menu: true
+                relationships:
+                  flexible-asset-fields:
+                    data:
+                      - type: flexible_asset_fields
+                        attributes:
+                          order: 0
+                          name: string
+                          kind: Checkbox
+                          hint: string
+                          tag-type: AccountsUsers
+                          required: true
+                          show-in-list: true
+                          decimals: 0
+                          default_value: string
+                          use_for_title: true
+                          expiration: true
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Create a Configuration Status
+      description: Creates a new configuration status in your account. Returns the created object if successful.
+      operationId: Post_configuration_status
+      tags:
+        - Configuration Statuses
+  '/configuration_statuses/{object_id}':
+    get:
+      summary: Get a Configuration Status
+      operationId: Get_configuration_status
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-a-Configuration-Status'
+      description: Returns the details of an existing configuration status.
+      parameters:
+        - $ref: '#/parameters/object_id'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-read'
+            required:
+              - data
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/401-Unauthorized'
+      tags:
+        - Configuration Statuses
+    patch:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Status'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '403':
+          $ref: '#/responses/403-Forbidden'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+        '415':
+          $ref: '#/responses/415-Bad_Content_Type'
+        '422':
+          $ref: '#/responses/422-Bad_Request'
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-create'
+            required:
+              - data
+          x-examples: {}
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Update a Configuration Status
+      description: Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_configuration_status
+      tags:
+        - Configuration Statuses
   /countries:
     get:
       summary: List Countries
@@ -1495,9 +1740,13 @@ definitions:
             description: Is the new flexible asset viewable in the side menu?
       relationships:
         type: object
+        required:
+          - flexible-asset-fields
         properties:
           flexible-asset-fields:
             type: object
+            required:
+              - data
             properties:
               data:
                 type: array
@@ -1605,9 +1854,12 @@ definitions:
                           x-ms-summary: Expiration
                           x-ms-visibility: advanced
                           description: 'For date fields, field is treated at an expiration date for the Asset.'
+                  required:
+                    - type
     required:
       - type
       - attributes
+      - relationships
   flexible-asset-types-update:
     description: ''
     type: object
@@ -1741,6 +1993,56 @@ definitions:
             x-ms-summary: Name
             description: Configuration Type Name
             x-ms-visibility: important
+    required:
+      - type
+  configuration-statuses-read:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 1
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+    required:
+      - id
+      - type
+  configuration-statuses-create:
+    description: ''
+    type: object
+    properties:
+      type:
+        type: string
+        minLength: 1
+        default: configuration-statuses
+        x-ms-summary: Record Type
+        x-ms-visibility: internal
+        enum:
+          - configuration-statuses
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+            x-ms-summary: Name
+            description: Configuration Status Name
+            x-ms-visibility: important
+    required:
+      - type      
 parameters:
   page-number:
     name: 'page[number]'
