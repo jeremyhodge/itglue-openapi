@@ -45,7 +45,7 @@ paths:
               included:
                 type: array
                 items:
-                  $ref: '#/definitions/flexible-asset-fields'
+                  $ref: '#/definitions/flexible-asset-fields-read'
               meta:
                 $ref: '#/definitions/list-meta'
               links:
@@ -137,7 +137,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: '#/definitions/flexible-asset-types-write'
+                $ref: '#/definitions/flexible-asset-types-create'
             required:
               - data
           x-examples:
@@ -168,15 +168,97 @@ paths:
                           use_for_title: true
                           expiration: true
           description: ''
-        - type: string
-          in: header
-          name: Content-Type
-          description: POST Methods must set Content-Type to application/vnd.api+json
-          required: true
-          default: application/vnd.api+json
-          x-ms-visibility: internal
+        - $ref: '#/parameters/content-type'
       tags:
         - Flexible Asset Types
+  '/flexible_asset_types/{object_id}':
+    get:
+      responses:
+        '200':
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/flexible-asset-types-read'
+              included:
+                $ref: '#/definitions/flexible-asset-fields-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+      summary: Get a Flexible Asset Type
+      description: |-
+        Returns the details of an existing flexible asset type.
+
+
+        > 1. externalDocs
+        > 1. Test in Power Automate Custom Connector
+      operationId: Get_flexible_asset_type
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: include
+          in: query
+          required: false
+          type: string
+          enum:
+            - flexible_asset_fields
+          x-ms-summary: Expand Results
+          description: Expand the returned objects to include the selected. Use Comma Separated List for multiple items.
+          x-ms-visibility: advanced
+      tags:
+        - Flexible Asset Types
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-a-Flexible-Asset-Type'
+    patch:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Flexible-Asset-Type'
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/flexible-asset-types-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '403':
+          $ref: '#/responses/403-Forbidden'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+        '415':
+          $ref: '#/responses/415-Bad_Content_Type'
+        '422':
+          $ref: '#/responses/422-Bad_Request'
+        '500':
+          $ref: '#/responses/500-Internal_Server_Error'
+      summary: Update a Flexible Asset Type
+      operationId: Patch_flexible_asset_type
+      description: Updates the details of an existing flexible asset type in your account. Returns 403 Forbidden error if any relationships are present in the request. An update does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/flexible-asset-types-update'
+            required:
+              - data
+          x-examples: {}
+          description: ''
+        - $ref: '#/parameters/content-type'
+      tags:
+        - Flexible Asset Types
+    parameters:
+      - $ref: '#/parameters/object_id'
   /domains:
     get:
       summary: List Domains
@@ -253,6 +335,37 @@ paths:
             - group_resource_accesses
           x-ms-summary: Expand Results
           x-ms-visibility: advanced
+  '/flexible_asset_types/{parent_id}/relationships/flexible_asset_fields':
+    get:
+      parameters:
+        - $ref: '#/parameters/parent_id'
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: data
+                items:
+                  $ref: '#/definitions/flexible-asset-fields-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+      summary: List Flexible Asset Fields
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Flexible-Asset-Fields'
+      description: Returns a list of fields for the specified flexible asset type.
+      operationId: List_flexible_asset_fields
+      tags:
+        - Flexible Asset Types
+        - Flexible Asset Fields
+    parameters:
+      - $ref: '#/parameters/parent_id'
 definitions:
   domains:
     description: ''
@@ -646,26 +759,10 @@ definitions:
   flexible-asset-types-read:
     description: ''
     type: object
-    x-examples:
-      example-1:
-        id: 0
-        type: string
-        attributes:
-          name: string
-          created-at: string
-          updated-at: string
-          description: string
-          icon: string
-          enabled: true
-          show-in-menu: true
-        relationships:
-          flexible-asset-fields:
-            data:
-              - id: 0
-                type: flexible-asset-fields
+    x-examples: {}
     properties:
       id:
-        type: integer
+        type: string
         readOnly: true
       type:
         type: string
@@ -715,12 +812,12 @@ definitions:
     required:
       - type
       - attributes
-  flexible-asset-fields:
+  flexible-asset-fields-read:
     description: ''
     type: object
     properties:
       id:
-        type: integer
+        type: string
       type:
         type: string
         minLength: 1
@@ -1100,7 +1197,7 @@ definitions:
               updated-at: string
               viewable: true
               download-url: string
-  flexible-asset-types-write:
+  flexible-asset-types-create:
     description: ''
     type: object
     x-examples: {}
@@ -1160,7 +1257,6 @@ definitions:
               data:
                 type: array
                 uniqueItems: true
-                minItems: 1
                 x-ms-summary: Fields
                 x-ms-visibility: advanced
                 description: JSON object representing the Fixed Asset Fields. Must include at least 1 field as title and show in list.
@@ -1264,8 +1360,60 @@ definitions:
                           x-ms-summary: Expiration
                           x-ms-visibility: advanced
                           description: 'For date fields, field is treated at an expiration date for the Asset.'
-                  required:
-                    - type
+    required:
+      - type
+      - attributes
+  flexible-asset-types-update:
+    description: ''
+    type: object
+    x-examples: {}
+    properties:
+      type:
+        type: string
+        minLength: 1
+        enum:
+          - flexible_asset_types
+        x-ms-summary: Record Type
+        x-ms-visibility: internal
+        description: The record type this object represents
+        default: flexible_asset_types
+      attributes:
+        type: object
+        properties:
+          id:
+            type: integer
+            x-ms-summary: Record ID
+            x-ms-visibility: advanced
+            description: Read Only. Record ID used only for record identification during bulk updates only.
+            readOnly: true
+          name:
+            type: string
+            minLength: 1
+            x-ms-summary: Name
+            x-ms-visibility: important
+            description: Name of this flexible asset type.
+          description:
+            type: string
+            minLength: 1
+            x-ms-summary: Description
+            x-ms-visibility: important
+            description: Description of this flexible asset type.
+          icon:
+            type: string
+            minLength: 1
+            x-ms-summary: Icon
+            x-ms-visbility: important
+            description: Name of the standard icon to use (e.g. envelope). Names can be found on the new flexible asset form in IT Glue under the Pick Icon button.
+          enabled:
+            type: boolean
+            x-ms-summary: Enabled
+            x-ms-visibility: advanced
+            description: Is the new flexible asset enabled?
+          show-in-menu:
+            type: boolean
+            x-ms-summary: In Menu
+            x-ms-visibility: advanced
+            description: Is the new flexible asset viewable in the side menu?
     required:
       - type
       - attributes
@@ -1290,17 +1438,25 @@ parameters:
     in: path
     required: true
     type: integer
-    description: ID of the object
-    x-ms-summary: Object ID
+    description: ID of the record to return
+    x-ms-summary: Record ID
     x-ms-visibility: important
   parent_id:
     name: parent_id
     in: path
     required: true
     type: integer
-    description: ID of the parent object
-    x-ms-summary: Parent Object ID
+    description: ID of the parent record
+    x-ms-summary: Parent Record ID
     x-ms-visibility: important
+  content-type:
+    name: Content-Type
+    type: string
+    in: header
+    description: POST Methods must set Content-Type to application/vnd.api+json
+    required: true
+    default: application/vnd.api+json
+    x-ms-visibility: internal
 responses:
   401-Unauthorized:
     description: Forbidden Response
@@ -1310,7 +1466,29 @@ responses:
   404-Not-Found:
     description: Example response
     schema:
-      $ref: '#/definitions/error-response'
+      description: ''
+      type: object
+      properties:
+        errors:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              status:
+                type: number
+              title:
+                type: string
+                minLength: 1
+              detail:
+                type: string
+                minLength: 1
+              source:
+                type: object
+                properties:
+                  pointer: {}
+    examples: {}
   403-Forbidden:
     description: Example response
     schema:

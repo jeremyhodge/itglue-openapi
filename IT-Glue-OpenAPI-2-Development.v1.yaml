@@ -30,6 +30,97 @@ consumes: []
 produces:
   - application/json
 paths:
+  /countries:
+    get:
+      summary: List Countries
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Success
+          schema:
+            description: ''
+            type: object
+            properties:
+              'data:':
+                $ref: '#/definitions/countries-read'
+          examples:
+            example-1:
+              id: string
+              type: string
+              attributes:
+                name: string
+                iso: string
+                created-at: string
+                updated-at: string
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+      operationId: List_countries
+      description: |-
+        Returns a list of supported countries.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector
+      parameters:
+        - type: string
+          in: query
+          name: 'filter[name]'
+          description: Enter the Country Name field value to filter by.
+        - type: string
+          in: query
+          name: 'filter[iso]'
+          description: Enter the Country ISO codue field value to filter by.
+        - type: string
+          in: query
+          name: sort
+          enum:
+            - id
+            - name
+            - created-at
+            - updated-at
+            - '-id'
+            - '-name'
+            - '-created-at'
+            - '-updated-at'
+          description: 'Enter the field to sort by, fieldname for ascending, and -fieldname for descending.'
+        - $ref: '#/parameters/page-number'
+        - $ref: '#/parameters/page-size'
+  '/countries/{object_id}':
+    get:
+      summary: Get a Country
+      parameters:
+        - $ref: '#/parameters/object_id'
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Success
+      operationId: Get_country
+      description: |-
+        Returns the details of one of the supported countries.
+
+
+        > NOT COMPLETE.
+        >
+        > 1. Verify Summary
+        > 1. Verify Description
+        > 1. Verify OperationID naming and format conventions
+        > 1. Verify Query Parameters
+        > 1. Separate local vs global params
+        > 1. For Requests, verify JSON body schema
+        > 1. Test Response / Gather response schema / Verify Response Codes
+        > 1. Verify Response Schema / fully fleshed
+        > 1. externalDocs
+        > 1. x-ms-COLORATION
+        >> 1. x-ms-summary
+        >> 1. x-ms-visibility
+        > 1. Test in Power Automate Custom Connector  
   /flexible_asset_types:
     get:
       responses:
@@ -175,7 +266,7 @@ paths:
     get:
       responses:
         '200':
-          description: default
+          description: Success
           schema:
             type: object
             properties:
@@ -1417,6 +1508,37 @@ definitions:
     required:
       - type
       - attributes
+  countries-read:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 1
+      type:
+        type: string
+        minLength: 1
+        default: countries
+        enum:
+          - countries
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          iso:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+    required:
+      - id
+      - type
 parameters:
   page-number:
     name: 'page[number]'
@@ -1438,16 +1560,16 @@ parameters:
     in: path
     required: true
     type: integer
-    description: ID of the object to return
-    x-ms-summary: Object ID
+    description: ID of the record to return
+    x-ms-summary: Record ID
     x-ms-visibility: important
   parent_id:
     name: parent_id
     in: path
     required: true
     type: integer
-    description: ID of the parent object
-    x-ms-summary: Parent Object ID
+    description: ID of the parent record
+    x-ms-summary: Parent Record ID
     x-ms-visibility: important
   content-type:
     name: Content-Type
