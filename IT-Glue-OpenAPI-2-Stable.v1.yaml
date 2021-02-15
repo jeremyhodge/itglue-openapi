@@ -30,6 +30,660 @@ consumes: []
 produces:
   - application/json
 paths:
+  /organization_types:
+    get:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Organization-Types'
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: data
+                items:
+                  $ref: '#/definitions/organization-types-read'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+      summary: List Organization Types
+      description: Returns a list of organization types in your account.
+      operationId: List-organization-types
+      parameters:
+        - name: 'filter[name]'
+          in: query
+          required: false
+          type: string
+          description: Filter by Name
+          x-ms-summary: Filter by Name
+          x-ms-visibility: advanced
+        - name: sort
+          in: query
+          required: false
+          type: string
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created-at'
+            - '-updated-at'
+          description: 'Sort by Field Name. fieldname for ascending, -fieldname for descending.'
+          x-ms-summary: Sort
+          x-ms-visibility: advanced
+        - $ref: '#/parameters/page-number'
+        - $ref: '#/parameters/page-size'
+      tags:
+        - Organization Types
+    post:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-an-Organization-Type'
+      responses:
+        '201':
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/organization-types-read'
+          examples: {}
+      summary: Create an Organization Type
+      description: Creates a new organization type in your account. Returns the created object if successful.
+      operationId: Post-organization-type
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/organization-types-create'
+            required:
+              - data
+          x-examples:
+            example-1:
+              data:
+                type: organization-types
+                attributes:
+                  name: string
+        - $ref: '#/parameters/content-type'
+      tags:
+        - Organization Types
+  '/organization_types/{object_id}':
+    get:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-an-Organization-Type'
+      parameters:
+        - $ref: '#/parameters/object_id'
+      responses:
+        '200':
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: id
+                  type:
+                    type: string
+                    description: type
+                  attributes:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: name
+                      created-at:
+                        type: string
+                        description: created-at
+                      updated-at:
+                        type: string
+                        description: updated-at
+                    description: attributes
+                description: data
+      summary: Get an Organization Type
+      description: Returns the details of an existing organization type.
+      operationId: Get-organization-type
+      tags:
+        - Organization Types
+    patch:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Update-an-Organization-Type'
+      responses:
+        '200':
+          description: default
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/organization-types-read'
+            required:
+              - data
+      summary: Update an Organization Type
+      description: Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch-organization-type
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/organization-types-create'
+            required:
+              - data
+        - $ref: '#/parameters/content-type'
+      tags:
+        - Organization Types
+  /configuration_types:
+    get:
+      summary: List Configuration Types
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Configuration-Types'
+      description: Returns a list of configuration types in your account.
+      operationId: List_configuration_types
+      parameters:
+        - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
+        - type: string
+          in: query
+          name: 'filter[name]'
+          description: Filter the results by the Name Field. Exact match only.
+          x-ms-summary: Filter By Name
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+          x-ms-summary: Sort Order
+          x-ms-visibility: advanced
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: data
+                items:
+                  $ref: '#/definitions/configuration-types-read'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+      tags:
+        - Configuration Types
+    post:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Type'
+      responses:
+        '201':
+          description: Created
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-read'
+          examples: {}
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Unsupported Media Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          schema:
+            type: object
+            properties: {}
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-create'
+            required:
+              - data
+          x-examples:
+            example-1:
+              data:
+                type: flexible_asset_types
+                attributes:
+                  id: 0
+                  name: string
+                  description: string
+                  icon: string
+                  enabled: true
+                  show-in-menu: true
+                relationships:
+                  flexible-asset-fields:
+                    data:
+                      - type: flexible_asset_fields
+                        attributes:
+                          order: 0
+                          name: string
+                          kind: Checkbox
+                          hint: string
+                          tag-type: AccountsUsers
+                          required: true
+                          show-in-list: true
+                          decimals: 0
+                          default_value: string
+                          use_for_title: true
+                          expiration: true
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Create a Configuration Type
+      description: Creates a new configuration type in your account. Returns the created object if successful.
+      operationId: Post_configuration_type
+      tags:
+        - Configuration Types
+  '/configuration_types/{object_id}':
+    get:
+      summary: Get a Configuration Type
+      operationId: Get_configuration_type
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-a-Configuration-Type'
+      description: Returns the details of an existing configuration type.
+      parameters:
+        - $ref: '#/parameters/object_id'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-read'
+            required:
+              - data
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/401-Unauthorized'
+      tags:
+        - Configuration Types
+    patch:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Type'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '403':
+          $ref: '#/responses/403-Forbidden'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+        '415':
+          $ref: '#/responses/415-Bad_Content_Type'
+        '422':
+          $ref: '#/responses/422-Bad_Request'
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-types-create'
+            required:
+              - data
+          x-examples: {}
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Update a Configuration Type
+      description: Updates a configuration type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_configuration_type
+      tags:
+        - Configuration Types
+  /configuration_statuses:
+    get:
+      summary: List Configuration Statuses
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Configuration-Statuses'
+      description: Returns a list of configuration statuses in your account.
+      operationId: List_configuration_statuses
+      parameters:
+        - $ref: '#/parameters/page-size'
+        - $ref: '#/parameters/page-number'
+        - type: string
+          in: query
+          name: 'filter[name]'
+          description: Filter the results by the Name Field. Exact match only.
+          x-ms-summary: Filter By Name
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          description: 'Select the field to sort by. Ascending by fieldname, descending by -fieldname.'
+          enum:
+            - name
+            - id
+            - created_at
+            - updated_at
+            - '-name'
+            - '-id'
+            - '-created_at'
+            - '-updated_at'
+          x-ms-summary: Sort Order
+          x-ms-visibility: advanced
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: data
+                items:
+                  $ref: '#/definitions/configuration-statuses-read'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+      tags:
+        - Configuration Statuses
+    post:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Status'
+      responses:
+        '201':
+          description: Created
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-read'
+          examples: {}
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties: {}
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties: {}
+        '415':
+          description: Unsupported Media Type
+          schema:
+            type: object
+            properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          schema:
+            type: object
+            properties: {}
+      parameters:
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-create'
+            required:
+              - data
+          x-examples:
+            example-1:
+              data:
+                type: flexible_asset_types
+                attributes:
+                  id: 0
+                  name: string
+                  description: string
+                  icon: string
+                  enabled: true
+                  show-in-menu: true
+                relationships:
+                  flexible-asset-fields:
+                    data:
+                      - type: flexible_asset_fields
+                        attributes:
+                          order: 0
+                          name: string
+                          kind: Checkbox
+                          hint: string
+                          tag-type: AccountsUsers
+                          required: true
+                          show-in-list: true
+                          decimals: 0
+                          default_value: string
+                          use_for_title: true
+                          expiration: true
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Create a Configuration Status
+      description: Creates a new configuration status in your account. Returns the created object if successful.
+      operationId: Post_configuration_status
+      tags:
+        - Configuration Statuses
+  '/configuration_statuses/{object_id}':
+    get:
+      summary: Get a Configuration Status
+      operationId: Get_configuration_status
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-a-Configuration-Status'
+      description: Returns the details of an existing configuration status.
+      parameters:
+        - $ref: '#/parameters/object_id'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-read'
+            required:
+              - data
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/401-Unauthorized'
+      tags:
+        - Configuration Statuses
+    patch:
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Configuration-Status'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: ''
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '403':
+          $ref: '#/responses/403-Forbidden'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+        '415':
+          $ref: '#/responses/415-Bad_Content_Type'
+        '422':
+          $ref: '#/responses/422-Bad_Request'
+      parameters:
+        - $ref: '#/parameters/object_id'
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/configuration-statuses-create'
+            required:
+              - data
+          x-examples: {}
+          description: ''
+        - $ref: '#/parameters/content-type'
+      summary: Update a Configuration Status
+      description: Updates a configuration status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+      operationId: Patch_configuration_status
+      tags:
+        - Configuration Statuses
+  /countries:
+    get:
+      summary: List Countries
+      tags:
+        - Countries
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/List-Countries'
+      responses:
+        '200':
+          description: Success
+          schema:
+            description: ''
+            type: object
+            properties:
+              'data:':
+                type: array
+                items:
+                  $ref: '#/definitions/countries-read'
+              meta:
+                $ref: '#/definitions/list-meta'
+              links:
+                $ref: '#/definitions/list-links'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+      operationId: List_countries
+      description: Returns a list of supported countries.
+      parameters:
+        - type: string
+          in: query
+          name: 'filter[name]'
+          description: Enter the Country Name field value to filter by.
+          x-ms-summary: Filter by Name
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: 'filter[iso]'
+          description: Enter the Country ISO codue field value to filter by.
+          x-ms-summary: Filter by Id
+          x-ms-visibility: advanced
+        - type: string
+          in: query
+          name: sort
+          x-ms-summary: Sort by
+          x-ms-visibility: advanced
+          enum:
+            - id
+            - name
+            - created-at
+            - updated-at
+            - '-id'
+            - '-name'
+            - '-created-at'
+            - '-updated-at'
+          description: 'Enter the field to sort by, fieldname for ascending, and -fieldname for descending.'
+        - $ref: '#/parameters/page-number'
+        - $ref: '#/parameters/page-size'
+  '/countries/{object_id}':
+    get:
+      summary: Get a Country
+      externalDocs:
+        description: Learn More...
+        url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Get-Country'
+      parameters:
+        - $ref: '#/parameters/object_id'
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/countries-read'
+          examples: {}
+        '401':
+          $ref: '#/responses/401-Unauthorized'
+        '404':
+          $ref: '#/responses/404-Not-Found'
+      operationId: Get_country
+      description: Returns the details of one of the supported countries.
+    parameters:
+      - $ref: '#/parameters/object_id'
   /flexible_asset_types:
     get:
       responses:
@@ -107,8 +761,8 @@ paths:
         description: Learn More...
         url: 'https://github.com/jeremyhodge/itglue-openapi/wiki/Create-a-Flexible-Asset-Type'
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
           schema:
             type: object
             properties:
@@ -175,14 +829,16 @@ paths:
     get:
       responses:
         '200':
-          description: default
+          description: Success
           schema:
             type: object
             properties:
               data:
                 $ref: '#/definitions/flexible-asset-types-read'
               included:
-                $ref: '#/definitions/flexible-asset-fields-read'
+                type: array
+                items:
+                  $ref: '#/definitions/flexible-asset-fields-read'
           examples: {}
         '401':
           $ref: '#/responses/401-Unauthorized'
@@ -294,10 +950,7 @@ paths:
         '401':
           $ref: '#/responses/401-Unauthorized'
       operationId: List_domains
-      description: |-
-        Returns a list of domains for all organizations or for a specified organization.
-
-        ![List Domains Action](./docs/assets/images/List-Domains.png)
+      description: Returns a list of domains for all organizations or for a specified organization.
       parameters:
         - $ref: '#/parameters/page-size'
         - $ref: '#/parameters/page-number'
@@ -803,7 +1456,7 @@ definitions:
                   type: object
                   properties:
                     id:
-                      type: integer
+                      type: string
                       readOnly: true
                     type:
                       type: string
@@ -1250,9 +1903,13 @@ definitions:
             description: Is the new flexible asset viewable in the side menu?
       relationships:
         type: object
+        required:
+          - flexible-asset-fields
         properties:
           flexible-asset-fields:
             type: object
+            required:
+              - data
             properties:
               data:
                 type: array
@@ -1360,9 +2017,12 @@ definitions:
                           x-ms-summary: Expiration
                           x-ms-visibility: advanced
                           description: 'For date fields, field is treated at an expiration date for the Asset.'
+                  required:
+                    - type
     required:
       - type
       - attributes
+      - relationships
   flexible-asset-types-update:
     description: ''
     type: object
@@ -1414,6 +2074,190 @@ definitions:
             x-ms-summary: In Menu
             x-ms-visibility: advanced
             description: Is the new flexible asset viewable in the side menu?
+    required:
+      - type
+      - attributes
+  countries-read:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 1
+      type:
+        type: string
+        minLength: 1
+        default: countries
+        enum:
+          - countries
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          iso:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+    required:
+      - id
+      - type
+  configuration-types-read:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 1
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          configuration-count:
+            type: number
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+    required:
+      - id
+      - type
+  configuration-types-create:
+    description: ''
+    type: object
+    properties:
+      type:
+        type: string
+        minLength: 1
+        default: configuration-types
+        x-ms-summary: Record Type
+        x-ms-visibility: internal
+        enum:
+          - configuration-types
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+            x-ms-summary: Name
+            description: Configuration Type Name
+            x-ms-visibility: important
+    required:
+      - type
+  configuration-statuses-read:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 1
+      type:
+        type: string
+        minLength: 1
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+    required:
+      - id
+      - type
+  configuration-statuses-create:
+    description: ''
+    type: object
+    properties:
+      type:
+        type: string
+        minLength: 1
+        default: configuration-statuses
+        x-ms-summary: Record Type
+        x-ms-visibility: internal
+        enum:
+          - configuration-statuses
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+            x-ms-summary: Name
+            description: Configuration Status Name
+            x-ms-visibility: important
+    required:
+      - type
+  organization-types-read:
+    description: ''
+    type: object
+    properties:
+      id:
+        type: string
+        minLength: 1
+      type:
+        type: string
+        minLength: 1
+        default: organization-types
+        enum:
+          - organization-types
+      attributes:
+        type: object
+        properties:
+          name:
+            type: string
+            minLength: 1
+          created-at:
+            type: string
+            minLength: 1
+          updated-at:
+            type: string
+            minLength: 1
+          synced:
+            type: boolean
+    required:
+      - id
+      - type
+  organization-types-create:
+    description: ''
+    type: object
+    properties:
+      type:
+        type: string
+        minLength: 1
+        default: organization-types
+        x-ms-visibility: internal
+        enum:
+          - organization-types
+      attributes:
+        type: object
+        required:
+          - name
+        description: Name of the Organization Type.
+        x-ms-summary: Name
+        x-ms-visibility: important
+        properties:
+          name:
+            type: string
+            minLength: 1
     required:
       - type
       - attributes

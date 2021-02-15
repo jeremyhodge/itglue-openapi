@@ -623,167 +623,17 @@ paths:
       tags:
         - Organizations
     parameters: []
-  /organization_types:
-    get:
-      responses:
-        '200':
-          description: default
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: id
-                    type:
-                      type: string
-                      description: type
-                    attributes:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                          description: name
-                        created-at:
-                          type: string
-                          description: created-at
-                        updated-at:
-                          type: string
-                          description: updated-at
-                        synced:
-                          type: boolean
-                          description: synced
-                      description: attributes
-                description: data
-              meta:
-                type: object
-                properties:
-                  current-page:
-                    type: integer
-                    format: int32
-                    description: current-page
-                  next-page:
-                    type: integer
-                    format: int32
-                    description: next-page
-                  prev-page:
-                    type: integer
-                    format: int32
-                    description: prev-page
-                  total-pages:
-                    type: integer
-                    format: int32
-                    description: total-pages
-                  total-count:
-                    type: integer
-                    format: int32
-                    description: total-count
-                  filters:
-                    type: object
-                    properties: {}
-                    description: filters
-                description: meta
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    description: self
-                  first:
-                    type: string
-                    description: first
-                  prev:
-                    type: string
-                    description: prev
-                  next:
-                    type: string
-                    description: next
-                  last:
-                    type: string
-                    description: last
-                description: links
-      summary: List Organization Types
-      description: |-
-        Returns a list of organizations in your account.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-      operationId: List-organization-types
-      parameters:
-        - name: 'filter[name]'
-          in: query
-          required: false
-          type: string
-        - name: sort
-          in: query
-          required: false
-          type: string
-          enum:
-            - name
-            - id
-            - created_at
-            - updated_at
-        - name: page-size
-          in: query
-          required: false
-          type: integer
-        - name: page-number
-          in: query
-          required: false
-          type: integer
-      tags:
-        - Organization Types
+  /configuration_interfaces:
     post:
+      summary: Create a Configuration Interface
+      operationId: Post_configuration_interface
       responses:
         '200':
-          description: default
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: id
-                  type:
-                    type: string
-                    description: type
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                      created-at:
-                        type: string
-                        description: created-at
-                      updated-at:
-                        type: string
-                        description: updated-at
-                    description: attributes
-                description: data
-      summary: Create an Organization Type
+          description: OK
+      tags:
+        - Configuration Interfaces
       description: |-
-        Creates a new organization type in your account. Returns the created object if successful.
+        Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
 
 
         > NOT COMPLETE.
@@ -801,126 +651,18 @@ paths:
         >> 1. x-ms-summary
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
-      operationId: Post-organization-type
-      parameters:
-        - name: body
-          in: body
-          required: false
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    description: type
-                    title: ''
-                    x-ms-visibility: internal
-                    default: organizational-types
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                    description: attributes
-                description: data
-                required:
-                  - type
-            required:
-              - data
-      tags:
-        - Organization Types
-  '/organization_types/{object_id}':
-    get:
-      parameters:
-        - $ref: '#/parameters/object_id'
-      responses:
-        '200':
-          description: default
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: id
-                  type:
-                    type: string
-                    description: type
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                      created-at:
-                        type: string
-                        description: created-at
-                      updated-at:
-                        type: string
-                        description: updated-at
-                    description: attributes
-                description: data
-      summary: Get an Organization Type
-      description: |-
-        Returns the details of an existing organization type.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-      operationId: Get-organization-type
-      tags:
-        - Organization Types
     patch:
+      summary: Update multiple Configuration Interfaces
+      operationId: Patch_configuration_interfaces
       responses:
         '200':
-          description: default
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: id
-                  type:
-                    type: string
-                    description: type
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                      created-at:
-                        type: string
-                        description: created-at
-                      updated-at:
-                        type: string
-                        description: updated-at
-                    description: attributes
-                description: data
-      summary: Update an Organization Type
+          description: OK
+      tags:
+        - Configuration Interfaces
       description: |-
-        Updates an organization type in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+        Updates a list of configuration interfaces, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
+
+        The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
 
 
         > NOT COMPLETE.
@@ -938,261 +680,19 @@ paths:
         >> 1. x-ms-summary
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
-      operationId: Patch-organization-type
-      parameters:
-        - $ref: '#/parameters/object_id'
-        - name: body
-          in: body
-          required: false
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    description: type
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                    description: attributes
-                description: data
-      tags:
-        - Organization Types
-    parameters: []
-  /organization_statuses:
-    get:
-      responses:
-        '200':
-          description: default
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: id
-                    type:
-                      type: string
-                      description: type
-                    attributes:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                          description: name
-                        created-at:
-                          type: string
-                          description: created-at
-                        updated-at:
-                          type: string
-                          description: updated-at
-                        synced:
-                          type: boolean
-                          description: synced
-                      description: attributes
-                description: data
-              meta:
-                type: object
-                properties:
-                  current-page:
-                    type: integer
-                    format: int32
-                    description: current-page
-                  next-page:
-                    type: integer
-                    format: int32
-                    description: next-page
-                  prev-page:
-                    type: integer
-                    format: int32
-                    description: prev-page
-                  total-pages:
-                    type: integer
-                    format: int32
-                    description: total-pages
-                  total-count:
-                    type: integer
-                    format: int32
-                    description: total-count
-                  filters:
-                    type: object
-                    properties: {}
-                    description: filters
-                description: meta
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    description: self
-                  first:
-                    type: string
-                    description: first
-                  prev:
-                    type: string
-                    description: prev
-                  next:
-                    type: string
-                    description: next
-                  last:
-                    type: string
-                    description: last
-                description: links
-      summary: List Organization Statuses
-      operationId: List-organization-statuses
-      description: |-
-        Returns a list of the organization statuses in your account.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-      parameters:
-        - name: 'filter[name]'
-          in: query
-          type: string
-          required: false
-          description: Filter the list by the Name field (exact match) of the organization status.
-        - name: sort
-          in: query
-          type: string
-          enum:
-            - name
-            - id
-            - created_at
-            - updated_at
-            - '-name'
-            - '-id'
-            - '-created_at'
-            - '-updated_at'
-          description: 'Sort the returned list ascending by the selected field, or descending if the negative field selected (e.g. -name) '
-        - name: page-size
-          default: 1000
-          in: query
-          type: integer
-          required: false
-          format: int32
-        - name: page-number
-          default: 1
-          in: query
-          type: integer
-          required: false
-          format: int32
-      tags:
-        - Organization Statuses
-    post:
-      responses:
-        '200':
-          description: default
-          schema: {}
-      summary: Create an Organization Status
-      description: |-
-        Creates a new organization status in your account. Returns the created object if successful.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-      operationId: Post-organization-status
-      parameters:
-        - name: body
-          in: body
-          required: false
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    description: type
-                    title: ''
-                    x-ms-visibility: internal
-                    default: organization-statuses
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                    description: attributes
-                description: data
-                required:
-                  - type
-            required:
-              - data
-      tags:
-        - Organization Statuses
-  '/organization_statuses/{object_id}':
+  '/configuration_interfaces/{object_id}':
     get:
       parameters:
         - $ref: '#/parameters/object_id'
+      summary: Get a Configuration Interface
+      tags:
+        - Configuration Interfaces
       responses:
         '200':
           description: default
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: id
-                  type:
-                    type: string
-                    description: type
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                      created-at:
-                        type: string
-                        description: created-at
-                      updated-at:
-                        type: string
-                        description: updated-at
-                    description: attributes
-                description: data
-      summary: Get an Organization Status
+      operationId: Get_configuration_interface_global
       description: |-
-        Returns the details of an existing organization status.
+        Returns the details of an existing configuration interface.
 
 
         > NOT COMPLETE.
@@ -1210,17 +710,20 @@ paths:
         >> 1. x-ms-summary
         >> 1. x-ms-visibility
         > 1. Test in Power Automate Custom Connector
-      operationId: Get-organization-status
-      tags:
-        - Organization Statuses
     patch:
+      parameters:
+        - $ref: '#/parameters/object_id'
+      summary: Update a Configuration Interface
+      operationId: Patch_configuration_interface
       responses:
         '200':
-          description: default
-          schema: {}
-      summary: Update an Organization Status
+          description: OK
+      tags:
+        - Configuration Interfaces
       description: |-
-        Updates an organization status in your account. Returns 422 Bad Request error if trying to update an externally synced record.
+        Updates the details of an existing configuration interface. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
+
+        A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
 
 
         > NOT COMPLETE.
@@ -1237,40 +740,7 @@ paths:
         > 1. x-ms-COLORATION
         >> 1. x-ms-summary
         >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-      operationId: Patch-organization-status
-      parameters:
-        - $ref: '#/parameters/object_id'
-        - name: body
-          in: body
-          required: false
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    description: type
-                    title: ''
-                    x-ms-visibility: internal
-                    default: organization_statuses
-                  attributes:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: name
-                    description: attributes
-                description: data
-                required:
-                  - type
-            required:
-              - data
-      tags:
-        - Organization Statuses
-    parameters: []
+        > 1. Test in Power Automate Custom Connector        
   '/{resource_type}/{resource_id}/relationships/attachments':
     post:
       summary: Create an Attachment for a particular Resource
@@ -1648,124 +1118,6 @@ paths:
               - data
           description: The request body must contain a JSON object.
           x-examples: {}
-  /configuration_interfaces:
-    post:
-      summary: Create a Configuration Interface
-      operationId: Post_configuration_interface
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Configuration Interfaces
-      description: |-
-        Creates a new configuration interface under the configuration specified in the ID parameter. Returns the created object if successful. Use the nested relationships route to add multiple configuration interfaces to a configuration in bulk.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-    patch:
-      summary: Update multiple Configuration Interfaces
-      operationId: Patch_configuration_interfaces
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Configuration Interfaces
-      description: |-
-        Updates a list of configuration interfaces, also known as bulk updating. Bulk updates using a nested relationships route are not supported. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
-
-        The bulk update PATCH format is one that is similar to the response returned from a GET on a list resource. It will accept a partial representation of objects, as long as the required parameters are present. Any attributes you don't specify will remain unchanged.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-  '/configuration_interfaces/{object_id}':
-    get:
-      parameters:
-        - $ref: '#/parameters/object_id'
-      summary: Get a Configuration Interface
-      tags:
-        - Configuration Interfaces
-      responses:
-        '200':
-          description: default
-      operationId: Get_configuration_interface_global
-      description: |-
-        Returns the details of an existing configuration interface.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
-    patch:
-      parameters:
-        - $ref: '#/parameters/object_id'
-      summary: Update a Configuration Interface
-      operationId: Patch_configuration_interface
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Configuration Interfaces
-      description: |-
-        Updates the details of an existing configuration interface. Returns 422 Bad Request error if trying to update an externally synced, primary IP address.
-
-        A PATCH request does not require that the entire object resource with all of its attributes be enclosed. Any attributes you don't specify will remain unchanged.
-
-
-        > NOT COMPLETE.
-        >
-        > 1. Verify Summary
-        > 1. Verify Description
-        > 1. Verify OperationID naming and format conventions
-        > 1. Verify Query Parameters
-        > 1. Separate local vs global params
-        > 1. For Requests, verify JSON body schema
-        > 1. Test Response / Gather response schema / Verify Response Codes
-        > 1. Verify Response Schema / fully fleshed
-        > 1. externalDocs
-        > 1. x-ms-COLORATION
-        >> 1. x-ms-summary
-        >> 1. x-ms-visibility
-        > 1. Test in Power Automate Custom Connector
   /configurations:
     get:
       summary: List Configurations
